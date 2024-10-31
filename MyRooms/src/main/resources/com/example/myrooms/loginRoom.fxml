@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+
+<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.LoginController">
+    <children>
+        <AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="1080.0" style="-fx-background-color: #B7B0A3;">
+            <children>
+                <ImageView fitHeight="576.0" fitWidth="318.0" layoutX="353.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../CsProject-BackGrounds/DoorWall.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="565.0" fitWidth="292.0" layoutX="366.0" layoutY="15.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../../../CsProject-BackGrounds/DoorRoom.png" />
+                    </image>
+                </ImageView>
+                <Pane fx:id="myPane" layoutX="1.0" layoutY="5.0" prefHeight="583.0" prefWidth="671.0">
+                    <children>
+                        <ImageView fx:id="imageView" fitHeight="576.0" fitWidth="324.0" layoutX="352.0" layoutY="4.0" onMouseClicked="#goToRoom" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../CsProject-BackGrounds/DoorPlant.png" />
+                            </image>
+                        </ImageView>
+                        <Label layoutX="381.0" layoutY="445.0" onMouseClicked="#goToRoom" prefHeight="49.0" prefWidth="260.0" text="MyRoom" textFill="#664c4c">
+                            <font>
+                                <Font name="Segoe UI" size="61.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
