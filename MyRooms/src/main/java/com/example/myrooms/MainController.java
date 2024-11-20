@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.PointLight;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
@@ -18,12 +19,21 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.RadialGradient;
+import javafx.scene.paint.Stop;
 import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.io.*;
+import java.util.*;
 
 
 public class MainController implements Initializable {
+
+
+    private static final String DATABASE_FILE = "database.txt";
+    private static final Map<String, List<String>> qaDatabase = new HashMap<>();
 
     @FXML
     Pane myComputerPane;
@@ -53,6 +63,13 @@ public class MainController implements Initializable {
     TextField alarmText;
     @FXML
     Label totalLabel;
+    @FXML
+    TextArea books;
+    @FXML
+    TextField booktext;
+    @FXML
+    ToggleButton toggle;
+
     int totalCoin = 10;
 
     int total = 0;
@@ -60,8 +77,9 @@ public class MainController implements Initializable {
 
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
+
+
 
     public void computerScene() {
         myClockParent.setVisible(false);
@@ -147,20 +165,25 @@ public class MainController implements Initializable {
 
 
         Light.Point light = new Light.Point();
-        light.setX(950);
-        light.setY(450);
-        light.setZ(1000);
+        light.setX(750);
+        light.setY(300);
+        light.setZ(50);
         light.setColor(Color.BEIGE);
+
         Lighting lighting = new Lighting();
+        lighting.setDiffuseConstant(2);
         lighting.setLight(light);
+
 
         //Setting light effects
 
-        //imagePane.setEffect(lighting);
-
+//        imagePane.setEffect(lighting);
+          //allPane.setEffect(lighting);
+        //allPane.setEffect(new Lighting());
 
         dayTextField.setStyle(IDLE_BUTTON_STYLE);
         monthTextField.setStyle(IDLE_BUTTON_STYLE);
+        myClockParent.setStyle(IDLE_BUTTON_STYLE);
 
         Clock clock1 = new Clock();
         Clock clock2 = new Clock();
@@ -193,8 +216,6 @@ public class MainController implements Initializable {
 
             series.getData().getFirst().setYValue(total);
         };
-
-
 
         System.out.println(clock1.getDate());
 

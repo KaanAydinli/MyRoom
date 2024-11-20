@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
+<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
     <children>
         <Pane fx:id="imagePane">
             <children>
@@ -30,31 +31,49 @@
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Plant.png" />
                     </image>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" height="47.38" offsetX="10.0" radius="27.5875" spread="0.03" width="64.97" />
+               </effect>
                 </ImageView>
-                <ImageView fx:id="myBoard" fitHeight="226.0" fitWidth="178.0" layoutX="170.0" layoutY="70.0" onMouseClicked="#corkBoardScene" pickOnBounds="true">
+                <ImageView fx:id="myBoard" fitHeight="226.0" fitWidth="178.0" layoutX="170.0" layoutY="70.0" pickOnBounds="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/HalfBoard.png" />
                     </image>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" height="17.59" offsetX="10.0" radius="20.02" spread="0.02" width="64.49" />
+               </effect>
                 </ImageView>
                 <ImageView fx:id="myBookCase" fitHeight="220.0" fitWidth="327.0" layoutX="740.0" layoutY="30.0" pickOnBounds="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Bookcase.png" />
                     </image>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" height="53.25" offsetX="10.0" radius="29.055" spread="0.02" width="64.97" />
+               </effect>
                 </ImageView>
-                <ImageView fx:id="myAlarm" fitHeight="99.0" fitWidth="85.0" layoutX="200.0" layoutY="350.0" onMouseClicked="#alarmScene" pickOnBounds="true">
+                <ImageView fx:id="myAlarm" fitHeight="99.0" fitWidth="85.0" layoutX="200.0" layoutY="350.0" pickOnBounds="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Alarm.png" />
                     </image>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" height="41.52" offsetX="10.0" radius="26.122500000000002" spread="0.03" width="64.97" />
+               </effect>
                 </ImageView>
                 <ImageView fx:id="myCalendar" fitHeight="169.0" fitWidth="153.0" layoutX="780.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Calendar.png" />
                     </image>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" height="26.87" offsetX="10.0" radius="22.46" spread="0.05" width="64.97" />
+               </effect>
                 </ImageView>
-                <ImageView fx:id="myClock" fitHeight="150.0" fitWidth="146.0" layoutX="470.0" layoutY="20.0" onMouseClicked="#clockScene" pickOnBounds="true">
+                <ImageView fx:id="myClock" fitHeight="150.0" fitWidth="146.0" layoutX="470.0" layoutY="20.0" pickOnBounds="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Clock.png" />
                     </image>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" height="23.69" offsetX="10.0" radius="40.595" spread="0.35" width="140.69" />
+               </effect>
                 </ImageView>
                 <ImageView fitHeight="56.0" fitWidth="52.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -68,6 +87,16 @@
                 </Label>
             </children>
         </Pane>
+      <Pane onMouseClicked="#closeEveryPane" prefHeight="600.0" prefWidth="1080.0">
+         <children>
+            <Button layoutX="165.0" layoutY="71.0" mnemonicParsing="false" onAction="#corkBoardScene" opacity="0.0" prefHeight="226.0" prefWidth="186.0" text="Board" />
+            <Button layoutX="471.0" layoutY="23.0" mnemonicParsing="false" onAction="#clockScene" opacity="0.0" prefHeight="142.0" prefWidth="146.0" text="Clock" />
+            <Button layoutX="202.0" layoutY="350.0" mnemonicParsing="false" onAction="#alarmScene" opacity="0.0" prefHeight="99.0" prefWidth="94.0" text="Alarm" />
+            <Button layoutX="343.0" layoutY="318.0" mnemonicParsing="false" opacity="0.0" prefHeight="106.0" prefWidth="58.0" text="Plant" />
+            <Button layoutX="423.0" layoutY="221.0" mnemonicParsing="false" onAction="#computerScene" opacity="0.0" prefHeight="142.0" prefWidth="239.0" style="-fx-background-color: transparent;" text="Computer" />
+            <Button layoutX="808.0" layoutY="336.0" mnemonicParsing="false" opacity="0.0" prefHeight="121.0" prefWidth="101.0" text="Calendar" />
+         </children>
+      </Pane>
         <Pane fx:id="alarmPane" layoutX="172.0" layoutY="50.0" onMouseClicked="#alarmScene" prefHeight="484.0" prefWidth="766.0" visible="false">
             <children>
                 <ImageView fitHeight="494.0" fitWidth="465.0" layoutX="133.0" onMouseClicked="#alarmScene" opacity="0.91" pickOnBounds="true">
@@ -135,6 +164,5 @@
                 <Font name="Georgia Pro" size="10.0" />
             </font>
         </TextField>
-      <Button layoutX="424.0" layoutY="224.0" mnemonicParsing="false" onAction="#computerScene" prefHeight="133.0" prefWidth="238.0" style="-fx-background-color: transparent;" />
     </children>
 </Pane>

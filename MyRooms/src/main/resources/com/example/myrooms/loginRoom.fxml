@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,35 +10,46 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.LoginController">
     <children>
         <AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="1080.0" style="-fx-background-color: #B7B0A3;">
             <children>
-                <ImageView fitHeight="576.0" fitWidth="318.0" layoutX="353.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="613.0" fitWidth="1080.0" layoutY="-3.0" pickOnBounds="true">
                     <image>
-                        <Image url="@../../../CsProject-BackGrounds/DoorWall.png" />
+                        <Image url="@../../../CsProject-BackGrounds/LoginDoorV4.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="565.0" fitWidth="292.0" layoutX="366.0" layoutY="15.0" pickOnBounds="true">
+                <ImageView fitHeight="424.0" fitWidth="228.0" layoutX="370.0" layoutY="122.0" pickOnBounds="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/DoorRoom.png" />
                     </image>
                 </ImageView>
-                <Pane fx:id="myPane" layoutX="1.0" layoutY="5.0" prefHeight="583.0" prefWidth="671.0">
+                <Pane fx:id="myPane" layoutX="104.0" layoutY="-1.0" prefHeight="589.0" prefWidth="520.0">
                     <children>
-                        <ImageView fx:id="imageView" fitHeight="576.0" fitWidth="324.0" layoutX="352.0" layoutY="4.0" onMouseClicked="#goToRoom" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageView" fitHeight="430.0" fitWidth="230.0" layoutX="266.0" layoutY="119.0" onMouseClicked="#isValid" pickOnBounds="true">
                             <image>
-                                <Image url="@../../../CsProject-BackGrounds/DoorPlant.png" />
+                                <Image url="@../../../CsProject-BackGrounds/LoginDoorPlanted.png" />
                             </image>
                         </ImageView>
-                        <Label layoutX="381.0" layoutY="445.0" onMouseClicked="#goToRoom" prefHeight="49.0" prefWidth="260.0" text="MyRoom" textFill="#664c4c">
-                            <font>
-                                <Font name="Segoe UI" size="61.0" />
-                            </font>
-                        </Label>
                     </children>
                 </Pane>
+            <Pane fx:id="loginPane" layoutX="721.0" layoutY="71.0" prefHeight="228.0" prefWidth="230.0">
+               <children>
+                  <TextField fx:id="username" layoutX="41.0" layoutY="42.0" promptText="Username" />
+                  <PasswordField fx:id="password" focusTraversable="false" layoutX="41.0" layoutY="114.0" promptText="Password" />
+                  <TextField fx:id="ErrorText" editable="false" focusTraversable="false" layoutX="50.0" layoutY="176.0" prefHeight="25.0" prefWidth="131.0">
+                     <font>
+                        <Font name="Gill Sans MT" size="11.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
+            <Pane fx:id="VisitPane" layoutX="728.0" layoutY="80.0" prefHeight="219.0" prefWidth="221.0" visible="false">
+               <children>
+                  <TextField layoutX="36.0" layoutY="32.0" promptText="Username" />
+               </children>
+            </Pane>
+            <ToggleButton fx:id="button" layoutX="795.0" layoutY="33.0" mnemonicParsing="false" onAction="#changePane" text="Login" textOverrun="WORD_ELLIPSIS" />
             </children>
         </AnchorPane>
     </children>

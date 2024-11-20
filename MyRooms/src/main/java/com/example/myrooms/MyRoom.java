@@ -13,7 +13,9 @@ public class MyRoom extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+
         Parent root = FXMLLoader.load(getClass().getResource("loginRoom.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("mainRoom.fxml"));
 
         Scene scene = new Scene(root);
         stage.setTitle("My Room");
