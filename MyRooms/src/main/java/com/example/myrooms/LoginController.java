@@ -1,10 +1,10 @@
 package com.example.myrooms;
 
+import com.sun.tools.javac.Main;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -14,13 +14,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class LoginController implements Initializable {
 
@@ -43,16 +39,37 @@ public class LoginController implements Initializable {
     @FXML
     Pane VisitPane;
     @FXML
-    ToggleButton button;
+    ToggleButton loginvisitButton;
+    @FXML
+    Pane registerPane;
+    @FXML
+    TextField registerUsername;
+    @FXML
+    TextField registerPassword;
+    @FXML
+    TextField registerConfirmPassword;
+    @FXML
+    Button registerButton;
+    @FXML
+    Button registration;
+    @FXML
+    ImageView LockImage;
 
-    private static final String DataBase_FILE = "src/main/resources/databaseRoom";
-    private static final Map<String,String> database = new HashMap<>();
+    private static final String DataBase_FILE = "src/main/resources/Users";
+    private static final LinkedHashMap<String,String> database = new LinkedHashMap<>();
+    private static  LinkedHashMap<String,String> roomDatabase = new LinkedHashMap<>();
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
-    static public String name;
+    public String name;
 
     public void goToRoom() throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("mainRoom.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainRoom.fxml"));
+        Parent root = loader.load();
+
+        MainController mainController = loader.getController();
+        mainController.setName(name);
+        mainController.UserDatabase = roomDatabase;
+        loadRoom(name,mainController);
 
 
         RotateTransition rotate = new RotateTransition();
@@ -62,8 +79,8 @@ public class LoginController implements Initializable {
         rotate.setNode(myPane);
 
         ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(1.5), anchorPane);
-        scaleTransition.setToX(8.0);
-        scaleTransition.setToY(8.0);
+        scaleTransition.setToX(20.0);
+        scaleTransition.setToY(20.0);
         scaleTransition.setFromX(1);
         scaleTransition.setFromY(1);
         scaleTransition.setOnFinished(event ->{
@@ -88,14 +105,39 @@ public class LoginController implements Initializable {
         });
 
     }
+    public void fadeIn(){
+        FadeTransition fadein = new FadeTransition(Duration.seconds(0.8), LockImage);
+        fadein.setFromValue(0.0);
+        fadein.setToValue(0.9);
+        fadein.setCycleCount(2);
+        fadein.setAutoReverse(true);
+        fadein.play();
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(100), LockImage);
+        translateTransition.setFromX(0);
+        translateTransition.setToX(10);
+        translateTransition.setCycleCount(10);
+        translateTransition.setAutoReverse(true);
+        translateTransition.play();
+    }
     public void changePane(){
         VisitPane.setVisible(!VisitPane.isVisible());
         loginPane.setVisible(!loginPane.isVisible());
         if(loginPane.isVisible()){
-            button.setText("Login");
+            loginvisitButton.setText("Login");
         }
         else
-            button.setText("Visit");
+            loginvisitButton.setText("Visit");
+    }
+
+    public void saveDatabase() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(DataBase_FILE))) {
+            for (Map.Entry<String, String> entry : database.entrySet()) {
+                writer.println(entry.getKey() + " : " + entry.getValue());
+
+            }
+        } catch (IOException e) {
+            System.err.println("Veritabanı kaydedilirken bir hata oluştu: " + e.getMessage());
+        }
     }
     private  void loadDatabase(){
         try(BufferedReader reader = new BufferedReader(new FileReader(DataBase_FILE))) {
@@ -113,6 +155,35 @@ public class LoginController implements Initializable {
             System.err.println("error");
         }
     }
+    public void showRegister(){
+        registerPane.setVisible(!registerPane.isVisible());
+    }
+    public void registerNew() throws IOException {
+
+        if(!registerPassword.getText().isEmpty() && !registerConfirmPassword.getText().isEmpty() && !registerUsername.getText().isEmpty()){
+
+            if(registerPassword.getText().equals(registerConfirmPassword.getText())){
+                database.put(registerUsername.getText(),registerPassword.getText());
+                name = registerUsername.getText();
+                System.out.println(name);
+                saveDatabase();
+                try {
+                    FileWriter writer = new FileWriter("src/main/resources/UserDatabases/" +  name + "Database");
+                    writer.write("TotalCoin : 50\n");
+                    writer.write("Plant : CsProject-BackGrounds/Plant.png\n");
+                    writer.write("Bookcase : CsProject-BackGrounds/Bookcase.png\n");
+                    writer.write("Alarm : CsProject-BackGrounds/Alarm.png\n");
+                    writer.write("Calendar : CsProject-BackGrounds/Calendar.png\n");
+                    writer.write("Clock : CsProject-BackGrounds/Clock.png");
+
+                    writer.close();
+                } catch (IOException e) {
+                    System.err.println("An error occurred: " + e.getMessage());
+                }
+                goToRoom();
+            }
+        }
+    }
     public void isValid() {
 
         if(!username.getText().isEmpty() && !password.getText().isEmpty()) {
@@ -121,6 +192,7 @@ public class LoginController implements Initializable {
 
                try {
                    name = username.getText();
+
                    goToRoom();
                } catch (Exception e) {
                    e.printStackTrace();
@@ -131,6 +203,7 @@ public class LoginController implements Initializable {
                username.clear();
                password.clear();
                ErrorText.setText("Wrong Password");
+               fadeIn();
            }
         }
         else{
@@ -147,4 +220,60 @@ public class LoginController implements Initializable {
         ErrorText.setStyle(IDLE_BUTTON_STYLE);
 
     }
+    public void loadRoom(String user, MainController controller) throws IOException {
+
+
+        try(BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/UserDatabases/" + user + "Database"))) {
+            String line;
+
+            while((line = reader.readLine()) != null){
+
+                if (line.trim().isEmpty() || line.startsWith("#")) {
+                    roomDatabase.put(line, "");
+                }
+                else {
+                    String[] parts = line.split(":");
+                    String variable = parts[0].trim();
+                    String value = parts[1].trim();
+
+                    roomDatabase.put(variable, value);
+                    if (variable.equals("TotalCoin")) {
+                        controller.setCoin(Integer.parseInt(value));
+                    }
+                    if (variable.equals("Clock")) {
+                        controller.buyClock(value);
+                    }
+                    if (variable.equals("Alarm")) {
+                        controller.setAlarmImage(value);
+                    }
+                    if (variable.equals("Bookcase")) {
+                        controller.setBookcaseImage(value);
+                    }
+                    if (variable.equals("Calendar")) {
+                        controller.setCalendarImage(value);
+                    }
+                    if (variable.equals("Board")) {
+                        controller.setBoardImage(value);
+                    }
+                    if (variable.equals("Plant")) {
+                        controller.setPlantImage(value);
+                    }
+                    if (variable.equals("TotalTimeSpent")) {
+                        controller.setTotalTime(value);
+                    }
+                    if (variable.equals("Username")) {
+                        controller.setName(value);
+                    }
+                    if (variable.equals("Postits")) {
+                        for (int i = 0; i < Integer.parseInt(value); i++) {
+                            controller.corkBoardScene();
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error");
+        }
+    }
+
 }

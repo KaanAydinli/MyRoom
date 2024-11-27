@@ -12,6 +12,7 @@ public class Clock extends Pane {
 
     private int  hour, minute, second;
     private int day, month, year;
+    private int dayOfWeek;
 
     public Clock(){
 
@@ -26,11 +27,11 @@ public class Clock extends Pane {
         this.day = calendar.get(Calendar.DAY_OF_MONTH);
         this.month = calendar.get(Calendar.MONTH);
         this.year = calendar.get(Calendar.YEAR);
+        this.dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
         writeClock();
     }
     public void writeClock(){
-
 
         double radius = Math.min(getWidth(),getHeight()) * 0.4;
         double coorX = getWidth() / 2;
@@ -93,5 +94,12 @@ public class Clock extends Pane {
     }
     public Month getMonth(){
         return Month.of(month + 1);
+    }
+    public int getDayOfWeek(){
+        if(dayOfWeek == 1){
+            return 6;
+        }
+        else
+            return  dayOfWeek - 2;
     }
 }
