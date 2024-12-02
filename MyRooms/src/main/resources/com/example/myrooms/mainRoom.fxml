@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
+<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
     <children>
         <Pane fx:id="imagePane">
             <children>
-                <ImageView fx:id="myBackground" cache="true" fitHeight="600.0" fitWidth="1080.0" nodeOrientation="INHERIT" onMouseClicked="#closeEveryPane" pickOnBounds="true" smooth="false">
+                <ImageView fx:id="myBackground" cache="true" fitHeight="617.0" fitWidth="1080.0" nodeOrientation="INHERIT" onMouseClicked="#closeEveryPane" pickOnBounds="true" smooth="false">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/currentBackground.jpg" />
                     </image>
@@ -27,7 +27,7 @@
                         <Rectangle2D />
                     </viewport>
                 </ImageView>
-                <ImageView fx:id="myPlant" fitHeight="106.0" fitWidth="94.0" layoutX="332.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="PlantImage" fitHeight="106.0" fitWidth="94.0" layoutX="332.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Plant.png" />
                     </image>
@@ -35,7 +35,7 @@
                   <DropShadow blurType="GAUSSIAN" height="47.39" offsetX="10.0" radius="27.59" spread="0.03" width="64.97" />
                </effect>
                 </ImageView>
-                <ImageView fx:id="myBoard" fitHeight="226.0" fitWidth="178.0" layoutX="170.0" layoutY="70.0" pickOnBounds="true">
+                <ImageView fx:id="BoardImage" fitHeight="226.0" fitWidth="178.0" layoutX="170.0" layoutY="70.0" pickOnBounds="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/HalfBoard.png" />
                     </image>
@@ -43,7 +43,7 @@
                   <DropShadow blurType="GAUSSIAN" height="17.59" offsetX="10.0" radius="20.02" spread="0.02" width="64.49" />
                </effect>
                 </ImageView>
-                <ImageView fx:id="myBookCase" fitHeight="220.0" fitWidth="327.0" layoutX="740.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="BookcaseImage" fitHeight="220.0" fitWidth="327.0" layoutX="740.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Bookcase.png" />
                     </image>
@@ -51,7 +51,7 @@
                   <DropShadow blurType="GAUSSIAN" height="53.25" offsetX="10.0" radius="29.055" spread="0.02" width="64.97" />
                </effect>
                 </ImageView>
-                <ImageView fx:id="myAlarm" fitHeight="99.0" fitWidth="85.0" layoutX="200.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="AlarmImage" fitHeight="99.0" fitWidth="85.0" layoutX="200.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Alarm.png" />
                     </image>
@@ -59,7 +59,7 @@
                   <DropShadow blurType="GAUSSIAN" height="47.39" offsetX="10.0" radius="27.59" spread="0.03" width="64.97" />
                </effect>
                 </ImageView>
-                <ImageView fx:id="myCalendar" fitHeight="169.0" fitWidth="153.0" layoutX="780.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="CalendarImage" fitHeight="169.0" fitWidth="153.0" layoutX="780.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Calendar.png" />
                     </image>
@@ -67,7 +67,7 @@
                   <DropShadow blurType="GAUSSIAN" height="26.87" offsetX="10.0" radius="22.46" spread="0.05" width="64.97" />
                </effect>
                 </ImageView>
-                <ImageView fx:id="myClock" fitHeight="150.0" fitWidth="146.0" layoutX="470.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="ClockImage" fitHeight="150.0" fitWidth="146.0" layoutX="470.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Clock.png" />
                     </image>
@@ -80,14 +80,14 @@
                         <Image url="@../../../CsProject-BackGrounds/MyRoomCurrency.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="totalLabel" layoutX="52.0" layoutY="18.0" text="0" textFill="#666161">
+                <Label fx:id="TotalCoinLabel" layoutX="52.0" layoutY="18.0" text="0" textFill="#666161">
                     <font>
                         <Font name="Segoe UI" size="19.0" />
                     </font>
                 </Label>
             </children>
         </Pane>
-      <Pane onMouseClicked="#closeEveryPane" prefHeight="600.0" prefWidth="1080.0">
+      <Pane onMouseClicked="#closeEveryPane" prefHeight="611.0" prefWidth="1080.0">
          <children>
             <Button layoutX="165.0" layoutY="71.0" mnemonicParsing="false" onAction="#corkBoardScene" opacity="0.0" prefHeight="226.0" prefWidth="186.0" text="Board" />
             <Button layoutX="471.0" layoutY="23.0" mnemonicParsing="false" onAction="#clockScene" opacity="0.0" prefHeight="142.0" prefWidth="146.0" text="Clock" />
@@ -97,7 +97,7 @@
             <Button layoutX="808.0" layoutY="336.0" mnemonicParsing="false" opacity="0.0" prefHeight="121.0" prefWidth="101.0" text="Calendar" />
          </children>
       </Pane>
-        <Pane fx:id="alarmPane" layoutX="172.0" layoutY="50.0" onMouseClicked="#alarmScene" prefHeight="484.0" prefWidth="766.0" visible="false">
+        <Pane fx:id="AlarmPane" layoutX="172.0" layoutY="50.0" onMouseClicked="#alarmScene" prefHeight="484.0" prefWidth="766.0" visible="false">
             <children>
                 <ImageView fitHeight="494.0" fitWidth="465.0" layoutX="133.0" onMouseClicked="#alarmScene" opacity="0.91" pickOnBounds="true">
                     <image>
@@ -107,9 +107,9 @@
                 <TextField fx:id="alarmText" layoutX="291.0" layoutY="353.0" onAction="#createAlarm" />
             </children>
         </Pane>
-        <FlowPane fx:id="mycorkBoardPane" layoutX="172.0" layoutY="69.0" onMouseClicked="#corkBoardScene" prefHeight="226.0" prefWidth="178.0" />
-        <BorderPane fx:id="borderPane" layoutX="465.0" layoutY="23.0" onMouseClicked="#clockScene" prefHeight="150.0" prefWidth="153.0" />
-        <Pane fx:id="myComputerPane" focusTraversable="true" layoutX="186.0" layoutY="50.0" prefHeight="500.0" prefWidth="814.0" visible="false">
+        <FlowPane fx:id="CorkboardPostitsPane" layoutX="172.0" layoutY="69.0" onMouseClicked="#corkBoardScene" prefHeight="226.0" prefWidth="178.0" />
+        <BorderPane fx:id="Clock1Pane" layoutX="465.0" layoutY="23.0" onMouseClicked="#clockScene" prefHeight="150.0" prefWidth="153.0" />
+        <Pane fx:id="ComputerPane" focusTraversable="true" layoutX="186.0" layoutY="50.0" prefHeight="500.0" prefWidth="814.0" visible="false">
             <children>
                 <ImageView fitHeight="592.0" fitWidth="773.0" layoutX="-25.0" layoutY="-56.0" nodeOrientation="INHERIT" pickOnBounds="true">
                     <image>
@@ -134,7 +134,7 @@
                         <Image url="@../../../CsProject-BackGrounds/graphlogo.png" />
                     </image>
                 </ImageView>
-                <LineChart fx:id="myLineChart" animated="false" layoutX="127.0" layoutY="146.0" opacity="0.48" prefHeight="134.0" prefWidth="494.0" title="Hours spent" visible="false">
+                <LineChart fx:id="LineChart" animated="false" layoutX="127.0" layoutY="146.0" opacity="0.48" prefHeight="134.0" prefWidth="494.0" title="Hours spent" visible="false">
                     <xAxis>
                         <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -142,21 +142,21 @@
                         <NumberAxis side="LEFT" />
                     </yAxis>
                 </LineChart>
-            <ImageView fitHeight="99.0" fitWidth="153.0" layoutX="407.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="shopIcon" fitHeight="99.0" fitWidth="153.0" layoutX="407.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../CsProject-BackGrounds/DALL_E-2024-11-12-17.09-removebg-preview.png" />
                </image>
             </ImageView>
             </children>
         </Pane>
-        <Pane fx:id="myClockParent" layoutX="100.0" layoutY="50.0" prefHeight="500.0" prefWidth="900.0" visible="false">
+        <Pane fx:id="ClockParent" layoutX="100.0" layoutY="50.0" prefHeight="500.0" prefWidth="900.0" visible="false">
             <children>
                 <ImageView fitHeight="476.0" fitWidth="555.0" layoutX="191.0" pickOnBounds="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Clock.png" />
                     </image>
                 </ImageView>
-                <BorderPane fx:id="myClockPane" layoutX="228.0" onMouseClicked="#clockScene" prefHeight="500.0" prefWidth="481.0" />
+                <BorderPane fx:id="Clock2Pane" layoutX="228.0" onMouseClicked="#clockScene" prefHeight="500.0" prefWidth="481.0" />
             </children>
         </Pane>
         <TextField fx:id="dayTextField" editable="false" focusTraversable="false" layoutX="820.0" layoutY="355.0" prefHeight="56.0" prefWidth="77.0" style="-fx-background-color: transparent;">

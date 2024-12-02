@@ -2,7 +2,6 @@ package com.example.myrooms;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,7 +22,6 @@ import javafx.util.Duration;
 
 import java.io.*;
 import java.net.URL;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
 import java.util.*;
 
@@ -33,39 +31,41 @@ public class MainController implements Initializable, Serializable {
 
 
     @FXML
-    Pane myComputerPane;
+    Pane ComputerPane;
     @FXML
-    BorderPane myClockPane;
+    BorderPane Clock2Pane;
     @FXML
-    LineChart<String, Number> myLineChart;
+    LineChart<String, Number> LineChart;
     @FXML
-    BorderPane borderPane;
+    BorderPane Clock1Pane;
     @FXML
-    ImageView myClock,myBookCase,myBoard,myCalendar,myAlarm,myPlant;
+    ImageView ClockImage, BookcaseImage, BoardImage, CalendarImage, AlarmImage, PlantImage;
     @FXML
-    Pane myClockParent;
+    Pane ClockParent;
     @FXML
     TextField dayTextField;
     @FXML
     TextField monthTextField;
     @FXML
-    FlowPane mycorkBoardPane;
+    FlowPane CorkboardPostitsPane;
     @FXML
     Pane imagePane;
     @FXML
     Pane allPane;
     @FXML
-    Pane alarmPane;
+    Pane AlarmPane;
     @FXML
     TextField alarmText;
     @FXML
-    Label totalLabel;
+    Label TotalCoinLabel;
     @FXML
     TextArea books;
     @FXML
     TextField booktext;
     @FXML
     ToggleButton toggle;
+    @FXML
+    ImageView shopIcon;
 
     int totalCoin = 10;
 
@@ -75,37 +75,50 @@ public class MainController implements Initializable, Serializable {
     int totalTimeSpent;
     int difference = 0;
 
+    Alarm alarm;
+    Clock clock1;
+    Clock clock2;
+
 
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
     public LinkedHashMap<String,String> UserDatabase = null;
     private final String  DataBase_FILE = "MyRooms/src/main/resources/UserDatabases/";
 
+
+    public MainController() {
+        alarm = new Alarm();
+        clock1 = new Clock();
+        clock2 = new Clock();
+    }
+    public void setShopIcon(String name){
+        shopIcon.setImage(new Image(name));
+    }
     public void setCoin(int money){
         totalCoin = money;
-        totalLabel.setText(String.valueOf(totalCoin));
+        TotalCoinLabel.setText(String.valueOf(totalCoin));
         UserDatabase.replace("TotalCoin", String.valueOf(totalCoin));
     }
     public void setAlarmImage(String image){
-        myAlarm.setImage(new Image(image));
+        AlarmImage.setImage(new Image(image));
         UserDatabase.replace("Alarm", image);
     }
     public void setName(String names){
         name = names;
     }
     public void setBoardImage(String image){
-        myBoard.setImage(new Image(image));
+        BoardImage.setImage(new Image(image));
         UserDatabase.replace("Board", image);
     }
     public void setBookcaseImage(String image){
-        myBookCase.setImage(new Image(image));
+        BookcaseImage.setImage(new Image(image));
         UserDatabase.replace("Bookcase", image);
     }
     public void setCalendarImage(String image){
-        myCalendar.setImage(new Image(image));
+        CalendarImage.setImage(new Image(image));
         UserDatabase.replace("Calendar", image);
     }
     public void setPlantImage(String image){
-        myPlant.setImage(new Image(image));
+        PlantImage.setImage(new Image(image));
         UserDatabase.replace("Plant", image);
     }
     public void setTotalTime(String time){
@@ -126,34 +139,40 @@ public class MainController implements Initializable, Serializable {
                     writer.newLine();
                 }
 
-
             }
         } catch (IOException e) {
             System.err.println("Veritabanı kaydedilirken bir hata oluştu: " + e.getMessage());
         }
     }
     public void computerScene() {
-        myClockParent.setVisible(false);
-        myComputerPane.setVisible(!myComputerPane.isVisible());
+        ClockParent.setVisible(false);
+        ComputerPane.setVisible(!ComputerPane.isVisible());
 
     }
     public void chartScene() {
-        myLineChart.setVisible(!myLineChart.isVisible());
+        LineChart.setVisible(!LineChart.isVisible());
 
     }
     public void clockScene() {
-        myComputerPane.setVisible(false);
-        myClockParent.setVisible(!myClockParent.isVisible());
+        ComputerPane.setVisible(false);
+        ClockParent.setVisible(!ClockParent.isVisible());
     }
     public void alarmScene() {
-        alarmPane.setVisible(!alarmPane.isVisible());
+        AlarmPane.setVisible(!AlarmPane.isVisible());
     }
     public void setAlarmText(String text){
         alarmText.setText(text);
     }
     public void createAlarm() {
         alarmTime = alarmText.getText();
-        System.out.println("Alarm set to: " + alarmTime);
+        String[] timeparts = alarmTime.split(":");
+        int hour = Integer.parseInt(timeparts[0]);
+        int minute = Integer.parseInt(timeparts[1]);
+        int seconds = Integer.parseInt(timeparts[2]);
+
+        alarm.createAlarmNormal(hour, minute, seconds);
+
+        System.out.println("Alarm set to: " + alarm.getAlarmTime());
     }
     public void settingsScene() {
         totalCoin -= 30;
@@ -161,12 +180,12 @@ public class MainController implements Initializable, Serializable {
         setAlarmImage("CsProject-BackGrounds/Alarm2.png");
         setPlantImage("CsProject-BackGrounds/Plant2.png");
 
-        totalLabel.setText(String.valueOf(totalCoin));
+        TotalCoinLabel.setText(String.valueOf(totalCoin));
     }
     public void closeEveryPane(){
-        myClockParent.setVisible(false);
-        myComputerPane.setVisible(false);
-        alarmPane.setVisible(false);
+        ClockParent.setVisible(false);
+        ComputerPane.setVisible(false);
+        AlarmPane.setVisible(false);
     }
     public void shopScene() {
 
@@ -189,7 +208,15 @@ public class MainController implements Initializable, Serializable {
     public void buyClock(String imageString){
         Image image = new Image(imageString);
         UserDatabase.replace("Clock", imageString);
-        myClock.setImage(image);
+        ClockImage.setImage(image);
+    }
+    public void checkAlarm(int hour,int minute, int seconds){
+
+        if (alarm.checkAlarm(hour,minute,seconds)) {
+            playAudio();
+            showAlert();
+            alarm.deactivateAlarm();
+        }
     }
     public void corkBoardScene(){
         Image image = new Image("CsProject-BackGrounds/postit.png");
@@ -199,10 +226,10 @@ public class MainController implements Initializable, Serializable {
         imageView.setFitWidth(50);
         imageView.setPreserveRatio(true);
 
-        UserDatabase.replace("Postits", String.valueOf(mycorkBoardPane.getChildren().size() + 1));
+        UserDatabase.replace("Postits", String.valueOf(CorkboardPostitsPane.getChildren().size() + 1));
 
-        if(mycorkBoardPane.getChildren().size() < 18){
-            mycorkBoardPane.getChildren().add(imageView);
+        if(CorkboardPostitsPane.getChildren().size() < 18){
+            CorkboardPostitsPane.getChildren().add(imageView);
         }
     }
     @Override
@@ -216,9 +243,9 @@ public class MainController implements Initializable, Serializable {
         series.getData().add(new XYChart.Data<>("Fri", 0));
         series.getData().add(new XYChart.Data<>("Sat", 0));
         series.getData().add(new XYChart.Data<>("Sun", 0));
-        myLineChart.getData().add(series);
+        LineChart.getData().add(series);
 
-        totalLabel.setText(String.valueOf(totalCoin));
+        TotalCoinLabel.setText(String.valueOf(totalCoin));
 
 
         Light.Point light = new Light.Point();
@@ -231,7 +258,6 @@ public class MainController implements Initializable, Serializable {
         lighting.setDiffuseConstant(2);
         lighting.setLight(light);
 
-
         //Setting light effects
 
 //        imagePane.setEffect(lighting);
@@ -240,10 +266,7 @@ public class MainController implements Initializable, Serializable {
 
         dayTextField.setStyle(IDLE_BUTTON_STYLE);
         monthTextField.setStyle(IDLE_BUTTON_STYLE);
-        myClockParent.setStyle(IDLE_BUTTON_STYLE);
-
-        Clock clock1 = new Clock();
-        Clock clock2 = new Clock();
+        ClockParent.setStyle(IDLE_BUTTON_STYLE);
 
         int startMinute = clock1.getMinute();
 
@@ -251,28 +274,15 @@ public class MainController implements Initializable, Serializable {
         dayTextField.setText(clock1.getDay() + "");
         monthTextField.setText(clock1.getMonth() + "");
 
-
         EventHandler<ActionEvent> ehandler = e->{
             clock1.setCurrent();
 
-
-            if(alarmTime.equals(clock1.getTime())){
-                showAlert();
-                playAudio();
-            }
-            if(clock1.getMinute() - startMinute > difference){
-                difference = clock1.getMinute() - startMinute;
-                String temp = UserDatabase.get("TotalTimeSpent");
-                UserDatabase.replace("TotalTimeSpent", (Integer.parseInt(temp) + 1) + "");
-                UserDatabase.replace("LineChart_" + series.getData().get(clock1.getDayOfWeek()).getXValue(), ((int)series.getData().get(clock1.getDayOfWeek()).getYValue() + 1) + "");
-                series.getData().get(clock1.getDayOfWeek()).setYValue((int)series.getData().get(clock1.getDayOfWeek()).getYValue() + 1);
-            }
+            checkAlarm(clock1.getHour(),clock1.getMinute(),clock1.getSecond());
 
             saveDatabase();
             System.out.println(clock1.getTime());
 
-
-            if(myClockParent.isVisible()){
+            if(ClockParent.isVisible()){
                 clock2.setCurrent();
             }
 
@@ -286,15 +296,9 @@ public class MainController implements Initializable, Serializable {
         anime.setCycleCount(Timeline.INDEFINITE);
         anime.play();
 
-
-        // Construct a pane to hold both the elements.
-
-
         //borderPane.setCenter(calendar);
-        borderPane.setCenter(clock1);
-        myClockPane.setCenter(clock2);
-
-
+        Clock1Pane.setCenter(clock1);
+        Clock2Pane.setCenter(clock2);
 
     }
 }

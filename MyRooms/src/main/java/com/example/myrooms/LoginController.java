@@ -1,6 +1,5 @@
 package com.example.myrooms;
 
-import com.sun.tools.javac.Main;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +26,7 @@ public class LoginController implements Initializable {
     @FXML
     ImageView imageView;
     @FXML
-    Pane myPane;
+    Pane RotatingDoorPane;
     @FXML
     TextField username;
     @FXML
@@ -54,6 +53,8 @@ public class LoginController implements Initializable {
     Button registration;
     @FXML
     ImageView LockImage;
+    @FXML
+    TextField visitUsername;
 
     private static final String DataBase_FILE = "MyRooms/src/main/resources/Users";
     private static final LinkedHashMap<String,String> database = new LinkedHashMap<>();
@@ -76,7 +77,7 @@ public class LoginController implements Initializable {
         rotate.setAxis(Rotate.Y_AXIS);
         rotate.setByAngle(70);
         rotate.setDuration(Duration.seconds(2));
-        rotate.setNode(myPane);
+        rotate.setNode(RotatingDoorPane);
 
         ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(1.5), anchorPane);
         scaleTransition.setToX(20.0);
@@ -268,6 +269,9 @@ public class LoginController implements Initializable {
                         for (int i = 0; i < Integer.parseInt(value); i++) {
                             controller.corkBoardScene();
                         }
+                    }
+                    if(variable.equals("ShopIcon")){
+                        controller.setShopIcon(value);
                     }
                 }
             }

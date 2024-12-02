@@ -102,4 +102,7 @@ public class Clock extends Pane {
         else
             return  dayOfWeek - 2;
     }
+    public int getSecond(){
+        return second;
+    }
 }
