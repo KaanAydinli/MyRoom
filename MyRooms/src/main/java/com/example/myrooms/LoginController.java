@@ -55,7 +55,7 @@ public class LoginController implements Initializable {
     @FXML
     ImageView LockImage;
 
-    private static final String DataBase_FILE = "src/main/resources/Users";
+    private static final String DataBase_FILE = "MyRooms/src/main/resources/Users";
     private static final LinkedHashMap<String,String> database = new LinkedHashMap<>();
     private static  LinkedHashMap<String,String> roomDatabase = new LinkedHashMap<>();
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
@@ -152,7 +152,7 @@ public class LoginController implements Initializable {
 
             }
         } catch (IOException e) {
-            System.err.println("error");
+            System.err.println("Error in loading");
         }
     }
     public void showRegister(){
@@ -223,7 +223,7 @@ public class LoginController implements Initializable {
     public void loadRoom(String user, MainController controller) throws IOException {
 
 
-        try(BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/UserDatabases/" + user + "Database"))) {
+        try(BufferedReader reader = new BufferedReader(new FileReader("MyRooms/src/main/resources/UserDatabases/" + user + "Database"))) {
             String line;
 
             while((line = reader.readLine()) != null){
@@ -272,7 +272,7 @@ public class LoginController implements Initializable {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error");
+            System.err.println("Error on loading");
         }
     }
 

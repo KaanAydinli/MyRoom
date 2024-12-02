@@ -78,7 +78,7 @@ public class MainController implements Initializable, Serializable {
 
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
     public LinkedHashMap<String,String> UserDatabase = null;
-    private final String  DataBase_FILE = "src/main/resources/UserDatabases/";
+    private final String  DataBase_FILE = "MyRooms/src/main/resources/UserDatabases/";
 
     public void setCoin(int money){
         totalCoin = money;
