@@ -86,9 +86,10 @@ public class MainController implements Initializable, Serializable {
 
 
     public MainController() {
-        alarm = new Alarm();
+
         clock1 = new Clock();
         clock2 = new Clock();
+        alarm = new Alarm(clock1);
     }
     public void setShopIcon(String name){
         shopIcon.setImage(new Image(name));
@@ -200,6 +201,7 @@ public class MainController implements Initializable, Serializable {
         alert.setTitle("Alarm");
         alert.setHeaderText(null);
         alert.setContentText("Time is up");
+        alert.show();
     }
     public void playAudio(){
         AudioClip clip = new AudioClip(getClass().getResource("Sounds/alarmsound.wav").toString());
@@ -247,6 +249,7 @@ public class MainController implements Initializable, Serializable {
 
         TotalCoinLabel.setText(String.valueOf(totalCoin));
 
+        alarm.createAlarmPomodoro(1,1);
 
         Light.Point light = new Light.Point();
         light.setX(750);

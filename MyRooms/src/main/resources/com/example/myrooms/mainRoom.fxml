@@ -59,7 +59,7 @@
                   <DropShadow blurType="GAUSSIAN" height="47.39" offsetX="10.0" radius="27.59" spread="0.03" width="64.97" />
                </effect>
                 </ImageView>
-                <ImageView fx:id="CalendarImage" fitHeight="169.0" fitWidth="153.0" layoutX="780.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="CalendarImage" fitHeight="121.0" fitWidth="111.0" layoutX="818.0" layoutY="350.0" pickOnBounds="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Calendar.png" />
                     </image>
@@ -159,12 +159,12 @@
                 <BorderPane fx:id="Clock2Pane" layoutX="228.0" onMouseClicked="#clockScene" prefHeight="500.0" prefWidth="481.0" />
             </children>
         </Pane>
-        <TextField fx:id="dayTextField" editable="false" focusTraversable="false" layoutX="820.0" layoutY="355.0" prefHeight="56.0" prefWidth="77.0" style="-fx-background-color: transparent;">
+        <TextField fx:id="dayTextField" editable="false" focusTraversable="false" layoutX="837.0" layoutY="367.0" prefHeight="52.0" prefWidth="79.0" style="-fx-background-color: transparent;">
             <font>
                 <Font name="Georgia Pro" size="24.0" />
             </font>
         </TextField>
-        <TextField fx:id="monthTextField" editable="false" focusTraversable="false" layoutX="821.0" layoutY="407.0" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: transparent;">
+        <TextField fx:id="monthTextField" editable="false" focusTraversable="false" layoutX="829.0" layoutY="415.0" prefHeight="34.0" prefWidth="71.0" style="-fx-background-color: transparent;">
             <font>
                 <Font name="Georgia Pro" size="10.0" />
             </font>
