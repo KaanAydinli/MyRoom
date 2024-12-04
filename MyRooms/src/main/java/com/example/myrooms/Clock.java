@@ -7,7 +7,6 @@ import java.time.Month;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-
 public class Clock extends Pane {
 
     private int  hour, minute, second;
@@ -37,8 +36,6 @@ public class Clock extends Pane {
         double coorX = getWidth() / 2;
         double coorY = getHeight() / 2;
 
-
-
         double sl = radius * 0.65;
         double ml = radius * 0.5;
         double hl = radius * 0.35;
@@ -50,8 +47,6 @@ public class Clock extends Pane {
         double sy = coorY - sl * Math.cos(second * (2 * Math.PI / 60));
         double my = coorY - ml * Math.cos(minute * (2 * Math.PI / 60));
         double hy = coorY - hl * Math.cos((hour % 12 + minute / 60) * (2 * Math.PI / 12));
-
-
 
         Line sli = new Line(coorX, coorY, sx, sy);
         Line mli = new Line(coorX, coorY, mx, my);

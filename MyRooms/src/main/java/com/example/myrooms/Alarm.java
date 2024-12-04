@@ -1,6 +1,5 @@
 package com.example.myrooms;
 
-
 public class Alarm {
 
     int second;
@@ -14,12 +13,12 @@ public class Alarm {
     int breakTime;
 
     public Alarm(Clock clock){
-        mode = 0;
+        mode = 1;
         isOn = false;
         this.clock = clock;
     }
     public void createAlarmNormal(int hour,int minute,int second){
-        
+
         mode = 0;
         this.hour = hour;
         this.minute = minute;
@@ -42,7 +41,6 @@ public class Alarm {
         else{
             hour = clock.getHour();
         }
-
     }
     public boolean checkAlarm(int hour,int minute,int second){
 
@@ -52,16 +50,8 @@ public class Alarm {
         }
         else{
             if(isOn && hour == this.hour && minute == this.minute && second == this.second){
-                this.minute = clock.getMinute() + breakTime;
-                if(this.minute > 60){
-                    this.minute = this.minute - 60;
-                    this.hour = clock.getHour() + 1;
-                }
-                else{
-                    this.hour = clock.getHour();
-                }
-                this.second = clock.getSecond();
-                createAlarmNormal(this.hour,this.minute,this.second);
+
+                createAlarmPomodoro(this.breakTime,this.sessionTime) ;
                 return true;
             }
             return false;

@@ -2,6 +2,14 @@
   -fx-background-color: rgba(218, 178, 138, 0.7);
   -fx-text-fill: rgba(98, 62, 31, 0.94);
 }
+#settingsNotificationsButton{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-text-fill: rgba(98, 62, 31, 0.94);
+}
+#settingsBrightnessSlider{
+  --body-background-color: rgba(218, 178, 138, 0.7);
+
+}
 #visitUsername{
   -fx-background-color: rgba(218, 178, 138, 0.7);
   -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;

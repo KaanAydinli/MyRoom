@@ -2,13 +2,18 @@ package com.example.myrooms;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
@@ -66,6 +71,16 @@ public class MainController implements Initializable, Serializable {
     ToggleButton toggle;
     @FXML
     ImageView shopIcon;
+    @FXML
+    Slider settingsBrightnessSlider,settingsVolumeSlider;
+    @FXML
+    Pane settingsPane;
+    @FXML
+    ToggleButton settingsNotificationsButton;
+    @FXML
+    Pane ComputerApplications;
+
+
 
     int totalCoin = 10;
 
@@ -148,6 +163,7 @@ public class MainController implements Initializable, Serializable {
     public void computerScene() {
         ClockParent.setVisible(false);
         ComputerPane.setVisible(!ComputerPane.isVisible());
+        ComputerApplications.setVisible(!ComputerApplications.isVisible());
 
     }
     public void chartScene() {
@@ -176,17 +192,17 @@ public class MainController implements Initializable, Serializable {
         System.out.println("Alarm set to: " + alarm.getAlarmTime());
     }
     public void settingsScene() {
-        totalCoin -= 30;
-        buyClock("CsProject-BackGrounds/Clock3.png");
-        setAlarmImage("CsProject-BackGrounds/Alarm2.png");
-        setPlantImage("CsProject-BackGrounds/Plant2.png");
-
-        TotalCoinLabel.setText(String.valueOf(totalCoin));
+        ComputerApplications.setVisible(false);
+        settingsPane.setVisible(!settingsPane.isVisible());
     }
     public void closeEveryPane(){
         ClockParent.setVisible(false);
         ComputerPane.setVisible(false);
         AlarmPane.setVisible(false);
+        settingsPane.setVisible(false);
+        ComputerApplications.setVisible(false);
+
+
     }
     public void shopScene() {
 
@@ -247,9 +263,18 @@ public class MainController implements Initializable, Serializable {
         series.getData().add(new XYChart.Data<>("Sun", 0));
         LineChart.getData().add(series);
 
-        TotalCoinLabel.setText(String.valueOf(totalCoin));
+        settingsBrightnessSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
-        alarm.createAlarmPomodoro(1,1);
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+
+                ColorAdjust setBrightness = new ColorAdjust();
+                setBrightness.setBrightness(settingsBrightnessSlider.getValue());
+                allPane.setEffect(setBrightness);
+            }
+        });
+
+        TotalCoinLabel.setText(String.valueOf(totalCoin));
 
         Light.Point light = new Light.Point();
         light.setX(750);
@@ -272,7 +297,6 @@ public class MainController implements Initializable, Serializable {
         ClockParent.setStyle(IDLE_BUTTON_STYLE);
 
         int startMinute = clock1.getMinute();
-
 
         dayTextField.setText(clock1.getDay() + "");
         monthTextField.setText(clock1.getMonth() + "");

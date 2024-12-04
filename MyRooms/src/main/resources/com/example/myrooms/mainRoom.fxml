@@ -6,7 +6,9 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -109,9 +111,9 @@
         </Pane>
         <FlowPane fx:id="CorkboardPostitsPane" layoutX="172.0" layoutY="69.0" onMouseClicked="#corkBoardScene" prefHeight="226.0" prefWidth="178.0" />
         <BorderPane fx:id="Clock1Pane" layoutX="465.0" layoutY="23.0" onMouseClicked="#clockScene" prefHeight="150.0" prefWidth="153.0" />
-        <Pane fx:id="ComputerPane" focusTraversable="true" layoutX="186.0" layoutY="50.0" prefHeight="500.0" prefWidth="814.0" visible="false">
-            <children>
-                <ImageView fitHeight="592.0" fitWidth="773.0" layoutX="-25.0" layoutY="-56.0" nodeOrientation="INHERIT" pickOnBounds="true">
+      <Pane fx:id="ComputerPane" layoutX="161.0" layoutY="-6.0" visible="false">
+         <children>
+                <ImageView fitHeight="592.0" fitWidth="773.0" nodeOrientation="INHERIT" pickOnBounds="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Computer.png" />
                     </image>
@@ -119,36 +121,40 @@
                         <Rectangle2D />
                     </viewport>
                 </ImageView>
-                <ImageView fitHeight="99.0" fitWidth="101.0" layoutX="111.0" layoutY="64.0" onMouseClicked="#settingsScene" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../CsProject-BackGrounds/DALL_E-2024-11-12-17.20__1_-removebg-preview.png" />
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="85.0" fitWidth="87.0" layoutX="210.0" layoutY="65.0" onMouseClicked="#musicScene" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../CsProject-BackGrounds/DALL_E-2024-11-12-17.26-removebg-preview.png" />
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="96.0" fitWidth="99.0" layoutX="314.0" layoutY="59.0" onMouseClicked="#chartScene" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../CsProject-BackGrounds/graphlogo.png" />
-                    </image>
-                </ImageView>
-                <LineChart fx:id="LineChart" animated="false" layoutX="127.0" layoutY="146.0" opacity="0.48" prefHeight="134.0" prefWidth="494.0" title="Hours spent" visible="false">
-                    <xAxis>
-                        <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                        <NumberAxis side="LEFT" />
-                    </yAxis>
-                </LineChart>
-            <ImageView fx:id="shopIcon" fitHeight="99.0" fitWidth="153.0" layoutX="407.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../CsProject-BackGrounds/DALL_E-2024-11-12-17.09-removebg-preview.png" />
-               </image>
-            </ImageView>
-            </children>
-        </Pane>
+              <Pane fx:id="ComputerApplications" focusTraversable="true" layoutX="25.0" layoutY="56.0" prefHeight="500.0" prefWidth="814.0" visible="false">
+                  <children>
+                      <ImageView fitHeight="99.0" fitWidth="101.0" layoutX="111.0" layoutY="64.0" onMouseClicked="#settingsScene" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../CsProject-BackGrounds/DALL_E-2024-11-12-17.20__1_-removebg-preview.png" />
+                          </image>
+                      </ImageView>
+                      <ImageView fitHeight="85.0" fitWidth="87.0" layoutX="210.0" layoutY="65.0" onMouseClicked="#musicScene" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../CsProject-BackGrounds/DALL_E-2024-11-12-17.26-removebg-preview.png" />
+                          </image>
+                      </ImageView>
+                      <ImageView fitHeight="96.0" fitWidth="99.0" layoutX="314.0" layoutY="59.0" onMouseClicked="#chartScene" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../CsProject-BackGrounds/graphlogo.png" />
+                          </image>
+                      </ImageView>
+                      <LineChart fx:id="LineChart" animated="false" layoutX="127.0" layoutY="146.0" opacity="0.48" prefHeight="134.0" prefWidth="494.0" title="Hours spent" visible="false">
+                          <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                              <NumberAxis side="LEFT" />
+                          </yAxis>
+                      </LineChart>
+                  <ImageView fx:id="shopIcon" fitHeight="99.0" fitWidth="153.0" layoutX="407.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../CsProject-BackGrounds/DALL_E-2024-11-12-17.09-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  </children>
+              </Pane>
+         </children>
+      </Pane>
         <Pane fx:id="ClockParent" layoutX="100.0" layoutY="50.0" prefHeight="500.0" prefWidth="900.0" visible="false">
             <children>
                 <ImageView fitHeight="476.0" fitWidth="555.0" layoutX="191.0" pickOnBounds="true">
@@ -159,6 +165,28 @@
                 <BorderPane fx:id="Clock2Pane" layoutX="228.0" onMouseClicked="#clockScene" prefHeight="500.0" prefWidth="481.0" />
             </children>
         </Pane>
+      <Pane fx:id="settingsPane" layoutX="231.0" layoutY="47.0" prefHeight="535.0" prefWidth="610.0" visible="false">
+         <children>
+            <Label layoutX="137.0" layoutY="134.0" prefHeight="32.0" prefWidth="134.0" text="Notifications" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="146.0" layoutY="198.0" prefHeight="32.0" prefWidth="102.0" text="Volume" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="143.0" layoutY="255.0" prefHeight="32.0" prefWidth="109.0" text="Brightness" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Slider fx:id="settingsVolumeSlider" layoutX="294.0" layoutY="207.0" value="50.0" />
+            <Slider fx:id="settingsBrightnessSlider" layoutX="294.0" layoutY="264.0" max="0.4" min="-0.8" />
+            <ToggleButton fx:id="settingsNotificationsButton" layoutX="320.0" layoutY="137.0" mnemonicParsing="false" text="On" />
+         </children>
+      </Pane>
         <TextField fx:id="dayTextField" editable="false" focusTraversable="false" layoutX="837.0" layoutY="367.0" prefHeight="52.0" prefWidth="79.0" style="-fx-background-color: transparent;">
             <font>
                 <Font name="Georgia Pro" size="24.0" />

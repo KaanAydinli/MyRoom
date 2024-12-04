@@ -72,7 +72,6 @@ public class LoginController implements Initializable {
         mainController.UserDatabase = roomDatabase;
         loadRoom(name,mainController);
 
-
         RotateTransition rotate = new RotateTransition();
         rotate.setAxis(Rotate.Y_AXIS);
         rotate.setByAngle(70);
@@ -169,7 +168,7 @@ public class LoginController implements Initializable {
                 System.out.println(name);
                 saveDatabase();
                 try {
-                    FileWriter writer = new FileWriter("src/main/resources/UserDatabases/" +  name + "Database");
+                    FileWriter writer = new FileWriter("MyRooms/src/main/resources/UserDatabases/" +  name + "Database");
                     writer.write("TotalCoin : 50\n");
                     writer.write("Plant : CsProject-BackGrounds/Plant.png\n");
                     writer.write("Bookcase : CsProject-BackGrounds/Bookcase.png\n");
