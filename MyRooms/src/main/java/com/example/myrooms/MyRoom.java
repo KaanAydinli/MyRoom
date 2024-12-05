@@ -16,7 +16,6 @@ public class MyRoom extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("loginRoom.fxml"));
         Parent root = loader.load();
 
@@ -24,7 +23,6 @@ public class MyRoom extends Application {
         //Parent root = FXMLLoader.load(getClass().getResource("mainRoom.fxml"));
 
         Scene scene = new Scene(root);
-
 
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setTitle("My Room");

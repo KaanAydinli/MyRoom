@@ -2,9 +2,9 @@ package com.example.myrooms;
 
 public class Alarm {
 
-    int second;
-    int minute;
-    int hour;
+    private int second;
+    private int minute;
+    private int hour;
     int mode; //Normal for 0 and Pomodoro for 1
     boolean isOn;
     String imagePath;
@@ -13,20 +13,19 @@ public class Alarm {
     int breakTime;
 
     public Alarm(Clock clock){
-        mode = 1;
+        mode = 0;
         isOn = false;
         this.clock = clock;
     }
     public void createAlarmNormal(int hour,int minute,int second){
 
-        mode = 0;
         this.hour = hour;
         this.minute = minute;
         this.second = second;
         isOn = true;
     }
     public void createAlarmPomodoro(int session, int breakTime){
-        mode = 1;
+
         isOn = true;
 
         sessionTime = session;
@@ -56,7 +55,6 @@ public class Alarm {
             }
             return false;
         }
-
     }
     public void deactivateAlarm(){
         isOn = true;
@@ -69,5 +67,14 @@ public class Alarm {
     }
     public String getAlarmTime(){
         return hour+":"+minute+":"+second;
+    }
+    public int getSecond(){
+        return second;
+    }
+    public int getMinute(){
+        return minute;
+    }
+    public int getHour(){
+        return hour;
     }
 }

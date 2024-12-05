@@ -3,6 +3,8 @@ package com.example.myrooms;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+
+import java.time.LocalTime;
 import java.time.Month;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -98,6 +100,44 @@ public class Clock extends Pane {
             return  dayOfWeek - 2;
     }
     public int getSecond(){
+
         return second;
     }
+    public int compareTo(int hour, int minute, int second){
+        int difference;
+        int secondResult;
+        int minuteResult;
+        int hourResult;
+
+        //Input 18:40:12
+        //Current 17:32:50
+
+        //Input 18:39:72
+
+
+        if(second - this.second > 0){
+            secondResult = second - this.second;
+        }
+        else{
+            second += 60;
+            minute--;
+            secondResult = second - this.second;
+        }
+
+        if(minute - this.minute > 0){
+            minuteResult = minute - this.minute;
+        }
+        else{
+            minute += 60;
+            hour--;
+            minuteResult = minute - this.minute;
+        }
+
+        hourResult = hour - this.hour;
+
+        difference = hourResult * 3600 + minuteResult * 60 + secondResult;
+
+        return difference;
+    }
+
 }

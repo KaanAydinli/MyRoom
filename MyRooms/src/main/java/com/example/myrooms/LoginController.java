@@ -60,6 +60,7 @@ public class LoginController implements Initializable {
     private static final LinkedHashMap<String,String> database = new LinkedHashMap<>();
     private static  LinkedHashMap<String,String> roomDatabase = new LinkedHashMap<>();
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
+    private int mode = 0; // 0 Login -- 1 Register -- 2 Visit
     public String name;
 
     public void goToRoom() throws IOException {
@@ -157,10 +158,15 @@ public class LoginController implements Initializable {
     }
     public void showRegister(){
         registerPane.setVisible(!registerPane.isVisible());
+        if(registerPane.isVisible()){
+            mode = 1;
+        }
+        else
+            mode = 0;
     }
     public void registerNew() throws IOException {
 
-        if(!registerPassword.getText().isEmpty() && !registerConfirmPassword.getText().isEmpty() && !registerUsername.getText().isEmpty()){
+        if(mode == 1 && !registerPassword.getText().isEmpty() && !registerConfirmPassword.getText().isEmpty() && !registerUsername.getText().isEmpty()){
 
             if(registerPassword.getText().equals(registerConfirmPassword.getText())){
                 database.put(registerUsername.getText(),registerPassword.getText());
@@ -186,33 +192,35 @@ public class LoginController implements Initializable {
     }
     public void isValid() {
 
-        if(!username.getText().isEmpty() && !password.getText().isEmpty()) {
+        if (mode == 0) {
+            if(!username.getText().isEmpty() && !password.getText().isEmpty()) {
 
-           if(database.get(username.getText()) != null && database.get(username.getText()).equals(password.getText())) {
+               if(database.get(username.getText()) != null && database.get(username.getText()).equals(password.getText())) {
 
-               try {
-                   name = username.getText();
+                   try {
+                       name = username.getText();
 
-                   goToRoom();
-               } catch (Exception e) {
-                   e.printStackTrace();
+                       goToRoom();
+                   } catch (Exception e) {
+                       e.printStackTrace();
+                   }
+                   ErrorText.setText("");
                }
-               ErrorText.setText("");
-           }
-           else{
-               username.clear();
-               password.clear();
-               ErrorText.setText("Wrong Password");
-               fadeIn();
-           }
-        }
-        else{
-            ErrorText.setText("Username or Password is Empty");
-            username.clear();
-            password.clear();
+               else{
+                   username.clear();
+                   password.clear();
+                   ErrorText.setText("Wrong Password");
+                   fadeIn();
+               }
+            }
+            else{
+                ErrorText.setText("Username or Password is Empty");
+                username.clear();
+                password.clear();
+                fadeIn();
+            }
         }
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

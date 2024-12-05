@@ -27,7 +27,7 @@
                 </ImageView>
                 <Pane fx:id="RotatingDoorPane" layoutX="104.0" layoutY="-1.0" prefHeight="589.0" prefWidth="520.0">
                     <children>
-                        <ImageView fx:id="imageView" fitHeight="430.0" fitWidth="230.0" layoutX="266.0" layoutY="119.0" onMouseClicked="#isValid" pickOnBounds="true">
+                        <ImageView fx:id="imageView" fitHeight="430.0" fitWidth="230.0" layoutX="266.0" layoutY="119.0" pickOnBounds="true">
                             <image>
                                 <Image url="@../../../CsProject-BackGrounds/LoginDoorPlanted.png" />
                             </image>
@@ -56,6 +56,12 @@
                </children>
             </Pane>
             <ToggleButton fx:id="loginvisitButton" layoutX="795.0" layoutY="33.0" mnemonicParsing="false" onAction="#changePane" text="Login" textOverrun="WORD_ELLIPSIS" />
+            <ImageView fx:id="LockImage" fitHeight="320.0" fitWidth="283.0" layoutX="348.0" layoutY="100.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../CsProject-BackGrounds/Lock.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="354.0" layoutY="106.0" mnemonicParsing="false" onAction="#isValid" opacity="0.0" prefHeight="457.0" prefWidth="260.0" />
             <Pane fx:id="registerPane" layoutX="284.0" layoutY="-4.0" prefHeight="610.0" prefWidth="395.0" visible="false">
                <children>
                   <TextField fx:id="registerUsername" layoutX="56.0" layoutY="107.0" prefHeight="71.0" prefWidth="283.0" promptText="Username">
@@ -76,12 +82,6 @@
                   <Button fx:id="registration" layoutX="144.0" layoutY="460.0" mnemonicParsing="false" onAction="#registerNew" prefHeight="31.0" prefWidth="108.0" text="Register" />
                </children>
             </Pane>
-            <ImageView fx:id="LockImage" fitHeight="320.0" fitWidth="283.0" layoutX="348.0" layoutY="100.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../CsProject-BackGrounds/Lock.png" />
-               </image>
-            </ImageView>
-            <Button layoutX="354.0" layoutY="106.0" mnemonicParsing="false" onAction="#isValid" opacity="0.0" prefHeight="457.0" prefWidth="260.0" />
             </children>
         </AnchorPane>
     </children>

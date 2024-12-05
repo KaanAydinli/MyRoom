@@ -27,6 +27,7 @@ import javafx.util.Duration;
 
 import java.io.*;
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 import java.util.*;
 
@@ -79,8 +80,16 @@ public class MainController implements Initializable, Serializable {
     ToggleButton settingsNotificationsButton;
     @FXML
     Pane ComputerApplications;
-
-
+    @FXML
+    Pane BoardPane;
+    @FXML
+    Pane AlarmNormalPane,AlarmPomodoroPane;
+    @FXML
+    ToggleButton alarmModeToggle;
+    @FXML
+    TextField alarmPomodoroSession,alarmPomodoroBreak;
+    @FXML
+    ProgressIndicator alarmProgress;
 
     int totalCoin = 10;
 
@@ -93,8 +102,7 @@ public class MainController implements Initializable, Serializable {
     Alarm alarm;
     Clock clock1;
     Clock clock2;
-
-
+    
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
     public LinkedHashMap<String,String> UserDatabase = null;
     private final String  DataBase_FILE = "MyRooms/src/main/resources/UserDatabases/";
@@ -180,16 +188,52 @@ public class MainController implements Initializable, Serializable {
     public void setAlarmText(String text){
         alarmText.setText(text);
     }
+    public void changeAlarmMode(){
+        AlarmNormalPane.setVisible(!AlarmNormalPane.isVisible());
+        AlarmPomodoroPane.setVisible(!AlarmPomodoroPane.isVisible());
+
+        if(AlarmPomodoroPane.isVisible()){
+            alarm.mode = 1;
+            alarmModeToggle.setText("Pomodoro");
+        }
+        else {
+            alarm.mode = 0;
+            alarmModeToggle.setText("Normal");
+        }
+    }
     public void createAlarm() {
-        alarmTime = alarmText.getText();
-        String[] timeparts = alarmTime.split(":");
-        int hour = Integer.parseInt(timeparts[0]);
-        int minute = Integer.parseInt(timeparts[1]);
-        int seconds = Integer.parseInt(timeparts[2]);
 
-        alarm.createAlarmNormal(hour, minute, seconds);
+        if(alarm.mode == 0){
+            alarmTime = alarmText.getText();
+            try {
+                String[] timeparts = alarmTime.split(":");
+                int hour = Integer.parseInt(timeparts[0]);
+                int minute = Integer.parseInt(timeparts[1]);
+                int seconds = Integer.parseInt(timeparts[2]);
 
-        System.out.println("Alarm set to: " + alarm.getAlarmTime());
+                alarm.createAlarmNormal(hour, minute, seconds);
+
+                System.out.println("Alarm set to: " + alarm.getAlarmTime());
+            }
+            catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Wrong or missing input in alarm");
+            }
+            catch (Exception e) {
+                System.out.println("Error in alarm creation");
+            }
+        }
+        else if(alarm.mode == 1){
+
+            try {
+                int session = Integer.parseInt(alarmPomodoroSession.getText());
+                int breakTime = Integer.parseInt(alarmPomodoroBreak.getText());
+                alarm.createAlarmPomodoro(session, breakTime);
+                System.out.println("Alarm set to: " + alarm.getAlarmTime());
+            } catch (Exception e) {
+                System.out.println("Wrong or missing input in alarm");
+            }
+        }
+
     }
     public void settingsScene() {
         ComputerApplications.setVisible(false);
@@ -201,7 +245,7 @@ public class MainController implements Initializable, Serializable {
         AlarmPane.setVisible(false);
         settingsPane.setVisible(false);
         ComputerApplications.setVisible(false);
-
+        BoardPane.setVisible(false);
 
     }
     public void shopScene() {
@@ -237,18 +281,19 @@ public class MainController implements Initializable, Serializable {
         }
     }
     public void corkBoardScene(){
-        Image image = new Image("CsProject-BackGrounds/postit.png");
-
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(50);
-        imageView.setFitWidth(50);
-        imageView.setPreserveRatio(true);
-
-        UserDatabase.replace("Postits", String.valueOf(CorkboardPostitsPane.getChildren().size() + 1));
-
-        if(CorkboardPostitsPane.getChildren().size() < 18){
-            CorkboardPostitsPane.getChildren().add(imageView);
-        }
+//        Image image = new Image("CsProject-BackGrounds/postit.png");
+//
+//        ImageView imageView = new ImageView(image);
+//        imageView.setFitHeight(50);
+//        imageView.setFitWidth(50);
+//        imageView.setPreserveRatio(true);
+//
+//        UserDatabase.replace("Postits", String.valueOf(CorkboardPostitsPane.getChildren().size() + 1));
+//
+//        if(CorkboardPostitsPane.getChildren().size() < 18){
+//            CorkboardPostitsPane.getChildren().add(imageView);
+//        }
+        BoardPane.setVisible(!BoardPane.isVisible());
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -289,7 +334,7 @@ public class MainController implements Initializable, Serializable {
         //Setting light effects
 
 //        imagePane.setEffect(lighting);
-          //allPane.setEffect(lighting);
+//          allPane.setEffect(lighting);
         //allPane.setEffect(new Lighting());
 
         dayTextField.setStyle(IDLE_BUTTON_STYLE);
@@ -305,6 +350,9 @@ public class MainController implements Initializable, Serializable {
             clock1.setCurrent();
 
             checkAlarm(clock1.getHour(),clock1.getMinute(),clock1.getSecond());
+
+//            alarmProgress.setProgress(clock1.compareTo(alarm.getHour(),alarm.getMinute(),alarm.getSecond()));
+//            System.out.println(clock1.compareTo(alarm.getHour(),alarm.getMinute(),alarm.getSecond()));
 
             saveDatabase();
             System.out.println(clock1.getTime());
