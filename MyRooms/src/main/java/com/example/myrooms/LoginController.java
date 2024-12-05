@@ -104,7 +104,6 @@ public class LoginController implements Initializable {
         rotate.setOnFinished(event -> {
             scaleTransition.play();
         });
-
     }
     public void fadeIn(){
         FadeTransition fadein = new FadeTransition(Duration.seconds(0.8), LockImage);
@@ -129,7 +128,6 @@ public class LoginController implements Initializable {
         else
             loginvisitButton.setText("Visit");
     }
-
     public void saveDatabase() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(DataBase_FILE))) {
             for (Map.Entry<String, String> entry : database.entrySet()) {
@@ -286,5 +284,4 @@ public class LoginController implements Initializable {
             System.err.println("Error on loading");
         }
     }
-
 }

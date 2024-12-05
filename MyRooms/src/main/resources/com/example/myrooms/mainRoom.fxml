@@ -107,7 +107,7 @@
                         <Image url="@../../../CsProject-BackGrounds/Alarm.png" />
                     </image>
                 </ImageView>
-            <Button layoutX="287.0" layoutY="417.0" mnemonicParsing="false" onAction="#createAlarm" prefHeight="25.0" prefWidth="179.0" text="Start Alarm">
+            <Button fx:id="alarmCreate" layoutX="287.0" layoutY="417.0" mnemonicParsing="false" onAction="#createAlarm" prefHeight="25.0" prefWidth="179.0" text="Start Alarm">
                <font>
                   <Font size="22.0" />
                </font>

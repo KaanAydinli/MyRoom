@@ -90,6 +90,8 @@ public class MainController implements Initializable, Serializable {
     TextField alarmPomodoroSession,alarmPomodoroBreak;
     @FXML
     ProgressIndicator alarmProgress;
+    @FXML
+    Button alarmCreate;
 
     int totalCoin = 10;
 
@@ -102,11 +104,10 @@ public class MainController implements Initializable, Serializable {
     Alarm alarm;
     Clock clock1;
     Clock clock2;
-    
+
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
     public LinkedHashMap<String,String> UserDatabase = null;
     private final String  DataBase_FILE = "MyRooms/src/main/resources/UserDatabases/";
-
 
     public MainController() {
 
@@ -212,6 +213,7 @@ public class MainController implements Initializable, Serializable {
                 int seconds = Integer.parseInt(timeparts[2]);
 
                 alarm.createAlarmNormal(hour, minute, seconds);
+                alarm.setStartingTime(clock1.getTotalTime());
 
                 System.out.println("Alarm set to: " + alarm.getAlarmTime());
             }
@@ -342,6 +344,7 @@ public class MainController implements Initializable, Serializable {
         ClockParent.setStyle(IDLE_BUTTON_STYLE);
 
         int startMinute = clock1.getMinute();
+        alarmProgress.setProgress(0);
 
         dayTextField.setText(clock1.getDay() + "");
         monthTextField.setText(clock1.getMonth() + "");
@@ -351,8 +354,17 @@ public class MainController implements Initializable, Serializable {
 
             checkAlarm(clock1.getHour(),clock1.getMinute(),clock1.getSecond());
 
-//            alarmProgress.setProgress(clock1.compareTo(alarm.getHour(),alarm.getMinute(),alarm.getSecond()));
-//            System.out.println(clock1.compareTo(alarm.getHour(),alarm.getMinute(),alarm.getSecond()));
+            if(alarm.getTotalTime() != 0){
+
+                int progress = alarm.compareTo(alarm.getStartingTime());
+                int comparison = clock1.compareTo(alarm.getTotalTime());
+                float value = (float) (100 - (comparison * 100 / progress)) / 100f;
+                alarmProgress.setProgress(value);
+                System.out.println(value);
+
+            }
+
+
 
             saveDatabase();
             System.out.println(clock1.getTime());

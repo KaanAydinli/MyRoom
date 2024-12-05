@@ -103,41 +103,46 @@ public class Clock extends Pane {
 
         return second;
     }
-    public int compareTo(int hour, int minute, int second){
-        int difference;
-        int secondResult;
-        int minuteResult;
-        int hourResult;
-
-        //Input 18:40:12
-        //Current 17:32:50
-
-        //Input 18:39:72
-
-
-        if(second - this.second > 0){
-            secondResult = second - this.second;
-        }
-        else{
-            second += 60;
-            minute--;
-            secondResult = second - this.second;
-        }
-
-        if(minute - this.minute > 0){
-            minuteResult = minute - this.minute;
-        }
-        else{
-            minute += 60;
-            hour--;
-            minuteResult = minute - this.minute;
-        }
-
-        hourResult = hour - this.hour;
-
-        difference = hourResult * 3600 + minuteResult * 60 + secondResult;
-
-        return difference;
+//    public int compareTo(int hour, int minute, int second){
+//        int difference;
+//        int secondResult;
+//        int minuteResult;
+//        int hourResult;
+//
+//        //Input 18:40:12
+//        //Current 17:32:50
+//
+//        //Input 18:39:72
+//
+//
+//        if(second - this.second > 0){
+//            secondResult = second - this.second;
+//        }
+//        else{
+//            second += 60;
+//            minute--;
+//            secondResult = second - this.second;
+//        }
+//
+//        if(minute - this.minute > 0){
+//            minuteResult = minute - this.minute;
+//        }
+//        else{
+//            minute += 60;
+//            hour--;
+//            minuteResult = minute - this.minute;
+//        }
+//
+//        hourResult = hour - this.hour;
+//
+//        difference = hourResult * 3600 + minuteResult * 60 + secondResult;
+//
+//        return difference;
+//    }
+    public int getTotalTime(){
+        return hour * 3600 + minute * 60 + second;
     }
-
+    public int compareTo(int total){
+        return total - getTotalTime();
+    }
 }

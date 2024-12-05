@@ -22,6 +22,30 @@
   -fx-background-color: rgba(218, 178, 138, 0.7);
   -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
 }
+#alarmText{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#alarmModeToggle{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#alarmCreate{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#alarmPomodoroBreak{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#alarmProgress{
+  -fx-background-color: transparent;
+  -fx-progress-color: rgba(98, 62, 31, 0.94);
+}
+#alarmPomodoroSession{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
 #registerButton{
   -fx-text-fill: rgba(98, 62, 31, 0.94);
 }

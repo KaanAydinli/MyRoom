@@ -11,6 +11,7 @@ public class Alarm {
     Clock clock;
     int sessionTime;
     int breakTime;
+    private int startingTime;
 
     public Alarm(Clock clock){
         mode = 0;
@@ -56,6 +57,12 @@ public class Alarm {
             return false;
         }
     }
+    public void setStartingTime(int startingTime){
+        this.startingTime = startingTime;
+    }
+    public int getStartingTime(){
+        return startingTime;
+    }
     public void deactivateAlarm(){
         isOn = true;
     }
@@ -76,5 +83,11 @@ public class Alarm {
     }
     public int getHour(){
         return hour;
+    }
+    public int getTotalTime(){
+        return hour * 3600 + minute * 60 + second;
+    }
+    public int compareTo(int total){
+        return getTotalTime() - total;
     }
 }
