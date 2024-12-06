@@ -16,12 +16,11 @@ public class MyRoom extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("loginRoom.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/myrooms/loginRoom.fxml"));
         Parent root = loader.load();
 
         LoginController controller = loader.getController();
-        //Parent root = FXMLLoader.load(getClass().getResource("mainRoom.fxml"));
+
 
         Scene scene = new Scene(root);
 
@@ -31,10 +30,10 @@ public class MyRoom extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
 
-        Platform.setImplicitExit(false);
-        stage.setOnCloseRequest(event -> {
-            controller.saveDatabase();
-        });
+//        Platform.setImplicitExit(false);
+//        stage.setOnCloseRequest(event -> {
+//            controller.saveDatabase();
+//        });
 
         Image image = new Image("CsProject-BackGrounds/planticon.png");
         stage.getIcons().add(image);

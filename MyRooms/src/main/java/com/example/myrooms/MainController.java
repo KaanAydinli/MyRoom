@@ -13,6 +13,7 @@ import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -67,6 +68,9 @@ public class MainController implements Initializable, Serializable {
     @FXML
     ImageView shopIcon;
 
+
+
+
     int totalCoin = 10;
 
     int total = 0;
@@ -80,9 +84,12 @@ public class MainController implements Initializable, Serializable {
     Clock clock2;
 
 
+    Notebook notebook;
+
+
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
     public LinkedHashMap<String,String> UserDatabase = null;
-    private final String  DataBase_FILE = "MyRooms/src/main/resources/UserDatabases/";
+    private final String  DataBase_FILE = "src/main/resources/UserDatabases/";
 
 
     public MainController() {
@@ -90,6 +97,7 @@ public class MainController implements Initializable, Serializable {
         clock1 = new Clock();
         clock2 = new Clock();
     }
+
     public void setShopIcon(String name){
         shopIcon.setImage(new Image(name));
     }
@@ -124,7 +132,6 @@ public class MainController implements Initializable, Serializable {
     public void setTotalTime(String time){
         totalTimeSpent = Integer.parseInt(time);
     }
-
     public void saveDatabase() {
 
         UserDatabase.replace("TotalCoin", totalCoin + "");
@@ -151,7 +158,6 @@ public class MainController implements Initializable, Serializable {
     }
     public void chartScene() {
         LineChart.setVisible(!LineChart.isVisible());
-
     }
     public void clockScene() {
         ComputerPane.setVisible(false);
@@ -182,14 +188,30 @@ public class MainController implements Initializable, Serializable {
 
         TotalCoinLabel.setText(String.valueOf(totalCoin));
     }
+
+
+    public void initializeNotebookCalendar()
+    {
+        notebook = new Notebook(allPane);
+    }
+    public void openNotebook(MouseEvent mouseEvent)
+    {
+        notebook.notebookOpen();
+
+    }
+
     public void closeEveryPane(){
         ClockParent.setVisible(false);
         ComputerPane.setVisible(false);
         AlarmPane.setVisible(false);
-    }
-    public void shopScene() {
+        notebook.notebookClose();
 
     }
+    public void shopScene()
+    {
+
+    }
+
     public void musicScene() {
 
         AudioClip clip = new AudioClip(getClass().getResource("Sounds/librarySounds.mp3").toString());
@@ -280,7 +302,7 @@ public class MainController implements Initializable, Serializable {
             checkAlarm(clock1.getHour(),clock1.getMinute(),clock1.getSecond());
 
             saveDatabase();
-            System.out.println(clock1.getTime());
+
 
             if(ClockParent.isVisible()){
                 clock2.setCurrent();
