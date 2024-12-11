@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+
 <Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
     <children>
         <Pane fx:id="imagePane">
@@ -100,7 +101,7 @@
             <Button layoutX="808.0" layoutY="336.0" mnemonicParsing="false" opacity="0.0" prefHeight="121.0" prefWidth="101.0" text="Calendar" />
          </children>
       </Pane>
-        <Pane fx:id="AlarmPane" layoutX="172.0" layoutY="50.0" onMouseClicked="#alarmScene" prefHeight="484.0" prefWidth="766.0" visible="false">
+        <Pane fx:id="AlarmPane" layoutX="172.0" layoutY="50.0" onMouseClicked="#alarmScene" prefHeight="484.0" prefWidth="766.0">
             <children>
                 <ImageView fitHeight="494.0" fitWidth="465.0" layoutX="133.0" onMouseClicked="#alarmScene" opacity="0.91" pickOnBounds="true">
                     <image>
@@ -115,7 +116,7 @@
             <Pane fx:id="AlarmNormalPane" layoutX="246.0" layoutY="190.0" prefHeight="193.0" prefWidth="239.0">
                <children>
                       <TextField fx:id="alarmText" layoutY="164.0" prefHeight="32.0" prefWidth="245.0" />
-                  <Label layoutX="63.0" layoutY="101.0" text="Alarm Time">
+                  <Label fx:id="alarmTimeLabel" layoutX="9.0" layoutY="101.0" prefHeight="32.0" prefWidth="235.0" text="Alarm Time:">
                      <font>
                         <Font size="22.0" />
                      </font>

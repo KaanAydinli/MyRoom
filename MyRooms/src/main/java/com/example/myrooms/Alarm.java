@@ -64,7 +64,7 @@ public class Alarm {
         return startingTime;
     }
     public void deactivateAlarm(){
-        isOn = true;
+        isOn = false;
     }
     public void setimagePath(String imagePath){
         this.imagePath = imagePath;

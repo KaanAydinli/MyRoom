@@ -92,6 +92,8 @@ public class MainController implements Initializable, Serializable {
     ProgressIndicator alarmProgress;
     @FXML
     Button alarmCreate;
+    @FXML
+    Label alarmTimeLabel;
 
     int totalCoin = 10;
 
@@ -204,38 +206,45 @@ public class MainController implements Initializable, Serializable {
     }
     public void createAlarm() {
 
-        if(alarm.mode == 0){
-            alarmTime = alarmText.getText();
-            try {
-                String[] timeparts = alarmTime.split(":");
-                int hour = Integer.parseInt(timeparts[0]);
-                int minute = Integer.parseInt(timeparts[1]);
-                int seconds = Integer.parseInt(timeparts[2]);
+        if(alarmCreate.getText().equals("Start Alarm")){
+            if(alarm.mode == 0){
+                alarmTime = alarmText.getText();
+                try {
+                    String[] timeparts = alarmTime.split(":");
+                    int hour = Integer.parseInt(timeparts[0]);
+                    int minute = Integer.parseInt(timeparts[1]);
+                    int seconds = Integer.parseInt(timeparts[2]);
 
-                alarm.createAlarmNormal(hour, minute, seconds);
-                alarm.setStartingTime(clock1.getTotalTime());
+                    alarm.createAlarmNormal(hour, minute, seconds);
+                    alarm.setStartingTime(clock1.getTotalTime());
 
-                System.out.println("Alarm set to: " + alarm.getAlarmTime());
+                    System.out.println("Alarm set to: " + alarm.getAlarmTime());
+                }
+                catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Wrong or missing input in alarm");
+                }
+                catch (Exception e) {
+                    System.out.println("Error in alarm creation");
+                }
             }
-            catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Wrong or missing input in alarm");
+            else if(alarm.mode == 1){
+
+                try {
+                    int session = Integer.parseInt(alarmPomodoroSession.getText());
+                    int breakTime = Integer.parseInt(alarmPomodoroBreak.getText());
+                    alarm.createAlarmPomodoro(session, breakTime);
+                    System.out.println("Alarm set to: " + alarm.getAlarmTime());
+                } catch (Exception e) {
+                    System.out.println("Wrong or missing input in alarm");
+                }
             }
-            catch (Exception e) {
-                System.out.println("Error in alarm creation");
-            }
+            alarmCreate.setText("Stop Alarm");
+            alarmTimeLabel.setText(alarmTimeLabel.getText() + alarmTime);
         }
-        else if(alarm.mode == 1){
-
-            try {
-                int session = Integer.parseInt(alarmPomodoroSession.getText());
-                int breakTime = Integer.parseInt(alarmPomodoroBreak.getText());
-                alarm.createAlarmPomodoro(session, breakTime);
-                System.out.println("Alarm set to: " + alarm.getAlarmTime());
-            } catch (Exception e) {
-                System.out.println("Wrong or missing input in alarm");
-            }
+        else if(alarmCreate.getText().equals("Stop Alarm")){
+            alarm.deactivateAlarm();
+            alarmCreate.setText("Start Alarm");
         }
-
     }
     public void settingsScene() {
         ComputerApplications.setVisible(false);
@@ -279,8 +288,10 @@ public class MainController implements Initializable, Serializable {
         if (alarm.checkAlarm(hour,minute,seconds)) {
             playAudio();
             showAlert();
-            alarm.deactivateAlarm();
         }
+    }
+    public void deActiveAlarm(){
+        alarm.deactivateAlarm();
     }
     public void corkBoardScene(){
 //        Image image = new Image("CsProject-BackGrounds/postit.png");
@@ -358,13 +369,15 @@ public class MainController implements Initializable, Serializable {
 
                 int progress = alarm.compareTo(alarm.getStartingTime());
                 int comparison = clock1.compareTo(alarm.getTotalTime());
-                float value = (float) (100 - (comparison * 100 / progress)) / 100f;
-                alarmProgress.setProgress(value);
-                System.out.println(value);
-
+                if(alarm.isOn){
+                    float value = (float) (100 - (comparison * 100 / progress)) / 100f;
+                    alarmProgress.setProgress(value);
+                }
+                else{
+                    alarmProgress.setProgress(0);
+                    alarmTimeLabel.setText("Alarm Time: ");
+                }
             }
-
-
 
             saveDatabase();
             System.out.println(clock1.getTime());
