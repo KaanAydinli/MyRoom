@@ -1,5 +1,6 @@
 package com.example.myrooms;
 
+import com.habittracker.HabitTracker;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -96,6 +97,8 @@ public class MainController implements Initializable, Serializable {
         alarm = new Alarm();
         clock1 = new Clock();
         clock2 = new Clock();
+        //Will delete
+        User user = new User(1);
     }
 
     public void setShopIcon(String name){
@@ -192,11 +195,14 @@ public class MainController implements Initializable, Serializable {
 
     public void initializeNotebookCalendar()
     {
-        notebook = new Notebook(allPane);
+        //TODO will be cutted oute
+        User user = new User(1);
+        notebook = new Notebook(allPane,user);
     }
     public void openNotebook(MouseEvent mouseEvent)
     {
         notebook.notebookOpen();
+        mouseEvent.consume();
 
     }
 

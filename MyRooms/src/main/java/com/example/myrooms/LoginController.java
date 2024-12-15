@@ -189,32 +189,41 @@ public class LoginController implements Initializable {
         }
     }
     public void isValid() {
+       //for development
+        name = username.getText();
 
-        if(!username.getText().isEmpty() && !password.getText().isEmpty()) {
-
-           if(database.get(username.getText()) != null && database.get(username.getText()).equals(password.getText())) {
-
-               try {
-                   name = username.getText();
-
-                   goToRoom();
-               } catch (Exception e) {
-                   e.printStackTrace();
-               }
-               ErrorText.setText("");
-           }
-           else{
-               username.clear();
-               password.clear();
-               ErrorText.setText("Wrong Password");
-               fadeIn();
-           }
+        try{
+            goToRoom();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
         }
-        else{
-            ErrorText.setText("Username or Password is Empty");
-            username.clear();
-            password.clear();
-        }
+
+//        if(!username.getText().isEmpty() && !password.getText().isEmpty()) {
+//
+//           if(database.get(username.getText()) != null && database.get(username.getText()).equals(password.getText())) {
+//
+//               try {
+//                   name = username.getText();
+//
+//                   goToRoom();
+//               } catch (Exception e) {
+//                   e.printStackTrace();
+//               }
+//               ErrorText.setText("");
+//           }
+//           else{
+//               username.clear();
+//               password.clear();
+//               ErrorText.setText("Wrong Password");
+//               fadeIn();
+//           }
+//        }
+//        else{
+//            ErrorText.setText("Username or Password is Empty");
+//            username.clear();
+//            password.clear();
+//        }
     }
 
 

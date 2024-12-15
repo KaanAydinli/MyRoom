@@ -33,3 +33,15 @@
   -fx-background-color: rgba(218, 178, 138, 0.7);
   -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
 }
+
+/* Make ScrollPane transparent */
+.transparent-scroll_pane {
+  -fx-background: transparent;
+  -fx-background-color: transparent;
+}
+
+.transparent-scroll_pane .viewport {
+  -fx-background: transparent;
+  -fx-background-color: transparent;
+}
+
