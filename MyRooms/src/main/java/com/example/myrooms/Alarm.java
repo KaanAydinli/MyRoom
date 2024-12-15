@@ -1,13 +1,15 @@
 package com.example.myrooms;
 
-public class Alarm {
+import java.io.Serializable;
+
+public class Alarm implements Serializable {
 
     private int second;
     private int minute;
     private int hour;
     int mode; //Normal for 0 and Pomodoro for 1
     boolean isOn;
-    String imagePath;
+    String imagePath = "CsProject-BackGrounds/Alarm.png";
     Clock clock;
     int sessionTime;
     int breakTime;

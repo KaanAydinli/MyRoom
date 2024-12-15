@@ -36,7 +36,7 @@ import javafx.scene.input.KeyCode;
 
 
 
-public class MainController implements Initializable, Serializable {
+public class MainController implements Initializable {
 
 
 
@@ -145,15 +145,28 @@ public class MainController implements Initializable, Serializable {
     BookCase bookcase;
 
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
-    public LinkedHashMap<String,String> UserDatabase = null;
-    private final String  DataBase_FILE = "MyRooms/src/main/resources/UserDatabases/";
+
+    User user;
 
     public MainController() {
 
-        clock1 = new Clock();
-        clock2 = new Clock();
-        alarm = new Alarm(clock1);
-        bookcase = new BookCase();
+        name = LoginController.name;
+
+        try {
+            UserManager.USER_FILE = name + ".ser";
+            user = UserManager.loadUser();
+            clock1 = user.room.clock1;
+            clock2 = user.room.clock2;
+            alarm = user.room.alarm;
+            bookcase = user.room.bookcase;
+            totalCoin = user.totalCoin;
+            totalTimeSpent = user.totalHours;
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     //azra
@@ -175,56 +188,34 @@ public class MainController implements Initializable, Serializable {
     public void setCoin(int money){
         totalCoin = money;
         TotalCoinLabel.setText(String.valueOf(totalCoin));
-        UserDatabase.replace("TotalCoin", String.valueOf(totalCoin));
+
     }
     public void setAlarmImage(String image){
         AlarmImage.setImage(new Image(image));
-        UserDatabase.replace("Alarm", image);
+
     }
     public void setName(String names){
         name = names;
     }
     public void setBoardImage(String image){
         BoardImage.setImage(new Image(image));
-        UserDatabase.replace("Board", image);
+
     }
     public void setBookcaseImage(String image){
         BookcaseImage.setImage(new Image(image));
-        UserDatabase.replace("Bookcase", image);
+
     }
     public void setCalendarImage(String image){
         CalendarImage.setImage(new Image(image));
-        UserDatabase.replace("Calendar", image);
+
     }
     public void setPlantImage(String image){
         PlantImage.setImage(new Image(image));
-        UserDatabase.replace("Plant", image);
+
     }
-    public void setTotalTime(String time){
-        totalTimeSpent = Integer.parseInt(time);
+    public void setTotalTime(int time){
+        totalTimeSpent = time;
     }
-
-    public void saveDatabase() {
-
-        UserDatabase.replace("TotalCoin", totalCoin + "");
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(DataBase_FILE + name + "Database"))) {
-            for (Map.Entry<String, String> entry : UserDatabase.entrySet()) {
-                if(!entry.getValue().isEmpty()){
-                    writer.write(entry.getKey() + " : " + entry.getValue());
-                    writer.newLine();
-                }
-                else if(entry.getKey().isEmpty() || entry.getValue().isEmpty()){
-                    writer.write(entry.getKey());
-                    writer.newLine();
-                }
-
-            }
-        } catch (IOException e) {
-            System.err.println("Veritabanı kaydedilirken bir hata oluştu: " + e.getMessage());
-        }
-    }
-    //azra
-
 
     public void computerScene() {
         ClockParent.setVisible(false);
@@ -337,7 +328,7 @@ public class MainController implements Initializable, Serializable {
     }
     public void buyClock(String imageString){
         Image image = new Image(imageString);
-        UserDatabase.replace("Clock", imageString);
+
         ClockImage.setImage(image);
     }
     public void checkAlarm(int hour,int minute, int seconds){
@@ -399,6 +390,22 @@ public class MainController implements Initializable, Serializable {
         for(Book b : bookcase.books){
 
             if(b != null){
+                ImageView bookImageView = new ImageView(new Image(b.path));
+                bookImageView.setFitWidth(25);
+                bookImageView.setFitHeight(110);
+
+
+                b.setPrefSize(bookImageView.getFitWidth()+5, bookImageView.getFitHeight());
+                Label bookLabel = new Label(b.bookName);
+                bookLabel.setWrapText(true);
+                bookLabel.setPrefWidth(150);
+                bookLabel.setTranslateY(-(bookImageView.getFitHeight()/2) +20);
+                bookLabel.setStyle(" -fx-background-color: transparent; " +
+                        "-fx-text-fill: white; -fx-font-size: 10px;-fx-text-overrun: clip;");
+                bookLabel.setRotate(90);
+                b.getChildren().addAll(bookImageView, bookLabel);
+
+
                 if(bookFlowPanee1.getChildren().size()<9){
                     bookFlowPanee1.getChildren().add(b);
                 }
@@ -431,6 +438,28 @@ public class MainController implements Initializable, Serializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+        name = LoginController.name;
+
+        try {
+            UserManager.USER_FILE = name + ".ser";
+            user = UserManager.loadUser();
+            clock1 = user.room.clock1;
+            clock2 = user.room.clock2;
+            alarm = user.room.alarm;
+            bookcase = user.room.bookcase;
+            totalCoin = user.totalCoin;
+            totalTimeSpent = user.totalHours;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        setAlarmImage(alarm.imagePath);
+        buyClock(clock1.imagePath);
+        setCoin(totalCoin);
+        setTotalTime(totalTimeSpent);
+        putAndSortBooks();
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.getData().add(new XYChart.Data<>("Mon", 0));
@@ -499,8 +528,8 @@ public class MainController implements Initializable, Serializable {
                     alarmTimeLabel.setText("Alarm Time: ");
                 }
             }
+            UserManager.saveUser(user);
 
-            saveDatabase();
             System.out.println(clock1.getTime());
 
             if(ClockParent.isVisible()){

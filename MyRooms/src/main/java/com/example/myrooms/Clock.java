@@ -4,16 +4,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Clock extends Pane {
+public class Clock extends Pane implements Serializable {
 
     private int  hour, minute, second;
     private int day, month, year;
     private int dayOfWeek;
+    public String imagePath = "CsProject-BackGrounds/Clock.png";
 
     public Clock(){
 

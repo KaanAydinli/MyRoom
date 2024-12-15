@@ -5,19 +5,25 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
+import java.io.Serializable;
 
-public class Book extends StackPane {
-    public ImageView bookImageView;
-    private Label bookLabel;
+
+public class Book extends StackPane implements Serializable {
+
+    public String bookName;
+    public String path;
 
     public Book(Book b){
-        this.bookLabel = new Label(b.getBookName());
-        this.bookImageView = new ImageView(b.bookImageView.getImage());
+        this.bookName = b.bookName;
+        this.path = b.path;
     }
 
     public Book(String bookName,String path) {
 
-        bookImageView = new ImageView(new Image(path));
+        this.bookName = bookName;
+        this.path = path;
+
+        ImageView bookImageView = new ImageView(new Image(path));
         bookImageView.setFitWidth(25);
         bookImageView.setFitHeight(110);
 
@@ -25,7 +31,7 @@ public class Book extends StackPane {
         //bookImageView.setPreserveRatio(true);
 
         this.setPrefSize(bookImageView.getFitWidth()+5, bookImageView.getFitHeight());
-        bookLabel = new Label(bookName);
+        Label bookLabel = new Label(bookName);
         bookLabel.setWrapText(true);
         bookLabel.setPrefWidth(150);
         bookLabel.setTranslateY(-(bookImageView.getFitHeight()/2) +20);
@@ -37,13 +43,13 @@ public class Book extends StackPane {
 
 
     } public void setBookName(String bookName) {
-        bookLabel.setText(bookName);
+        this.bookName = bookName;
     }
     public String getBookName() {
-        return bookLabel.getText();
+        return bookName;
     }
     public void setImage(String imagePath) {
-        bookImageView.setImage(new Image(imagePath));
+        this.path = imagePath;
     }
     public int compareTo(Book other){
         return this.getBookName().compareTo(other.getBookName());

@@ -58,10 +58,10 @@ public class LoginController implements Initializable {
 
     private static final String DataBase_FILE = "MyRooms/src/main/resources/Users";
     private static final LinkedHashMap<String,String> database = new LinkedHashMap<>();
-    private static  LinkedHashMap<String,String> roomDatabase = new LinkedHashMap<>();
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
     private int mode = 0; // 0 Login -- 1 Register -- 2 Visit
-    public String name;
+    static public String name;
+    User user;
 
     public void goToRoom() throws IOException {
 
@@ -70,7 +70,6 @@ public class LoginController implements Initializable {
 
         MainController mainController = loader.getController();
         mainController.setName(name);
-        mainController.UserDatabase = roomDatabase;
         loadRoom(name,mainController);
 
         RotateTransition rotate = new RotateTransition();
@@ -171,19 +170,14 @@ public class LoginController implements Initializable {
                 name = registerUsername.getText();
                 System.out.println(name);
                 saveDatabase();
-                try {
-                    FileWriter writer = new FileWriter("MyRooms/src/main/resources/UserDatabases/" +  name + "Database");
-                    writer.write("TotalCoin : 50\n");
-                    writer.write("Plant : CsProject-BackGrounds/Plant.png\n");
-                    writer.write("Bookcase : CsProject-BackGrounds/Bookcase.png\n");
-                    writer.write("Alarm : CsProject-BackGrounds/Alarm.png\n");
-                    writer.write("Calendar : CsProject-BackGrounds/Calendar.png\n");
-                    writer.write("Clock : CsProject-BackGrounds/Clock.png");
 
-                    writer.close();
-                } catch (IOException e) {
-                    System.err.println("An error occurred: " + e.getMessage());
-                }
+                Clock clock1 = new Clock();
+                Room userRoom = new Room(new Alarm(clock1),clock1,new Clock(),new BookCase());
+
+                user = new User(name,password.getText(),20,0,userRoom);
+                UserManager.USER_FILE = name + ".ser";
+                UserManager.saveUser(user);
+
                 goToRoom();
             }
         }
@@ -228,60 +222,6 @@ public class LoginController implements Initializable {
     }
     public void loadRoom(String user, MainController controller) throws IOException {
 
-
-        try(BufferedReader reader = new BufferedReader(new FileReader("MyRooms/src/main/resources/UserDatabases/" + user + "Database"))) {
-            String line;
-
-            while((line = reader.readLine()) != null){
-
-                if (line.trim().isEmpty() || line.startsWith("#")) {
-                    roomDatabase.put(line, "");
-                }
-                else {
-                    String[] parts = line.split(":");
-                    String variable = parts[0].trim();
-                    String value = parts[1].trim();
-
-                    roomDatabase.put(variable, value);
-                    if (variable.equals("TotalCoin")) {
-                        controller.setCoin(Integer.parseInt(value));
-                    }
-                    if (variable.equals("Clock")) {
-                        controller.buyClock(value);
-                    }
-                    if (variable.equals("Alarm")) {
-                        controller.setAlarmImage(value);
-                    }
-                    if (variable.equals("Bookcase")) {
-                        controller.setBookcaseImage(value);
-                    }
-                    if (variable.equals("Calendar")) {
-                        controller.setCalendarImage(value);
-                    }
-                    if (variable.equals("Board")) {
-                        controller.setBoardImage(value);
-                    }
-                    if (variable.equals("Plant")) {
-                        controller.setPlantImage(value);
-                    }
-                    if (variable.equals("TotalTimeSpent")) {
-                        controller.setTotalTime(value);
-                    }
-                    if (variable.equals("Username")) {
-                        controller.setName(value);
-                    }
-                    if (variable.equals("Postits")) {
-                        for (int i = 0; i < Integer.parseInt(value); i++) {
-                            controller.corkBoardScene();
-                        }
-                    }
-                    if(variable.equals("ShopIcon")){
-                        controller.setShopIcon(value);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error on loading");
-        }
+        controller.name = name;
     }
 }

@@ -1,6 +1,8 @@
 package com.example.myrooms;
 
-public class BookCase {
+import java.io.Serializable;
+
+public class BookCase implements Serializable {
     public Book[] books;
     static public int count = 0;
 
