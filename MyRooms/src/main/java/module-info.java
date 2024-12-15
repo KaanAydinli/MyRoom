@@ -5,6 +5,7 @@ module com.example.myrooms {
     requires javafx.graphics;
     requires javafx.web;
     requires jdk.compiler;
+    requires java.desktop;
 
 
     opens com.example.myrooms to javafx.fxml;

@@ -18,6 +18,7 @@ import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -25,11 +26,14 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.URL;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 import java.util.*;
+import javafx.scene.input.KeyCode;
+
 
 
 public class MainController implements Initializable, Serializable {
@@ -92,8 +96,42 @@ public class MainController implements Initializable, Serializable {
     ProgressIndicator alarmProgress;
     @FXML
     Button alarmCreate;
+<<<<<<< Updated upstream
     @FXML
     Label alarmTimeLabel;
+=======
+    //azra
+    @FXML
+    Pane bookPane;
+    @FXML
+    Pane bookPane1;
+    // azra
+    @FXML
+    Button addBookButton;
+    //azra
+    @FXML
+    TextField bookTextField;
+    //azra
+    @FXML
+    Label bookLabel;
+    @FXML
+    FlowPane flowPaneBook;
+    @FXML
+    FlowPane flowPaneBook2;
+    @FXML
+    FlowPane flowPaneBook3;
+    @FXML
+    FlowPane bookFlowPanee1;
+    @FXML
+    FlowPane bookFlowPanee2;
+    @FXML
+    FlowPane bookFlowPanee3;
+    @FXML
+    Button addImageButton;
+    @FXML
+    Pane addBookNamePane;
+
+>>>>>>> Stashed changes
 
     int totalCoin = 10;
 
@@ -102,10 +140,12 @@ public class MainController implements Initializable, Serializable {
     String name;
     int totalTimeSpent;
     int difference = 0;
+    String bookName = "";
 
     Alarm alarm;
     Clock clock1;
     Clock clock2;
+    BookCase bookcase;
 
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
     public LinkedHashMap<String,String> UserDatabase = null;
@@ -116,7 +156,22 @@ public class MainController implements Initializable, Serializable {
         clock1 = new Clock();
         clock2 = new Clock();
         alarm = new Alarm(clock1);
+        bookcase = new BookCase();
     }
+
+    //azra
+    public void addBook() {
+        bookPane.setVisible(true);
+        bookTextField.setOnAction(event -> {
+            bookLabel.setText(bookTextField.getText());
+        });
+    }
+    public void bookNameKey() {
+
+            bookLabel.setText(bookTextField.getText());
+            bookName = bookTextField.getText();
+    }
+
     public void setShopIcon(String name){
         shopIcon.setImage(new Image(name));
     }
@@ -171,6 +226,9 @@ public class MainController implements Initializable, Serializable {
             System.err.println("Veritabanı kaydedilirken bir hata oluştu: " + e.getMessage());
         }
     }
+    //azra
+
+
     public void computerScene() {
         ClockParent.setVisible(false);
         ComputerPane.setVisible(!ComputerPane.isVisible());
@@ -257,6 +315,8 @@ public class MainController implements Initializable, Serializable {
         settingsPane.setVisible(false);
         ComputerApplications.setVisible(false);
         BoardPane.setVisible(false);
+        bookPane.setVisible(false);
+        addBookNamePane.setVisible(false);
 
     }
     public void shopScene() {
@@ -307,6 +367,70 @@ public class MainController implements Initializable, Serializable {
 //            CorkboardPostitsPane.getChildren().add(imageView);
 //        }
         BoardPane.setVisible(!BoardPane.isVisible());
+    }
+    public void bookCaseScene() {
+
+       bookPane.setVisible(!bookPane.isVisible());
+
+    }
+    public void addImage(){
+
+        String imagePath ="CsProject-BackGrounds/Book.png";
+        if(!bookName.equals("")){
+            Book book = new Book(bookTextField.getText(),  imagePath);
+            int count = bookcase.getCount();
+            bookcase.books[bookcase.getCount()] = book;
+            bookcase.setCount(++count);
+
+            putAndSortBooks();
+
+            bookName = "";
+            bookTextField.clear();
+        }
+        addBookNamePane.setVisible(!addBookNamePane.isVisible());
+
+       // bookPane.setVisible(!bookPane.isVisible());
+
+    }
+    public void putAndSortBooks(){
+        bookcase.sortBooks();
+
+        bookFlowPanee1.getChildren().clear();
+        bookFlowPanee2.getChildren().clear();
+        bookFlowPanee3.getChildren().clear();
+
+        for(Book b : bookcase.books){
+
+            if(b != null){
+                if(bookFlowPanee1.getChildren().size()<9){
+                    bookFlowPanee1.getChildren().add(b);
+                }
+                else if(bookFlowPanee2.getChildren().size()<10){
+                    bookFlowPanee2.getChildren().add(b);
+                }
+                else if(bookFlowPanee3.getChildren().size()<10){
+                    bookFlowPanee3.getChildren().add(b);
+                }
+            }
+
+        }
+    }
+    public  void addImageViewOfBooks(){
+        Image image = new Image("CsProject-BackGrounds/Book.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(60);
+        imageView.setFitWidth(25);
+        imageView.setPreserveRatio(true);
+        if(flowPaneBook.getChildren().size()<9){
+            flowPaneBook.getChildren().add(imageView);
+
+        }
+        else if(flowPaneBook2.getChildren().size()<10){
+            flowPaneBook2.getChildren().add(imageView);
+        }
+        else if(flowPaneBook3.getChildren().size()<10){
+            flowPaneBook3.getChildren().add(imageView);
+        }
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

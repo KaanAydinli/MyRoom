@@ -1,0 +1,52 @@
+#UserInfo
+UserName : Emre
+TotalCoin : -69
+TotalTimeSpent : 1
+#-
+#ItemImages
+Bookcase : CsProject-BackGrounds/Bookcase.png
+Calendar : CsProject-BackGrounds/Calendar.png
+Plant : CsProject-BackGrounds/Plant.png
+Board : CsProject-BackGrounds/HalfBoard.png
+Alarm : CsProject-BackGrounds/Alarm.png
+Clock : CsProject-BackGrounds/Clock.png
+#--
+#Board
+Postits : 0
+#Board.Postits
+Postit1Text : Go to school
+Postit2Text : Be healthy
+#---
+#Alarm
+AlarmTime : 08.00
+AlarmMode : Normal
+#Alarm.Pomodoro
+SessionTime : 25
+BreakTime : 5
+#----
+#Bookcase
+BookNumber : 1
+#Bookcase.Book
+Book1Name : Tutunamayanlar
+#-----
+#Plant
+Height : 10
+#Plant.Watering
+CanFullness : 25
+#------
+#Computer
+#Computer.Shop
+#Computer.Settings
+#Computer.MusicPlayer
+#Computer.Graphics
+LineChart_Mon : 0
+LineChart_Tue : 0
+LineChart_Wed : 1
+LineChart_Thu : 0
+LineChart_Fri : 0
+LineChart_Sat : 0
+LineChart_Sun : 1
+#-------
+#NoteBook
+#--------
+#Calendar

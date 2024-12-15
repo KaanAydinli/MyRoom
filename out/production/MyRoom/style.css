@@ -1,0 +1,71 @@
+#loginvisitButton{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-text-fill: rgba(98, 62, 31, 0.94);
+}
+#settingsNotificationsButton{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-text-fill: rgba(98, 62, 31, 0.94);
+}
+#settingsBrightnessSlider{
+  --body-background-color: rgba(218, 178, 138, 0.7);
+
+}
+#visitUsername{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#username{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#password{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#alarmText{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#alarmModeToggle{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#alarmCreate{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#alarmPomodoroBreak{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#alarmProgress{
+  -fx-background-color: transparent;
+  -fx-progress-color: rgba(98, 62, 31, 0.94);
+}
+#alarmPomodoroSession{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#registerButton{
+  -fx-text-fill: rgba(98, 62, 31, 0.94);
+}
+#registerConfirmPassword{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#registerUsername{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#registerPassword{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#registration{
+  -fx-background-color: rgba(218, 178, 138, 0.7);
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
+#bookTextArea{
+  -fx-background-color: transparent;
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}

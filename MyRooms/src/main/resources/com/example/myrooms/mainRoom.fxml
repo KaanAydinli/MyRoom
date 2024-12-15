@@ -18,8 +18,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< Updated upstream
 
 <Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
+=======
+<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
+>>>>>>> Stashed changes
     <children>
         <Pane fx:id="imagePane">
             <children>
@@ -91,6 +95,14 @@
                 </Label>
             </children>
         </Pane>
+      <Pane fx:id="bookPane1" layoutX="744.0" layoutY="36.0" prefHeight="203.0" prefWidth="322.0">
+         <children>
+            <FlowPane fx:id="flowPaneBook2" layoutX="183.0" layoutY="61.0" prefHeight="78.0" prefWidth="140.0" />
+            <FlowPane fx:id="flowPaneBook" prefHeight="66.0" prefWidth="121.0" />
+            <Button fx:id="addImageButton" layoutX="131.0" layoutY="14.0" mnemonicParsing="false" onAction="#addImageViewOfBooks" prefHeight="55.0" prefWidth="66.0" text="Button" />
+            <FlowPane fx:id="flowPaneBook3" layoutX="60.0" layoutY="148.0" prefHeight="52.0" prefWidth="140.0" />
+         </children>
+      </Pane>
       <Pane onMouseClicked="#closeEveryPane" prefHeight="611.0" prefWidth="1080.0">
          <children>
             <Button layoutX="165.0" layoutY="71.0" mnemonicParsing="false" onAction="#corkBoardScene" opacity="0.0" prefHeight="226.0" prefWidth="186.0" text="Board" />
@@ -99,6 +111,24 @@
             <Button layoutX="341.0" layoutY="316.0" mnemonicParsing="false" opacity="0.0" prefHeight="106.0" prefWidth="71.0" text="Plant" />
             <Button layoutX="423.0" layoutY="221.0" mnemonicParsing="false" onAction="#computerScene" opacity="0.0" prefHeight="142.0" prefWidth="239.0" style="-fx-background-color: transparent;" text="Computer" />
             <Button layoutX="808.0" layoutY="336.0" mnemonicParsing="false" opacity="0.0" prefHeight="121.0" prefWidth="101.0" text="Calendar" />
+            <Button layoutX="730.0" layoutY="98.0" mnemonicParsing="false" onAction="#bookCaseScene" opacity="0.0" prefHeight="154.0" prefWidth="339.0" text="Bookcase" />
+         </children>
+      </Pane>
+      <Pane fx:id="bookPane" layoutX="135.0" layoutY="49.0" prefHeight="492.0" prefWidth="820.0">
+         <children>
+            <ImageView fitHeight="524.0" fitWidth="822.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../CsProject-BackGrounds/Bookcase.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="addBookButton" layoutX="491.0" layoutY="384.0" mnemonicParsing="false" onAction="#addImage" prefHeight="101.0" prefWidth="268.0" text="Add Book">
+               <font>
+                  <Font name="System Bold" size="47.0" />
+               </font>
+            </Button>
+            <FlowPane fx:id="bookFlowPanee1" layoutX="19.0" layoutY="56.0" onKeyPressed="#bookCaseScene" prefHeight="124.0" prefWidth="289.0" />
+            <FlowPane fx:id="bookFlowPanee2" layoutX="482.0" layoutY="243.0" prefHeight="118.0" prefWidth="301.0" />
+            <FlowPane fx:id="bookFlowPanee3" layoutX="173.0" layoutY="395.0" prefHeight="101.0" prefWidth="304.0" />
          </children>
       </Pane>
         <Pane fx:id="AlarmPane" layoutX="172.0" layoutY="50.0" onMouseClicked="#alarmScene" prefHeight="484.0" prefWidth="766.0">
@@ -236,5 +266,19 @@
                 <Font name="Georgia Pro" size="10.0" />
             </font>
         </TextField>
+      <Pane fx:id="addBookNamePane" layoutX="346.0" layoutY="32.0" prefHeight="540.0" prefWidth="432.0" visible="false">
+         <children>
+            <ImageView fitHeight="635.0" fitWidth="618.0" layoutX="-83.0" layoutY="-52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../CsProject-BackGrounds/bookbackgroundless.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="bookTextField" onAction="#addImage" onKeyTyped="#bookNameKey" prefHeight="32.0" prefWidth="161.0" />
+            <Label fx:id="bookLabel" alignment="CENTER" layoutX="-61.0" layoutY="279.0" prefHeight="65.0" prefWidth="390.0" rotate="90.0" text=".." textAlignment="CENTER">
+               <font>
+                  <Font size="35.0" />
+               </font></Label>
+         </children>
+      </Pane>
     </children>
 </Pane>

@@ -65,3 +65,7 @@
   -fx-background-color: rgba(218, 178, 138, 0.7);
   -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
 }
+#bookTextArea{
+  -fx-background-color: transparent;
+  -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
+}
