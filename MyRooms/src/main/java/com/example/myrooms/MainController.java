@@ -96,10 +96,9 @@ public class MainController implements Initializable, Serializable {
     ProgressIndicator alarmProgress;
     @FXML
     Button alarmCreate;
-<<<<<<< Updated upstream
+
     @FXML
     Label alarmTimeLabel;
-=======
     //azra
     @FXML
     Pane bookPane;
@@ -130,8 +129,6 @@ public class MainController implements Initializable, Serializable {
     Button addImageButton;
     @FXML
     Pane addBookNamePane;
-
->>>>>>> Stashed changes
 
     int totalCoin = 10;
 

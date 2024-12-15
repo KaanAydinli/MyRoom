@@ -18,12 +18,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< Updated upstream
-
-<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
-=======
 <Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
->>>>>>> Stashed changes
     <children>
         <Pane fx:id="imagePane">
             <children>
@@ -114,7 +109,7 @@
             <Button layoutX="730.0" layoutY="98.0" mnemonicParsing="false" onAction="#bookCaseScene" opacity="0.0" prefHeight="154.0" prefWidth="339.0" text="Bookcase" />
          </children>
       </Pane>
-      <Pane fx:id="bookPane" layoutX="135.0" layoutY="49.0" prefHeight="492.0" prefWidth="820.0">
+      <Pane fx:id="bookPane" layoutX="135.0" layoutY="49.0" prefHeight="492.0" prefWidth="820.0" visible="false">
          <children>
             <ImageView fitHeight="524.0" fitWidth="822.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -131,7 +126,7 @@
             <FlowPane fx:id="bookFlowPanee3" layoutX="173.0" layoutY="395.0" prefHeight="101.0" prefWidth="304.0" />
          </children>
       </Pane>
-        <Pane fx:id="AlarmPane" layoutX="172.0" layoutY="50.0" onMouseClicked="#alarmScene" prefHeight="484.0" prefWidth="766.0">
+        <Pane fx:id="AlarmPane" layoutX="172.0" layoutY="50.0" onMouseClicked="#alarmScene" prefHeight="484.0" prefWidth="766.0" visible="false">
             <children>
                 <ImageView fitHeight="494.0" fitWidth="465.0" layoutX="133.0" onMouseClicked="#alarmScene" opacity="0.91" pickOnBounds="true">
                     <image>
