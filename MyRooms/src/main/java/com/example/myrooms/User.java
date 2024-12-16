@@ -6,8 +6,8 @@ public class User implements Serializable {
 
     public String name;
     public String password;
-    public int totalCoin;
-    public int totalHours;
+    public Integer totalCoin;
+    public Integer totalHours;
     public Room room;
 
     public User(String name, String password, int totalCoin, int totalHours, Room room){

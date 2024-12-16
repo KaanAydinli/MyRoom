@@ -7,7 +7,6 @@ module com.example.myrooms {
     requires jdk.compiler;
     requires java.desktop;
 
-
     opens com.example.myrooms to javafx.fxml;
     exports com.example.myrooms;
 }

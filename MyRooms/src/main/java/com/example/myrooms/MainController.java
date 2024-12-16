@@ -46,8 +46,6 @@ public class MainController implements Initializable {
     @FXML
     BorderPane Clock2Pane;
     @FXML
-    LineChart<String, Number> LineChart;
-    @FXML
     BorderPane Clock1Pane;
     @FXML
     ImageView ClockImage, BookcaseImage, BoardImage, CalendarImage, AlarmImage, PlantImage;
@@ -70,12 +68,6 @@ public class MainController implements Initializable {
     @FXML
     Label TotalCoinLabel;
     @FXML
-    TextArea books;
-    @FXML
-    TextField booktext;
-    @FXML
-    ToggleButton toggle;
-    @FXML
     ImageView shopIcon;
     @FXML
     Slider settingsBrightnessSlider,settingsVolumeSlider;
@@ -86,7 +78,7 @@ public class MainController implements Initializable {
     @FXML
     Pane ComputerApplications;
     @FXML
-    Pane BoardPane;
+    Pane BoardPane, ChartPane;
     @FXML
     Pane AlarmNormalPane,AlarmPomodoroPane;
     @FXML
@@ -132,6 +124,9 @@ public class MainController implements Initializable {
     Pane addBookNamePane;
     @FXML
     TextField changePasswordTextfield;
+
+    @FXML
+    Label totalTimeCharts,plantLevelCharts,totalHabitsCharts,totalPostitsCharts,totalBooksCharts;
 
     int totalCoin = 10;
 
@@ -230,7 +225,8 @@ public class MainController implements Initializable {
 
     }
     public void chartScene() {
-        LineChart.setVisible(!LineChart.isVisible());
+        ComputerApplications.setVisible(false);
+        ChartPane.setVisible(!ChartPane.isVisible());
 
     }
     public void clockScene() {
@@ -294,19 +290,21 @@ public class MainController implements Initializable {
             alarmTimeLabel.setText(alarmTimeLabel.getText() + alarmTime);
         }
         else if(alarmCreate.getText().equals("Stop Alarm")){
-            alarm.deactivateAlarm();
+            deActiveAlarm();
             alarmCreate.setText("Start Alarm");
         }
     }
     public void settingsScene() {
         ComputerApplications.setVisible(false);
         settingsPane.setVisible(!settingsPane.isVisible());
+
     }
     public void closeEveryPane(){
         ClockParent.setVisible(false);
         ComputerPane.setVisible(false);
         AlarmPane.setVisible(false);
         settingsPane.setVisible(false);
+        ChartPane.setVisible(false);
         ComputerApplications.setVisible(false);
         BoardPane.setVisible(false);
         bookPane.setVisible(false);
@@ -377,6 +375,7 @@ public class MainController implements Initializable {
 
         String imagePath ="CsProject-BackGrounds/Book.png";
         if(!bookName.equals("")){
+            totalBooksCharts.setText((Integer.parseInt(totalBooksCharts.getText()) + 1)+ "");
             Book book = new Book(bookTextField.getText(),  imagePath);
             int count = bookcase.getCount();
             bookcase.books[bookcase.getCount()] = book;
@@ -477,16 +476,7 @@ public class MainController implements Initializable {
         setCoin(totalCoin);
         setTotalTime(totalTimeSpent);
         putAndSortBooks();
-
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.getData().add(new XYChart.Data<>("Mon", 0));
-        series.getData().add(new XYChart.Data<>("Tue", 0));
-        series.getData().add(new XYChart.Data<>("Wed", 0));
-        series.getData().add(new XYChart.Data<>("Thu", 0));
-        series.getData().add(new XYChart.Data<>("Fri", 0));
-        series.getData().add(new XYChart.Data<>("Sat", 0));
-        series.getData().add(new XYChart.Data<>("Sun", 0));
-        LineChart.getData().add(series);
+        totalTimeCharts.setText(user.totalHours + "");
 
         settingsBrightnessSlider.valueProperty().addListener(new ChangeListener<Number>() {
 

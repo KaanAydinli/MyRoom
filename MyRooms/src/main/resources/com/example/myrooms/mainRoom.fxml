@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
@@ -192,14 +189,6 @@
                               <Image url="@../../../CsProject-BackGrounds/graphlogo.png" />
                           </image>
                       </ImageView>
-                      <LineChart fx:id="LineChart" animated="false" layoutX="127.0" layoutY="146.0" opacity="0.48" prefHeight="134.0" prefWidth="494.0" title="Hours spent" visible="false">
-                          <xAxis>
-                              <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                              <NumberAxis side="LEFT" />
-                          </yAxis>
-                      </LineChart>
                   <ImageView fx:id="shopIcon" fitHeight="99.0" fitWidth="153.0" layoutX="407.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../CsProject-BackGrounds/DALL_E-2024-11-12-17.09-removebg-preview.png" />
@@ -219,7 +208,7 @@
                 <BorderPane fx:id="Clock2Pane" layoutX="228.0" onMouseClicked="#clockScene" prefHeight="500.0" prefWidth="481.0" />
             </children>
         </Pane>
-      <Pane fx:id="settingsPane" layoutX="231.0" layoutY="47.0" prefHeight="535.0" prefWidth="610.0">
+      <Pane fx:id="settingsPane" layoutX="231.0" layoutY="47.0" prefHeight="535.0" prefWidth="610.0" visible="false">
          <children>
             <Label layoutX="137.0" layoutY="134.0" prefHeight="32.0" prefWidth="134.0" text="Notifications" textFill="WHITE">
                <font>
@@ -241,6 +230,60 @@
             <ToggleButton fx:id="settingsNotificationsButton" layoutX="320.0" layoutY="137.0" mnemonicParsing="false" text="On" />
             <TextField fx:id="changePasswordTextfield" layoutX="320.0" layoutY="85.0" onAction="#changePass" />
             <Label layoutX="118.0" layoutY="81.0" text="Change Password" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="ChartPane" layoutX="236.0" layoutY="12.0" prefHeight="401.0" prefWidth="652.0" visible="false">
+         <children>
+            <Label layoutX="105.0" layoutY="94.0" text="Plant Level:" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="plantLevelCharts" layoutX="286.0" layoutY="94.0" text="0" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="113.0" layoutY="154.0" text="Total Time:" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalTimeCharts" layoutX="285.0" layoutY="154.0" text="0" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="112.0" layoutY="214.0" text="Total Habits:" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalHabitsCharts" layoutX="286.0" layoutY="214.0" text="0" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="120.0" layoutY="267.0" text="Total Postit:" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalPostitsCharts" layoutX="284.0" layoutY="265.0" text="0" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="116.0" layoutY="322.0" text="Total Books:" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalBooksCharts" layoutX="277.0" layoutY="329.0" text="0" textFill="WHITE">
                <font>
                   <Font size="22.0" />
                </font>
