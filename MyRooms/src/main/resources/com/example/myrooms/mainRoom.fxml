@@ -162,9 +162,9 @@
         </Pane>
         <FlowPane fx:id="CorkboardPostitsPane" layoutX="172.0" layoutY="69.0" onMouseClicked="#corkBoardScene" prefHeight="226.0" prefWidth="178.0" />
         <BorderPane fx:id="Clock1Pane" layoutX="465.0" layoutY="23.0" onMouseClicked="#clockScene" prefHeight="150.0" prefWidth="153.0" />
-      <Pane fx:id="ComputerPane" layoutX="161.0" layoutY="-6.0" visible="false">
+      <Pane fx:id="ComputerPane" layoutX="153.0" layoutY="7.0" prefHeight="579.0" prefWidth="802.0" visible="false">
          <children>
-                <ImageView fitHeight="592.0" fitWidth="773.0" nodeOrientation="INHERIT" pickOnBounds="true">
+                <ImageView fx:id="ComputerImage" fitHeight="592.0" fitWidth="804.0" nodeOrientation="INHERIT" pickOnBounds="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Computer.png" />
                     </image>
@@ -172,24 +172,24 @@
                         <Rectangle2D />
                     </viewport>
                 </ImageView>
-              <Pane fx:id="ComputerApplications" focusTraversable="true" layoutX="25.0" layoutY="56.0" prefHeight="500.0" prefWidth="814.0" visible="false">
+              <Pane fx:id="ComputerApplications" focusTraversable="true" layoutX="25.0" layoutY="27.0" prefHeight="412.0" prefWidth="749.0" visible="false">
                   <children>
-                      <ImageView fitHeight="99.0" fitWidth="101.0" layoutX="111.0" layoutY="64.0" onMouseClicked="#settingsScene" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fitHeight="152.0" fitWidth="170.0" layoutX="40.0" layoutY="11.0" onMouseClicked="#settingsScene" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../../../CsProject-BackGrounds/DALL_E-2024-11-12-17.20__1_-removebg-preview.png" />
                           </image>
                       </ImageView>
-                      <ImageView fitHeight="85.0" fitWidth="87.0" layoutX="210.0" layoutY="65.0" onMouseClicked="#musicScene" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fitHeight="129.0" fitWidth="157.0" layoutX="182.0" layoutY="15.0" onMouseClicked="#musicScene" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../../../CsProject-BackGrounds/DALL_E-2024-11-12-17.26-removebg-preview.png" />
                           </image>
                       </ImageView>
-                      <ImageView fitHeight="96.0" fitWidth="99.0" layoutX="314.0" layoutY="59.0" onMouseClicked="#chartScene" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fitHeight="145.0" fitWidth="140.0" layoutX="314.0" layoutY="10.0" onMouseClicked="#chartScene" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../../../CsProject-BackGrounds/graphlogo.png" />
                           </image>
                       </ImageView>
-                  <ImageView fx:id="shopIcon" fitHeight="99.0" fitWidth="153.0" layoutX="407.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="shopIcon" fitHeight="152.0" fitWidth="154.0" layoutX="439.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../CsProject-BackGrounds/DALL_E-2024-11-12-17.09-removebg-preview.png" />
                      </image>
@@ -198,14 +198,14 @@
               </Pane>
          </children>
       </Pane>
-        <Pane fx:id="ClockParent" layoutX="100.0" layoutY="50.0" prefHeight="500.0" prefWidth="900.0" visible="false">
+        <Pane fx:id="ClockParent" layoutX="100.0" layoutY="34.0" prefHeight="516.0" prefWidth="900.0" visible="false">
             <children>
                 <ImageView fitHeight="476.0" fitWidth="555.0" layoutX="191.0" pickOnBounds="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Clock.png" />
                     </image>
                 </ImageView>
-                <BorderPane fx:id="Clock2Pane" layoutX="228.0" onMouseClicked="#clockScene" prefHeight="500.0" prefWidth="481.0" />
+                <BorderPane fx:id="Clock2Pane" layoutX="228.0" prefHeight="500.0" prefWidth="481.0" />
             </children>
         </Pane>
       <Pane fx:id="settingsPane" layoutX="231.0" layoutY="47.0" prefHeight="535.0" prefWidth="610.0" visible="false">

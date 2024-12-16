@@ -11,6 +11,8 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
@@ -124,7 +126,8 @@ public class MainController implements Initializable {
     Pane addBookNamePane;
     @FXML
     TextField changePasswordTextfield;
-
+    @FXML
+    ImageView ComputerImage;
     @FXML
     Label totalTimeCharts,plantLevelCharts,totalHabitsCharts,totalPostitsCharts,totalBooksCharts;
 
@@ -134,7 +137,6 @@ public class MainController implements Initializable {
     String alarmTime = "";
     String name;
     int totalTimeSpent;
-    int difference = 0;
     String bookName = "";
 
     Timeline anime;
@@ -163,11 +165,9 @@ public class MainController implements Initializable {
             totalCoin = user.totalCoin;
             totalTimeSpent = user.totalHours;
 
-
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     //azra
@@ -477,6 +477,19 @@ public class MainController implements Initializable {
         setTotalTime(totalTimeSpent);
         putAndSortBooks();
         totalTimeCharts.setText(user.totalHours + "");
+
+        Image image = new Image("CsProject-BackGrounds/ComputerCursor.png");
+
+        ComputerPane.setCursor(new ImageCursor(image,
+                image.getWidth() ,
+                image.getHeight() ));
+        settingsPane.setCursor(new ImageCursor(image,
+                image.getWidth() ,
+                image.getHeight() ));
+        ChartPane.setCursor(new ImageCursor(image,
+                image.getWidth() ,
+                image.getHeight() ));
+
 
         settingsBrightnessSlider.valueProperty().addListener(new ChangeListener<Number>() {
 
