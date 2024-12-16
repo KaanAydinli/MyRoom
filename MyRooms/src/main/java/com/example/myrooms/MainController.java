@@ -1,8 +1,6 @@
 package com.example.myrooms;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -10,9 +8,11 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
+import javafx.scene.Parent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
@@ -25,6 +25,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -138,6 +139,8 @@ public class MainController implements Initializable {
     String name;
     int totalTimeSpent;
     String bookName = "";
+
+    StackPane stackPane;
 
     Timeline anime;
     Timeline lightingTimeline;
@@ -366,6 +369,47 @@ public class MainController implements Initializable {
 //        }
         BoardPane.setVisible(!BoardPane.isVisible());
     }
+    public void goToLogin() throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("loginRoom.fxml"));
+        Parent root = loader.load();
+
+
+        anime.stop();
+        lightingTimeline.stop();
+
+
+
+        Timeline scaleOut = new Timeline(
+                new KeyFrame(Duration.seconds(0),
+                        new KeyValue(allPane.scaleXProperty(), 1),
+                        new KeyValue(allPane.scaleYProperty(), 1)
+                ),
+                new KeyFrame(Duration.seconds(1),
+                        new KeyValue(allPane.scaleXProperty(), 5),
+                        new KeyValue(allPane.scaleYProperty(), 5)
+                )
+        );
+
+        scaleOut.setOnFinished(event -> {
+            stackPane.getChildren().add(root);
+            stackPane.getChildren().remove(allPane);
+
+            Timeline scaleIn = new Timeline(
+                    new KeyFrame(Duration.seconds(0),
+                            new KeyValue(root.scaleXProperty(), 5),
+                            new KeyValue(root.scaleYProperty(), 5)
+                    ),
+                    new KeyFrame(Duration.seconds(1),
+                            new KeyValue(root.scaleXProperty(), 1),
+                            new KeyValue(root.scaleYProperty(), 1)
+                    )
+            );
+            scaleIn.play();
+        });
+
+        scaleOut.play();
+    }
     public void bookCaseScene() {
 
        bookPane.setVisible(!bookPane.isVisible());
@@ -489,7 +533,6 @@ public class MainController implements Initializable {
         ChartPane.setCursor(new ImageCursor(image,
                 image.getWidth() ,
                 image.getHeight() ));
-
 
         settingsBrightnessSlider.valueProperty().addListener(new ChangeListener<Number>() {
 

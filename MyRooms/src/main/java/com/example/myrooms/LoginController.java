@@ -69,7 +69,9 @@ public class LoginController implements Initializable {
         Parent root = loader.load();
 
         MainController mainController = loader.getController();
+
         mainController.setName(name);
+        mainController.stackPane = stackPane;
         loadRoom(name,mainController);
 
         RotateTransition rotate = new RotateTransition();

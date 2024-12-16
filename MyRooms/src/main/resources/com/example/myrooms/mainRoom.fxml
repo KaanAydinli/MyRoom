@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+
 <Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
     <children>
         <Pane fx:id="imagePane">
@@ -103,6 +104,11 @@
             <Button layoutX="423.0" layoutY="221.0" mnemonicParsing="false" onAction="#computerScene" opacity="0.0" prefHeight="142.0" prefWidth="239.0" style="-fx-background-color: transparent;" text="Computer" />
             <Button layoutX="808.0" layoutY="336.0" mnemonicParsing="false" opacity="0.0" prefHeight="121.0" prefWidth="101.0" text="Calendar" />
             <Button layoutX="730.0" layoutY="98.0" mnemonicParsing="false" onAction="#bookCaseScene" opacity="0.0" prefHeight="154.0" prefWidth="339.0" text="Bookcase" />
+            <ImageView fitHeight="72.0" fitWidth="30.0" layoutX="6.0" layoutY="73.0" onMouseClicked="#goToLogin" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../CsProject-BackGrounds/LoginDoorPlanted.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="bookPane" layoutX="135.0" layoutY="49.0" prefHeight="492.0" prefWidth="820.0" visible="false">
@@ -320,7 +326,8 @@
             <Label fx:id="bookLabel" alignment="CENTER" layoutX="-61.0" layoutY="279.0" prefHeight="65.0" prefWidth="390.0" rotate="90.0" text=".." textAlignment="CENTER">
                <font>
                   <Font size="35.0" />
-               </font></Label>
+               </font>
+            </Label>
          </children>
       </Pane>
     </children>
