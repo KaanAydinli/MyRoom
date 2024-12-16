@@ -219,7 +219,7 @@
                 <BorderPane fx:id="Clock2Pane" layoutX="228.0" onMouseClicked="#clockScene" prefHeight="500.0" prefWidth="481.0" />
             </children>
         </Pane>
-      <Pane fx:id="settingsPane" layoutX="231.0" layoutY="47.0" prefHeight="535.0" prefWidth="610.0" visible="false">
+      <Pane fx:id="settingsPane" layoutX="231.0" layoutY="47.0" prefHeight="535.0" prefWidth="610.0">
          <children>
             <Label layoutX="137.0" layoutY="134.0" prefHeight="32.0" prefWidth="134.0" text="Notifications" textFill="WHITE">
                <font>
@@ -239,6 +239,12 @@
             <Slider fx:id="settingsVolumeSlider" layoutX="294.0" layoutY="207.0" value="50.0" />
             <Slider fx:id="settingsBrightnessSlider" layoutX="294.0" layoutY="264.0" max="0.4" min="-0.9" />
             <ToggleButton fx:id="settingsNotificationsButton" layoutX="320.0" layoutY="137.0" mnemonicParsing="false" text="On" />
+            <TextField fx:id="changePasswordTextfield" layoutX="320.0" layoutY="85.0" onAction="#changePass" />
+            <Label layoutX="118.0" layoutY="81.0" text="Change Password" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane fx:id="BoardPane" layoutX="81.0" layoutY="32.0" opacity="0.94" prefHeight="527.0" prefWidth="899.0" visible="false">

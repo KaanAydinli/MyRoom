@@ -130,6 +130,8 @@ public class MainController implements Initializable {
     Button addImageButton;
     @FXML
     Pane addBookNamePane;
+    @FXML
+    TextField changePasswordTextfield;
 
     int totalCoin = 10;
 
@@ -314,6 +316,12 @@ public class MainController implements Initializable {
     public void shopScene() {
 
     }
+    public void changePass(){
+
+        user.password = changePasswordTextfield.getText();
+        LoginController.database.put(name,user.password);
+        LoginController.saveDatabase();
+    }
     public void musicScene() {
 
         AudioClip clip = new AudioClip(getClass().getResource("Sounds/librarySounds.mp3").toString());
@@ -376,6 +384,7 @@ public class MainController implements Initializable {
 
             putAndSortBooks();
 
+
             bookName = "";
             bookTextField.clear();
         }
@@ -391,12 +400,17 @@ public class MainController implements Initializable {
         bookFlowPanee2.getChildren().clear();
         bookFlowPanee3.getChildren().clear();
 
+        flowPaneBook.getChildren().clear();
+        flowPaneBook2.getChildren().clear();
+        flowPaneBook3.getChildren().clear();
+
         for(Book b : bookcase.books){
 
             if(b != null){
                 ImageView bookImageView = new ImageView(new Image(b.path));
                 bookImageView.setFitWidth(25);
                 bookImageView.setFitHeight(110);
+                addImageViewOfBooks();
 
 
                 b.setPrefSize(bookImageView.getFitWidth()+5, bookImageView.getFitHeight());
@@ -420,7 +434,6 @@ public class MainController implements Initializable {
                     bookFlowPanee3.getChildren().add(b);
                 }
             }
-
         }
     }
     public  void addImageViewOfBooks(){
@@ -540,6 +553,7 @@ public class MainController implements Initializable {
             }
             UserManager.saveUser(user);
 
+            System.out.println(user.password);
             System.out.println(clock1.getTime());
 
             if(ClockParent.isVisible()){

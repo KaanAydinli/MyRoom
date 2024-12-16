@@ -57,7 +57,7 @@ public class LoginController implements Initializable {
     TextField visitUsername;
 
     private static final String DataBase_FILE = "MyRooms/src/main/resources/Users";
-    private static final LinkedHashMap<String,String> database = new LinkedHashMap<>();
+    public static final LinkedHashMap<String,String> database = new LinkedHashMap<>();
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
     private int mode = 0; // 0 Login -- 1 Register -- 2 Visit
     static public String name;
@@ -127,7 +127,7 @@ public class LoginController implements Initializable {
         else
             loginvisitButton.setText("Visit");
     }
-    public void saveDatabase() {
+    public static void saveDatabase() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(DataBase_FILE))) {
             for (Map.Entry<String, String> entry : database.entrySet()) {
                 writer.println(entry.getKey() + " : " + entry.getValue());
@@ -174,7 +174,7 @@ public class LoginController implements Initializable {
                 Clock clock1 = new Clock();
                 Room userRoom = new Room(new Alarm(clock1),clock1,new Clock(),new BookCase());
 
-                user = new User(name,password.getText(),20,0,userRoom);
+                user = new User(registerUsername.getText(),registerPassword.getText(),20,0,userRoom);
                 UserManager.USER_FILE = name + ".ser";
                 UserManager.saveUser(user);
 
