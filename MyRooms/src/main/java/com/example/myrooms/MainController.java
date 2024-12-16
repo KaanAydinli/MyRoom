@@ -4,24 +4,20 @@ import javafx.animation.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
+import javafx.geometry.Pos;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -30,14 +26,9 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.URL;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
-import java.util.*;
-import javafx.scene.input.KeyCode;
-
 
 
 public class MainController implements Initializable {
@@ -131,6 +122,36 @@ public class MainController implements Initializable {
     ImageView ComputerImage;
     @FXML
     Label totalTimeCharts,plantLevelCharts,totalHabitsCharts,totalPostitsCharts,totalBooksCharts;
+    //zeynep
+    @FXML
+    Button plusButton;
+    @FXML
+    FlowPane SecondBoardPane;
+    @FXML
+    Pane ColorSelectFOrPostıtPane;
+    @FXML
+    Pane mainPostItPane;
+    @FXML
+    RadioButton yellowButton;
+    @FXML
+    RadioButton blueButton;
+    @FXML
+    RadioButton purpleButton;
+    @FXML
+    RadioButton GreenButton;
+    @FXML
+    Button backButtonOne;
+    @FXML
+    Button backButtonTwo;
+    @FXML
+    Button colorButtonOne;
+    @FXML
+    Button colorButtonTwo;
+    @FXML
+    TextField postItTitle;
+    @FXML
+    TextArea postItText;
+
 
     int totalCoin = 10;
 
@@ -149,6 +170,7 @@ public class MainController implements Initializable {
     Clock clock1;
     Clock clock2;
     BookCase bookcase;
+    Board myBoard;
 
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
 
@@ -167,6 +189,7 @@ public class MainController implements Initializable {
             bookcase = user.room.bookcase;
             totalCoin = user.totalCoin;
             totalTimeSpent = user.totalHours;
+            myBoard = user.room.board;
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -312,6 +335,8 @@ public class MainController implements Initializable {
         BoardPane.setVisible(false);
         bookPane.setVisible(false);
         addBookNamePane.setVisible(false);
+        mainPostItPane.setVisible(false);
+        ColorSelectFOrPostıtPane.setVisible(false);
 
     }
     public void shopScene() {
@@ -325,7 +350,7 @@ public class MainController implements Initializable {
     }
     public void musicScene() {
 
-        AudioClip clip = new AudioClip(getClass().getResource("Sounds/librarySounds.mp3").toString());
+        AudioClip clip = new AudioClip(getClass().getResource("com/example/myrooms/Sounds/librarySounds.mp3").toString());
         clip.play();
     }
     public void showAlert(){
@@ -336,7 +361,7 @@ public class MainController implements Initializable {
         alert.show();
     }
     public void playAudio(){
-        AudioClip clip = new AudioClip(getClass().getResource("Sounds/alarmsound.wav").toString());
+        AudioClip clip = new AudioClip(getClass().getResource("com/example/myrooms/Sounds/alarmsound.wav").toString());
         clip.play();
     }
     public void buyClock(String imageString){
@@ -354,21 +379,184 @@ public class MainController implements Initializable {
     public void deActiveAlarm(){
         alarm.deactivateAlarm();
     }
+
     public void corkBoardScene(){
-//        Image image = new Image("CsProject-BackGrounds/postit.png");
-//
-//        ImageView imageView = new ImageView(image);
-//        imageView.setFitHeight(50);
-//        imageView.setFitWidth(50);
-//        imageView.setPreserveRatio(true);
-//
-//        UserDatabase.replace("Postits", String.valueOf(CorkboardPostitsPane.getChildren().size() + 1));
-//
-//        if(CorkboardPostitsPane.getChildren().size() < 18){
-//            CorkboardPostitsPane.getChildren().add(imageView);
-//        }
-        BoardPane.setVisible(!BoardPane.isVisible());
+        BoardPane.setVisible(true);
     }
+    public void colorSelected()
+    {
+        int number;
+        number = myBoard.currentColor;
+        myBoard.currentPostIt.setColor(number);
+        printPostIts();
+        ColorSelectFOrPostıtPane.setVisible(false);
+    }
+
+    public void greenRadioButtonClicked()
+    {
+        myBoard.currentColor = 3;
+
+    }
+    public void yellowRadioButtonClicked()
+    {
+        myBoard.currentColor = 1;
+
+
+
+    }
+    public void purpleRadioButtonClicked()
+    {
+        myBoard.currentColor = 2;
+
+
+    }
+    public void blueRadioButtonClicked()
+    {
+        myBoard.currentColor = 4;
+
+
+    }
+    public void saveTextAndTitle()
+    {
+        myBoard.currentPostIt.setTitle(postItTitle.getText());
+        myBoard.currentPostIt.setText(postItText.getText());
+        printPostIts();
+        mainPostItPane.setVisible(false);
+
+
+    }
+    public void closeCurrentPostit(){
+        mainPostItPane.setVisible(false);
+    }
+
+    public void plusIconsMethod() {
+
+
+        if (CorkboardPostitsPane.getChildren().size() < 24) {
+            PostIt b = new PostIt("Title", "Text", 0);
+            b.getChildren().clear();
+            b.setPrefHeight(79);
+            b.setPrefWidth(87);
+
+            b.setStyle(" -fx-background-color: BEIGE");
+            TextField textOne = new TextField(b.getTitle());
+            textOne.setEditable(false);
+
+            b.setAlignment(textOne, Pos.CENTER);
+            TextField textTwo = new TextField(b.getText());
+            //b.setAlignment(textTwo, Pos.CENTER);
+            //String nameOfThePostItColor = colorOfPostIt.toString();
+
+            textOne.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-background-color: transparent; -fx-border-width: 1;");
+            //textOne.setEditable(false);
+            //textTwo.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-background-color: transparent; -fx-border-width: 1;");
+            //textTwo.setEditable(false);
+
+            b.getChildren().add(textOne);
+            //b.getChildren().add(textTwo);
+            PostIt c = b.minimizePostIt();
+            myBoard.postItArrayList.add(b);
+            CorkboardPostitsPane.getChildren().add(c);
+            SecondBoardPane.getChildren().add(b);
+
+            b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    myBoard.currentPostIt = b;
+                    mainPostItPane.setVisible(true);
+                    postItTitle.setText(b.getTitle());
+                    postItText.setText(b.getText());
+
+                    printPostIts();
+                }
+            });
+
+
+        }
+    }
+    public void colorTwoClicked()
+    {
+        mainPostItPane.setVisible(false);
+        ColorSelectFOrPostıtPane.setVisible(true);
+
+    }
+
+    public void printPostIts()
+    {
+        SecondBoardPane.getChildren().clear();
+        CorkboardPostitsPane.getChildren().clear();
+
+        int length = myBoard.getPostItArrayList().size();
+
+
+        for(int i =0; i< length; i++)
+        {
+            if(myBoard.getPostItArrayList().get(i) != null)
+            {
+                myBoard.getPostItArrayList().get(i).getChildren().clear();
+                myBoard.getPostItArrayList().get(i).setPrefHeight(79);
+                myBoard.getPostItArrayList().get(i).setPrefWidth(87);
+
+
+                if(myBoard.getPostItArrayList().get(i).getColor()==0)
+                {
+                    myBoard.getPostItArrayList().get(i).setStyle(" -fx-background-color: BEIGE");
+                }
+                else if(myBoard.getPostItArrayList().get(i).getColor()==1){
+                    myBoard.getPostItArrayList().get(i).setStyle(" -fx-background-color: #d3d30f");
+                }
+                else if(myBoard.getPostItArrayList().get(i).getColor()==2)
+                {
+                    myBoard.getPostItArrayList().get(i).setStyle(" -fx-background-color: #7e5c7e");
+                }
+                else if(myBoard.getPostItArrayList().get(i).getColor()==3){
+                    myBoard.getPostItArrayList().get(i).setStyle(" -fx-background-color: #70a670");
+                }
+                else if(myBoard.getPostItArrayList().get(i).getColor()==4){
+                    myBoard.getPostItArrayList().get(i).setStyle(" -fx-background-color: #0101e4");
+                }
+
+
+
+
+
+                TextField textOne = new TextField( myBoard.getPostItArrayList().get(i).getTitle());
+                textOne.setEditable(false);
+
+                myBoard.getPostItArrayList().get(i).setAlignment(textOne, Pos.CENTER);
+                //TextField textTwo = new TextField( myBoard.getPostItArrayList().get(i).getText());
+                //myBoard.getPostItArrayList().get(i).setAlignment(textTwo, Pos.CENTER);
+                //String nameOfThePostItColor = colorOfPostIt.toString();
+
+                textOne.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-background-color: transparent; -fx-border-width: 1;");
+                //textTwo.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-background-color: transparent; -fx-border-width: 1;");
+
+                myBoard.getPostItArrayList().get(i).getChildren().add(textOne);
+                // myBoard.getPostItArrayList().get(i).getChildren().add(textTwo);
+
+
+                SecondBoardPane.getChildren().add(myBoard.getPostItArrayList().get(i));
+                CorkboardPostitsPane.getChildren().add(myBoard.getPostItArrayList().get(i).minimizePostIt());
+
+
+            }
+        }
+
+    }
+    public void deleteThePostıt()
+    {
+        myBoard.deletePostIt(myBoard.currentPostIt);
+        mainPostItPane.setVisible(false);
+        printPostIts();
+
+    }
+    public void backToTheBoard()
+    {
+        mainPostItPane.setVisible(false);
+        ColorSelectFOrPostıtPane.setVisible(false);
+
+    }
+
     public void goToLogin() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("loginRoom.fxml"));
@@ -502,6 +690,7 @@ public class MainController implements Initializable {
 
         name = LoginController.name;
 
+
         try {
             UserManager.USER_FILE = name + ".ser";
             user = UserManager.loadUser();
@@ -520,9 +709,15 @@ public class MainController implements Initializable {
         setCoin(totalCoin);
         setTotalTime(totalTimeSpent);
         putAndSortBooks();
+        printPostIts();
         totalTimeCharts.setText(user.totalHours + "");
 
         Image image = new Image("CsProject-BackGrounds/ComputerCursor.png");
+        ToggleGroup group = new ToggleGroup();
+        yellowButton.setToggleGroup(group);
+        blueButton.setToggleGroup(group);
+        GreenButton.setToggleGroup(group);
+        purpleButton.setToggleGroup(group);
 
         ComputerPane.setCursor(new ImageCursor(image,
                 image.getWidth() ,

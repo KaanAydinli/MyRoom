@@ -174,7 +174,7 @@ public class LoginController implements Initializable {
                 saveDatabase();
 
                 Clock clock1 = new Clock();
-                Room userRoom = new Room(new Alarm(clock1),clock1,new Clock(),new BookCase());
+                Room userRoom = new Room(new Alarm(clock1),clock1,new Clock(),new BookCase(),new Board());
 
                 user = new User(registerUsername.getText(),registerPassword.getText(),20,0,userRoom);
                 UserManager.USER_FILE = name + ".ser";

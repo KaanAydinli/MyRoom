@@ -8,11 +8,13 @@ public class Room implements Serializable {
     Clock clock1;
     Clock clock2;
     BookCase bookcase;
+    Board board;
 
-    public Room(Alarm alarm,Clock clock1, Clock clock2, BookCase bookcase){
+    public Room(Alarm alarm,Clock clock1, Clock clock2, BookCase bookcase, Board board){
         this.alarm = alarm;
         this.clock1 = clock1;
         this.clock2 = clock2;
         this.bookcase = bookcase;
+        this.board = board;
     }
 }
