@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
+<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
     <children>
         <Pane fx:id="imagePane">
             <children>
@@ -94,7 +94,6 @@
          <children>
             <FlowPane fx:id="flowPaneBook2" layoutX="183.0" layoutY="61.0" prefHeight="78.0" prefWidth="140.0" />
             <FlowPane fx:id="flowPaneBook" prefHeight="66.0" prefWidth="121.0" />
-            <Button fx:id="addImageButton" layoutX="131.0" layoutY="14.0" mnemonicParsing="false" onAction="#addImageViewOfBooks" prefHeight="55.0" prefWidth="66.0" text="Button" />
             <FlowPane fx:id="flowPaneBook3" layoutX="60.0" layoutY="148.0" prefHeight="52.0" prefWidth="140.0" />
          </children>
       </Pane>
@@ -118,7 +117,7 @@
             </ImageView>
             <Button fx:id="addBookButton" layoutX="491.0" layoutY="384.0" mnemonicParsing="false" onAction="#addImage" prefHeight="101.0" prefWidth="268.0" text="Add Book">
                <font>
-                  <Font name="System Bold" size="47.0" />
+                  <Font name="System Bold" size="41.0" />
                </font>
             </Button>
             <FlowPane fx:id="bookFlowPanee1" layoutX="19.0" layoutY="56.0" onKeyPressed="#bookCaseScene" prefHeight="124.0" prefWidth="289.0" />

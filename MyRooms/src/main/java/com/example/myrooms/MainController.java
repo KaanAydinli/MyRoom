@@ -1,6 +1,7 @@
 package com.example.myrooms;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -138,6 +139,9 @@ public class MainController implements Initializable {
     int totalTimeSpent;
     int difference = 0;
     String bookName = "";
+
+    Timeline anime;
+    Timeline lightingTimeline;
 
     Alarm alarm;
     Clock clock1;
@@ -485,20 +489,26 @@ public class MainController implements Initializable {
         TotalCoinLabel.setText(String.valueOf(totalCoin));
 
         Light.Point light = new Light.Point();
-        light.setX(750);
+        light.setX(50);
         light.setY(300);
-        light.setZ(50);
+        light.setZ(200);
         light.setColor(Color.BEIGE);
 
-        Lighting lighting = new Lighting();
-        lighting.setDiffuseConstant(2);
-        lighting.setLight(light);
+        Lighting lightingEffect = new Lighting();
+        lightingEffect.setLight(light);
+        lightingEffect.setDiffuseConstant(10);
 
-        //Setting light effects
+        allPane.setEffect(lightingEffect);
 
-//        imagePane.setEffect(lighting);
-//          allPane.setEffect(lighting);
-        //allPane.setEffect(new Lighting());
+        lightingTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(light.colorProperty(), Color.BEIGE)),
+                new KeyFrame(Duration.seconds(10), new KeyValue(light.colorProperty(), Color.rgb(225, 215, 180))), // Afternoon light
+                new KeyFrame(Duration.seconds(30), new KeyValue(light.colorProperty(), Color.rgb(50, 50, 150))),  // Night light
+                new KeyFrame(Duration.seconds(50), new KeyValue(light.colorProperty(), Color.rgb(225, 215, 180)))
+        );
+
+        lightingTimeline.setCycleCount(Timeline.INDEFINITE);
+        lightingTimeline.play();
 
         dayTextField.setStyle(IDLE_BUTTON_STYLE);
         monthTextField.setStyle(IDLE_BUTTON_STYLE);
@@ -542,7 +552,7 @@ public class MainController implements Initializable {
 
         System.out.println(clock1.getDate());
 
-        Timeline anime = new Timeline(new KeyFrame(Duration.millis(1000),ehandler));
+        anime = new Timeline(new KeyFrame(Duration.millis(1000),ehandler));
         anime.setCycleCount(Timeline.INDEFINITE);
         anime.play();
 
