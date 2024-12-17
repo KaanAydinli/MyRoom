@@ -151,7 +151,24 @@ public class MainController implements Initializable {
     TextField postItTitle;
     @FXML
     TextArea postItText;
-
+    @FXML
+    ImageView BigPlantImage,WaterCanImage;
+    @FXML
+    Pane PlantPane;
+    @FXML
+    ScrollPane ShopPane;
+    @FXML
+    Pane ShopPaneInPane,BuySoundPane,buyPostItPane;
+    @FXML
+    ImageView clock2png,standartCalender, StandartAlarm,alarm2png,board2, standartBoard,standartClock, standartNotebook, GFImage,CelloImage,LoftImage,notebook4,notebook3,notebook2,clock3,calendar4,calendar3, alarm4,alarm3, calender2, yellowwpostit, bluepostit,greenpostit,purplepostit;
+    @FXML
+    CheckBox GodfatherThemeCB, LoftMusicCB , CelloAndPianoCB,yellowPostItCB,bluePostItCB,purplePostItCB,greenPostItCB;
+    @FXML
+    RadioButton standartAlarmRB,alarm2RB,clock2RB,standartClockRB, calender2RB,standartBoardRB,standartCalenderRB,standartNoteBookRB,board2RB, alarm4RB,calendar3RB,calendar4RB,clock3RB,notebook3RB,notebook2RB,notebook4RB,alarm3RB;
+    @FXML
+    Button p,s,returnShopButton;
+    @FXML
+    ImageView bigClockImage, bigBoardImage, bigBookcase,bigAlarm;
 
     int totalCoin = 10;
 
@@ -171,6 +188,7 @@ public class MainController implements Initializable {
     Clock clock2;
     BookCase bookcase;
     Board myBoard;
+    Plant plant;
 
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
 
@@ -190,6 +208,7 @@ public class MainController implements Initializable {
             totalCoin = user.totalCoin;
             totalTimeSpent = user.totalHours;
             myBoard = user.room.board;
+            plant = user.room.plant;
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -205,8 +224,8 @@ public class MainController implements Initializable {
     }
     public void bookNameKey() {
 
-            bookLabel.setText(bookTextField.getText());
-            bookName = bookTextField.getText();
+        bookLabel.setText(bookTextField.getText());
+        bookName = bookTextField.getText();
     }
 
     public void setShopIcon(String name){
@@ -217,28 +236,26 @@ public class MainController implements Initializable {
         TotalCoinLabel.setText(String.valueOf(totalCoin));
 
     }
-    public void setAlarmImage(String image){
-        AlarmImage.setImage(new Image(image));
 
-    }
     public void setName(String names){
         name = names;
     }
-    public void setBoardImage(String image){
-        BoardImage.setImage(new Image(image));
-
+    public void setAlarmImage(String image){
+        AlarmImage.setImage(new Image(image));
+        bigAlarm.setImage(new Image(image));
     }
     public void setBookcaseImage(String image){
         BookcaseImage.setImage(new Image(image));
-
+        bigBookcase.setImage(new Image(image));
     }
-    public void setCalendarImage(String image){
-        CalendarImage.setImage(new Image(image));
+    public void setClockImage(String image){
 
+        ClockImage.setImage(new Image(image));
+        bigClockImage.setImage(new Image(image));
     }
-    public void setPlantImage(String image){
-        PlantImage.setImage(new Image(image));
-
+    public void setBoardImage(String image){
+        BoardImage.setImage(new Image(image));
+        bigBoardImage.setImage(new Image(image));
     }
     public void setTotalTime(int time){
         totalTimeSpent = time;
@@ -337,10 +354,17 @@ public class MainController implements Initializable {
         addBookNamePane.setVisible(false);
         mainPostItPane.setVisible(false);
         ColorSelectFOrPostıtPane.setVisible(false);
+        PlantPane.setVisible(false);
+        ShopPane.setVisible(false);
+        ShopPaneInPane.setVisible(false);
+        buyPostItPane.setVisible(false);
+        BuySoundPane.setVisible(false);
 
     }
     public void shopScene() {
-
+        ComputerApplications.setVisible(false);
+        ShopPane.setVisible(true);
+        ShopPaneInPane.setVisible(true);
     }
     public void changePass(){
 
@@ -597,9 +621,187 @@ public class MainController implements Initializable {
 
         scaleOut.play();
     }
+    public void purchase(MouseEvent e){
+        if(e.getSource() == notebook4 && notebook4RB.isDisable()){
+            notebook4RB.setDisable(false);
+        }
+        else if(e.getSource() == notebook3 && notebook3RB.isDisable() ){
+            notebook3RB.setDisable(false);
+        }
+        else if(e.getSource() == notebook2 && notebook2RB.isDisable() ){
+            notebook2RB.setDisable(false);
+        }
+        else if(e.getSource() == clock3 && clock3RB.isDisable() ){
+            clock3RB.setDisable(false);
+        }
+        else if(e.getSource() == clock2png && clock2RB.isDisable() ){
+            clock2RB.setDisable(false);
+        }
+        else if(e.getSource() == alarm2png && alarm2RB.isDisable() ){
+            alarm2RB.setDisable(false);
+        }
+        else if(e.getSource() == alarm4 && alarm4RB.isDisable() ){
+            alarm4RB.setDisable(false);
+        }
+        else if(e.getSource() == alarm3 && alarm3RB.isDisable() ){
+            alarm3RB.setDisable(false);
+        }
+        else if(e.getSource() == board2 && board2RB.isDisable() ){
+            board2RB.setDisable(false);
+        }
+        else if(e.getSource() == calendar4 && calendar4RB.isDisable() ){
+            calendar4RB.setDisable(false);
+        }
+        else if(e.getSource() == calendar3 && calendar3RB.isDisable() ){
+            calendar3RB.setDisable(false);
+        }
+        else if(e.getSource() == calender2 && calender2RB.isDisable() ){
+            calender2RB.setDisable(false);
+        }
+        else if(e.getSource() == bluepostit && bluePostItCB.isDisable()  ){
+            bluePostItCB.setDisable(false);
+        }
+        else if(e.getSource() == greenpostit && greenPostItCB.isDisable() ){
+            greenPostItCB.setDisable(false);
+        }
+        else if(e.getSource() == GFImage && GodfatherThemeCB.isDisable()){
+            GodfatherThemeCB.setDisable(false);
+        }
+        else if(e.getSource() == LoftImage && LoftMusicCB.isDisable()){
+            LoftMusicCB.setDisable(false);
+        }
+        else if(e.getSource() == CelloImage && CelloAndPianoCB.isDisable()){
+            CelloAndPianoCB.setDisable(false);
+        }
+    }
+    public void plantScene() {
+        PlantPane.setVisible(!PlantPane.isVisible());
+    }
+    public  void  returnShopFromPostIts(){
+        buyPostItPane.setVisible(!buyPostItPane.isVisible());
+        ShopPane.setVisible(!ShopPane.isVisible());
+    }
+    public void returnShopFromSounds(){
+        BuySoundPane.setVisible(!BuySoundPane.isVisible());
+        ShopPane.setVisible(!ShopPane.isVisible());
+    }
+
+    public void selectItem(ActionEvent e){
+        ToggleGroup clockgroup = new ToggleGroup();
+        ToggleGroup alarmgroup = new ToggleGroup();
+
+        ToggleGroup boardgroup = new ToggleGroup();
+        ToggleGroup calendergroup = new ToggleGroup();
+        ToggleGroup notebookgroup = new ToggleGroup();
+
+        standartAlarmRB.setToggleGroup(alarmgroup);
+        alarm2RB.setToggleGroup(alarmgroup);
+        alarm3RB.setToggleGroup(alarmgroup);
+        alarm4RB.setToggleGroup(alarmgroup);
+
+        standartClockRB.setToggleGroup(clockgroup);
+        clock2RB.setToggleGroup(clockgroup);
+        clock3RB.setToggleGroup(clockgroup);
+
+        standartBoardRB.setToggleGroup(boardgroup);
+        board2RB.setToggleGroup(boardgroup);
+
+        standartNoteBookRB.setToggleGroup(notebookgroup);
+        notebook2RB.setToggleGroup(notebookgroup);
+        notebook3RB.setToggleGroup(notebookgroup);
+        notebook4RB.setToggleGroup(notebookgroup);
+
+        standartCalenderRB.setToggleGroup(calendergroup);
+        calender2RB.setToggleGroup(calendergroup);
+        calendar3RB.setToggleGroup(calendergroup);
+        calendar4RB.setToggleGroup(calendergroup);
+
+
+        if(e.getSource() == standartAlarmRB && !standartAlarmRB.isDisable()){
+            alarm.imagePath = "CsProject-BackGrounds/Alarm.png";
+            setAlarmImage(alarm.imagePath);
+        }
+        else if(e.getSource() == alarm2RB && !alarm2RB.isDisable()){
+            alarm.imagePath = "CsProject-BackGrounds/Alarm2.png";
+            setAlarmImage(alarm.imagePath);
+        }
+        else if(e.getSource() == alarm3RB && !alarm3RB.isDisable()){
+            alarm.imagePath = "CsProject-BackGrounds/Alarm3.png";
+            setAlarmImage(alarm.imagePath);
+        }
+        else if(e.getSource() == alarm4RB && !alarm4RB.isDisable()){
+            alarm.imagePath = "CsProject-BackGrounds/Alarm4.png";
+            setAlarmImage(alarm.imagePath);
+        }
+
+        else if(e.getSource() == standartClockRB ){
+            clock1.imagePath = "CsProject-BackGrounds/Clock.png";
+            setClockImage(clock1.imagePath);
+
+        }
+        else if(e.getSource() == clock2RB ){
+            clock1.imagePath = "CsProject-BackGrounds/Clock2.png";
+            setClockImage(clock1.imagePath);
+        }
+        else if(e.getSource() == clock3RB ){
+            clock1.imagePath = "CsProject-BackGrounds/Clock3.png";
+            setClockImage(clock1.imagePath);
+        }
+//
+//         else if(e.getSource() == standartCalenderRB && !standartCalenderRB.isDisable()){
+//             calendar.imagePath ="CsProject-BackGrounds/Calendar.png";
+//             setClockImage(calendar.imagePath);
+//         }
+//        else if(e.getSource() == calender2RB && !calender2RB.isDisable()){
+//             calendar.imagePath = "CsProject-BackGrounds/Calendar2.png";
+//            setClockImage(calendar.imagePath);
+//        }
+//         else if(e.getSource() == calendar3RB && !calendar3RB.isDisable()){
+//             calendar.imagePath = "CsProject-BackGrounds/Calendar3.png";
+//             setClockImage(calendar.imagePath);
+//         }
+//         else if(e.getSource() == calendar4RB && !calendar4RB.isDisable()){
+//             calendar.imagePath = "CsProject-BackGrounds/Calendar4.png";
+//             setClockImage(calendar.imagePath);
+//         }
+//
+//        else if(e.getSource() == standartBoardRB && !standartBoardRB.isDisable()){
+//            board.imagePath = "CsProject-BackGrounds/HalfBoard.png";
+//            setClockImage(board.imagePath);
+//        }
+//        else if(e.getSource() == board2RB && !board2RB.isDisable()){
+//            board.imagePath = "CsProject-BackGrounds/Board2.png";
+//            setClockImage(board.imagePath);
+//        }
+//
+//        else if(e.getSource() == standartNoteBookRB && !standartNoteBookRB.isDisable()){
+//            notebook.imagePath = "CsProject-BackGrounds/Notebook.png";
+//            setClockImage(notebook.imagePath);
+//        }
+//         else if(e.getSource() == notebook2RB && !notebook2RB.isDisable()){
+//             notebook.imagePath = "CsProject-BackGrounds/NoteBook2.png";
+//             setClockImage(notebook.imagePath);
+//         }
+//         else if(e.getSource() == notebook3RB && !notebook3RB.isDisable()){
+//             notebook.imagePath = "CsProject-BackGrounds/NoteBook3.png";
+//             setClockImage(notebook.imagePath);
+//         }
+//         else if(e.getSource() == notebook4RB && !notebook4RB.isDisable()){
+//             notebook.imagePath = "CsProject-BackGrounds/NoteBook4.png";
+//             setClockImage(notebook.imagePath);
+//         }
+    }
+    public void buyPostItAction(){
+        buyPostItPane.setVisible(!buyPostItPane.isVisible());
+        ShopPane.setVisible(!ShopPane.isVisible());
+    }
+    public void buySoundAction(){
+        BuySoundPane.setVisible(!BuySoundPane.isVisible());
+        ShopPane.setVisible(!ShopPane.isVisible());
+    }
     public void bookCaseScene() {
 
-       bookPane.setVisible(!bookPane.isVisible());
+        bookPane.setVisible(!bookPane.isVisible());
 
     }
     public void addImage(){
@@ -620,7 +822,7 @@ public class MainController implements Initializable {
         }
         addBookNamePane.setVisible(!addBookNamePane.isVisible());
 
-       // bookPane.setVisible(!bookPane.isVisible());
+        // bookPane.setVisible(!bookPane.isVisible());
 
     }
     public void putAndSortBooks(){
@@ -666,6 +868,55 @@ public class MainController implements Initializable {
             }
         }
     }
+    public void growPlant(){
+
+        plant.setLevelOfPlant(plant.getLevelOfPlant() + 1);
+        System.out.println(plant.getLevelOfPlant());
+        if(plant.getLevelOfPlant() == 1){
+            plant.imagePath = "CsProject-BackGrounds/plantlevel2.png";
+
+        }
+        else if (plant.getLevelOfPlant() == 2) {
+            plant.imagePath = "CsProject-BackGrounds/plantlevel3.png";
+        }
+        else if (plant.getLevelOfPlant() >= 3) {
+            plant.imagePath = "CsProject-BackGrounds/plantlevel4.png";
+        }
+        setPlantImage(plant.imagePath);
+    }
+
+    public void setPlantImage(String image){
+        PlantImage.setImage(new Image(image));
+        BigPlantImage.setImage(new Image(image));
+
+    }
+    public void setWaterCanImage(String image){
+        WaterCanImage.setImage(new Image(image));
+    }
+    public void waterplant(){
+
+        if(plant.watercan.getWaterLevel() == 1){
+            plant.watercan.imagePath = "CsProject-BackGrounds/watercanempty.png";
+            setWaterCanImage(plant.watercan.imagePath);
+        }
+        else if (plant.watercan.getWaterLevel() == 2) {
+            plant.watercan.imagePath = "CsProject-BackGrounds/watercanhalf.png";
+            setWaterCanImage(plant.watercan.imagePath);
+        }
+        else if (plant.watercan.getWaterLevel() == 3) {
+            plant.watercan.imagePath = "CsProject-BackGrounds/watercanfull.png";
+            setWaterCanImage(plant.watercan.imagePath);
+        }
+
+    }
+    public void waterPlantButton(){
+        if(plant.watercan.getWaterLevel() >= plant.watercan.getWatercanLevel()){
+
+            growPlant();
+            plant.watercan.setWaterLevel(1);
+
+        }
+    }
     public  void addImageViewOfBooks(){
         Image image = new Image("CsProject-BackGrounds/Book.png");
         ImageView imageView = new ImageView(image);
@@ -700,6 +951,7 @@ public class MainController implements Initializable {
             myBoard = user.room.board;
             totalCoin = user.totalCoin;
             totalTimeSpent = user.totalHours;
+            plant = user.room.plant;
 
         } catch (Exception e) {
             e.printStackTrace();
