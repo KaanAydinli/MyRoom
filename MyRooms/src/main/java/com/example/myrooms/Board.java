@@ -7,6 +7,7 @@ public class Board implements Serializable {
     public ArrayList<PostIt> postItArrayList;
     public PostIt currentPostIt ;
     public int currentColor;
+    public String imagePath = "CsProject-BackGrounds/HalfBoard.png";
 
     public Board()
     {

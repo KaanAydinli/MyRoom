@@ -33,7 +33,7 @@ public class Book extends StackPane implements Serializable {
         this.setPrefSize(bookImageView.getFitWidth()+5, bookImageView.getFitHeight());
         Label bookLabel = new Label(bookName);
         bookLabel.setWrapText(true);
-        bookLabel.setPrefWidth(150);
+        bookLabel.setPrefWidth(500);
         bookLabel.setTranslateY(-(bookImageView.getFitHeight()/2) +20);
         bookLabel.setStyle(" -fx-background-color: transparent; " +
                 "-fx-text-fill: white; -fx-font-size: 10px;-fx-text-overrun: clip;");

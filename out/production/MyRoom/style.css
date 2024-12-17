@@ -69,3 +69,7 @@
   -fx-background-color: transparent;
   -fx-prompt-text-fill: rgba(98, 62, 31, 0.94) ;
 }
+#ShopPaneInPane{
+  -fx-background-color: rgba(50, 50, 55, 0.7);
+}
+

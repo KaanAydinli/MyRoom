@@ -268,6 +268,8 @@ public class MainController implements Initializable {
 
     }
     public void chartScene() {
+        totalTimeCharts.setText(String.valueOf(totalTimeSpent));
+        totalBooksCharts.setText(String.valueOf(bookcase.getCount()));
         ComputerApplications.setVisible(false);
         ChartPane.setVisible(!ChartPane.isVisible());
 
@@ -497,6 +499,12 @@ public class MainController implements Initializable {
 
         }
     }
+    public void goToComputer(){
+        closeEveryPane();
+        ComputerPane.setVisible(true);
+        ComputerApplications.setVisible(true);
+
+    }
     public void colorTwoClicked()
     {
         mainPostItPane.setVisible(false);
@@ -622,57 +630,75 @@ public class MainController implements Initializable {
         scaleOut.play();
     }
     public void purchase(MouseEvent e){
-        if(e.getSource() == notebook4 && notebook4RB.isDisable()){
+        if(e.getSource() == notebook4 && notebook4RB.isDisable() && totalCoin >= 15){
             notebook4RB.setDisable(false);
+            totalCoin -= 15;
         }
-        else if(e.getSource() == notebook3 && notebook3RB.isDisable() ){
+        else if(e.getSource() == notebook3 && notebook3RB.isDisable() && totalCoin >= 10){
             notebook3RB.setDisable(false);
+            totalCoin -= 10;
         }
-        else if(e.getSource() == notebook2 && notebook2RB.isDisable() ){
+        else if(e.getSource() == notebook2 && notebook2RB.isDisable() && totalCoin >= 5 ){
             notebook2RB.setDisable(false);
+            totalCoin -= 5;
         }
-        else if(e.getSource() == clock3 && clock3RB.isDisable() ){
+        else if(e.getSource() == clock3 && clock3RB.isDisable() && totalCoin >= 10 ){
             clock3RB.setDisable(false);
+            totalCoin -= 10;
         }
-        else if(e.getSource() == clock2png && clock2RB.isDisable() ){
+        else if(e.getSource() == clock2png && clock2RB.isDisable() && totalCoin >= 5 ){
             clock2RB.setDisable(false);
+            totalCoin -= 5;
         }
-        else if(e.getSource() == alarm2png && alarm2RB.isDisable() ){
+        else if(e.getSource() == alarm2png && alarm2RB.isDisable() && totalCoin >= 5 ){
             alarm2RB.setDisable(false);
+            totalCoin -= 5;
         }
-        else if(e.getSource() == alarm4 && alarm4RB.isDisable() ){
+        else if(e.getSource() == alarm4 && alarm4RB.isDisable() && totalCoin >= 15){
             alarm4RB.setDisable(false);
+            totalCoin -= 15;
         }
-        else if(e.getSource() == alarm3 && alarm3RB.isDisable() ){
+        else if(e.getSource() == alarm3 && alarm3RB.isDisable() && totalCoin >= 10 ){
             alarm3RB.setDisable(false);
+            totalCoin -= 10;
         }
-        else if(e.getSource() == board2 && board2RB.isDisable() ){
+        else if(e.getSource() == board2 && board2RB.isDisable() && totalCoin >= 5 ){
             board2RB.setDisable(false);
+            totalCoin -= 5;
         }
-        else if(e.getSource() == calendar4 && calendar4RB.isDisable() ){
+        else if(e.getSource() == calendar4 && calendar4RB.isDisable() && totalCoin >= 15 ){
             calendar4RB.setDisable(false);
+            totalCoin -= 15;
         }
-        else if(e.getSource() == calendar3 && calendar3RB.isDisable() ){
+        else if(e.getSource() == calendar3 && calendar3RB.isDisable() && totalCoin >= 10 ){
             calendar3RB.setDisable(false);
+            totalCoin -= 10;
         }
-        else if(e.getSource() == calender2 && calender2RB.isDisable() ){
+        else if(e.getSource() == calender2 && calender2RB.isDisable() && totalCoin >= 5 ){
             calender2RB.setDisable(false);
+            totalCoin -= 5;
         }
-        else if(e.getSource() == bluepostit && bluePostItCB.isDisable()  ){
+        else if(e.getSource() == bluepostit && bluePostItCB.isDisable() && totalCoin >= 1 ){
             bluePostItCB.setDisable(false);
+            totalCoin -= 1;
         }
-        else if(e.getSource() == greenpostit && greenPostItCB.isDisable() ){
+        else if(e.getSource() == greenpostit && greenPostItCB.isDisable() && totalCoin >= 3 ){
             greenPostItCB.setDisable(false);
+            totalCoin -= 3;
         }
-        else if(e.getSource() == GFImage && GodfatherThemeCB.isDisable()){
+        else if(e.getSource() == GFImage && GodfatherThemeCB.isDisable() && totalCoin >= 20 ){
             GodfatherThemeCB.setDisable(false);
+            totalCoin -= 20;
         }
-        else if(e.getSource() == LoftImage && LoftMusicCB.isDisable()){
+        else if(e.getSource() == LoftImage && LoftMusicCB.isDisable() && totalCoin >= 5 ){
             LoftMusicCB.setDisable(false);
+            totalCoin -= 5;
         }
-        else if(e.getSource() == CelloImage && CelloAndPianoCB.isDisable()){
+        else if(e.getSource() == CelloImage && CelloAndPianoCB.isDisable() && totalCoin >= 10 ){
             CelloAndPianoCB.setDisable(false);
+            totalCoin -= 10;
         }
+        setCoin(totalCoin);
     }
     public void plantScene() {
         PlantPane.setVisible(!PlantPane.isVisible());
@@ -765,14 +791,14 @@ public class MainController implements Initializable {
 //             setClockImage(calendar.imagePath);
 //         }
 //
-//        else if(e.getSource() == standartBoardRB && !standartBoardRB.isDisable()){
-//            board.imagePath = "CsProject-BackGrounds/HalfBoard.png";
-//            setClockImage(board.imagePath);
-//        }
-//        else if(e.getSource() == board2RB && !board2RB.isDisable()){
-//            board.imagePath = "CsProject-BackGrounds/Board2.png";
-//            setClockImage(board.imagePath);
-//        }
+        else if(e.getSource() == standartBoardRB && !standartBoardRB.isDisable()){
+            myBoard.imagePath = "CsProject-BackGrounds/HalfBoard.png";
+            setBoardImage(myBoard.imagePath);
+        }
+        else if(e.getSource() == board2RB && !board2RB.isDisable()){
+            myBoard.imagePath = "CsProject-BackGrounds/Board2.png";
+            setBoardImage(myBoard.imagePath);
+        }
 //
 //        else if(e.getSource() == standartNoteBookRB && !standartNoteBookRB.isDisable()){
 //            notebook.imagePath = "CsProject-BackGrounds/Notebook.png";
@@ -811,7 +837,7 @@ public class MainController implements Initializable {
             totalBooksCharts.setText((Integer.parseInt(totalBooksCharts.getText()) + 1)+ "");
             Book book = new Book(bookTextField.getText(),  imagePath);
             int count = bookcase.getCount();
-            bookcase.books[bookcase.getCount()] = book;
+            bookcase.books.add(book);
             bookcase.setCount(++count);
 
             putAndSortBooks();
@@ -1019,7 +1045,7 @@ public class MainController implements Initializable {
         lightingEffect.setLight(light);
         lightingEffect.setDiffuseConstant(10);
 
-        allPane.setEffect(lightingEffect);
+        //allPane.setEffect(lightingEffect);
 
         lightingTimeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(light.colorProperty(), Color.BEIGE)),
@@ -1059,6 +1085,9 @@ public class MainController implements Initializable {
                     alarmTimeLabel.setText("Alarm Time: ");
                 }
             }
+            totalTimeSpent++;
+            user.totalCoin = totalCoin;
+            user.totalHours = totalTimeSpent;
             UserManager.saveUser(user);
 
             System.out.println(user.password);

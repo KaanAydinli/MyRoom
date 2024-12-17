@@ -1,13 +1,14 @@
 package com.example.myrooms;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class BookCase implements Serializable {
-    public Book[] books;
+    public ArrayList<Book> books;
     static public int count = 0;
 
     public BookCase() {
-        books = new Book[29];
+        books = new ArrayList<>();
     }
     public int getCount(){
         return count;
@@ -17,13 +18,13 @@ public class BookCase implements Serializable {
     }
     public void sortBooks() {
 
-        for(int i = 0; i < books.length - 1; i++){
-            for(int j = 0; j < books.length - 1 - i; j++){
+        for(int i = 0; i < books.size() - 1; i++){
+            for(int j = 0; j < books.size() - 1 - i; j++){
 
-                if(books[j + 1] != null && books[j] != null && books[j].compareTo(books[j + 1]) > 0){
-                    Book temp = books[j];
-                    books[j] = books[j + 1];
-                    books[j + 1] = temp;
+                if(books.get(j + 1) != null && books.get(j) != null && books.get(j).compareTo(books.get(j)) > 0){
+                    Book temp = books.get(j);
+                    books.set(j, books.get(j + 1));
+                    books.set(j + 1, temp);
                 }
             }
         }

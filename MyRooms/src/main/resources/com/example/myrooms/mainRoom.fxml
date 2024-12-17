@@ -92,6 +92,17 @@
                 </Label>
             </children>
         </Pane>
+        <TextField fx:id="monthTextField" editable="false" focusTraversable="false" layoutX="829.0" layoutY="415.0" prefHeight="34.0" prefWidth="71.0" style="-fx-background-color: transparent;">
+            <font>
+                <Font name="Georgia Pro" size="10.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="dayTextField" editable="false" focusTraversable="false" layoutX="837.0" layoutY="367.0" prefHeight="52.0" prefWidth="79.0" style="-fx-background-color: transparent;">
+            <font>
+                <Font name="Georgia Pro" size="24.0" />
+            </font>
+        </TextField>
+        <BorderPane fx:id="Clock1Pane" layoutX="465.0" layoutY="23.0" onMouseClicked="#clockScene" prefHeight="150.0" prefWidth="153.0" />
         <FlowPane fx:id="CorkboardPostitsPane" hgap="3.0" layoutX="179.0" layoutY="80.0" onMouseClicked="#corkBoardScene" prefHeight="215.0" prefWidth="171.0" vgap="3.0" />
         <Pane fx:id="bookPane1" layoutX="744.0" layoutY="36.0" prefHeight="203.0" prefWidth="322.0">
             <children>
@@ -114,23 +125,6 @@
                         <Image url="@../../../CsProject-BackGrounds/LoginDoorPlanted.png" />
                     </image>
                 </ImageView>
-            </children>
-        </Pane>
-        <Pane fx:id="bookPane" layoutX="135.0" layoutY="49.0" prefHeight="492.0" prefWidth="820.0" visible="false">
-            <children>
-                <ImageView fitHeight="524.0" fitWidth="822.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../CsProject-BackGrounds/Bookcase.png" />
-                    </image>
-                </ImageView>
-                <Button fx:id="addBookButton" layoutX="491.0" layoutY="384.0" mnemonicParsing="false" onAction="#addImage" prefHeight="101.0" prefWidth="268.0" text="Add Book">
-                    <font>
-                        <Font name="System Bold" size="41.0" />
-                    </font>
-                </Button>
-                <FlowPane fx:id="bookFlowPanee1" layoutX="19.0" layoutY="56.0" onKeyPressed="#bookCaseScene" prefHeight="124.0" prefWidth="289.0" />
-                <FlowPane fx:id="bookFlowPanee2" layoutX="482.0" layoutY="243.0" prefHeight="118.0" prefWidth="301.0" />
-                <FlowPane fx:id="bookFlowPanee3" layoutX="173.0" layoutY="395.0" prefHeight="101.0" prefWidth="304.0" />
             </children>
         </Pane>
         <Pane fx:id="PlantPane" layoutX="186.0" layoutY="49.0" prefHeight="504.0" prefWidth="745.0" visible="false">
@@ -185,7 +179,23 @@
                 <ProgressIndicator fx:id="alarmProgress" layoutX="292.0" layoutY="158.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="145.0" prefWidth="168.0" progress="0.0" />
             </children>
         </Pane>
-        <BorderPane fx:id="Clock1Pane" layoutX="465.0" layoutY="23.0" onMouseClicked="#clockScene" prefHeight="150.0" prefWidth="153.0" />
+        <Pane fx:id="bookPane" layoutX="135.0" layoutY="49.0" prefHeight="492.0" prefWidth="820.0" visible="false">
+            <children>
+                <ImageView fitHeight="524.0" fitWidth="822.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../CsProject-BackGrounds/Bookcase.png" />
+                    </image>
+                </ImageView>
+                <Button fx:id="addBookButton" layoutX="491.0" layoutY="384.0" mnemonicParsing="false" onAction="#addImage" prefHeight="101.0" prefWidth="268.0" text="Add Book">
+                    <font>
+                        <Font name="System Bold" size="41.0" />
+                    </font>
+                </Button>
+                <FlowPane fx:id="bookFlowPanee1" layoutX="19.0" layoutY="56.0" onKeyPressed="#bookCaseScene" prefHeight="124.0" prefWidth="289.0" />
+                <FlowPane fx:id="bookFlowPanee2" layoutX="482.0" layoutY="243.0" prefHeight="118.0" prefWidth="301.0" />
+                <FlowPane fx:id="bookFlowPanee3" layoutX="173.0" layoutY="395.0" prefHeight="101.0" prefWidth="304.0" />
+            </children>
+        </Pane>
         <Pane fx:id="ComputerPane" layoutX="153.0" layoutY="7.0" prefHeight="579.0" prefWidth="802.0" visible="false">
             <children>
                 <ImageView fx:id="ComputerImage" fitHeight="592.0" fitWidth="804.0" nodeOrientation="INHERIT" pickOnBounds="true">
@@ -196,6 +206,11 @@
                         <Rectangle2D />
                     </viewport>
                 </ImageView>
+            <ImageView fitHeight="75.0" fitWidth="127.0" layoutX="618.0" layoutY="416.0" onMouseClicked="#goToComputer" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../CsProject-BackGrounds/gobackbutton.png" />
+               </image>
+            </ImageView>
                 <Pane fx:id="ComputerApplications" focusTraversable="true" layoutX="25.0" layoutY="27.0" prefHeight="412.0" prefWidth="749.0" visible="false">
                     <children>
                         <ImageView fitHeight="152.0" fitWidth="170.0" layoutX="40.0" layoutY="11.0" onMouseClicked="#settingsScene" pickOnBounds="true" preserveRatio="true">
@@ -232,9 +247,9 @@
                 <BorderPane fx:id="Clock2Pane" layoutX="228.0" prefHeight="500.0" prefWidth="481.0" />
             </children>
         </Pane>
-        <ScrollPane fx:id="ShopPane" hbarPolicy="NEVER" layoutX="225.0" layoutY="107.0" prefHeight="423.0" prefWidth="578.0" visible="false">
+        <ScrollPane fx:id="ShopPane" hbarPolicy="NEVER" layoutX="206.0" layoutY="44.0" prefHeight="364.0" prefWidth="695.0" visible="false">
             <content>
-                <Pane fx:id="ShopPaneInPane" focusTraversable="true" prefHeight="1204.0" prefWidth="502.0">
+                <Pane fx:id="ShopPaneInPane" focusTraversable="true" prefHeight="1211.0" prefWidth="686.0">
                     <children>
                         <ImageView fx:id="notebook4" fitHeight="134.0" fitWidth="126.0" layoutX="361.0" layoutY="680.0" onMouseClicked="#purchase" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -356,35 +371,54 @@
                 </Pane>
             </content>
         </ScrollPane>
-        <Pane fx:id="BuySoundPane" layoutX="287.0" layoutY="105.0" prefHeight="249.0" prefWidth="507.0" visible="false">
+        <Pane fx:id="BuySoundPane" layoutX="210.0" layoutY="47.0" prefHeight="358.0" prefWidth="691.0" visible="false">
             <children>
-                <ImageView fx:id="LoftImage" fitHeight="93.0" fitWidth="106.0" layoutX="192.0" layoutY="50.0" onMouseClicked="#purchase" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="LoftImage" fitHeight="148.0" fitWidth="130.0" layoutX="264.0" layoutY="57.0" onMouseClicked="#purchase" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/orange.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="216.0" prefHeight="28.0" prefWidth="86.0" text="BUY SOUNDS" textFill="#f2efef" />
-                <ImageView fx:id="GFImage" fitHeight="93.0" fitWidth="86.0" layoutX="44.0" layoutY="53.0" onMouseClicked="#purchase" pickOnBounds="true" preserveRatio="true">
+                <Label layoutX="216.0" prefHeight="57.0" prefWidth="227.0" text="BUY SOUNDS" textFill="#f2efef">
+               <font>
+                  <Font size="38.0" />
+               </font></Label>
+                <ImageView fx:id="GFImage" fitHeight="147.0" fitWidth="128.0" layoutX="46.0" layoutY="53.0" onMouseClicked="#purchase" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/orange.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="CelloImage" fitHeight="93.0" fitWidth="117.0" layoutX="349.0" layoutY="45.0" onMouseClicked="#purchase" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="CelloImage" fitHeight="148.0" fitWidth="130.0" layoutX="488.0" layoutY="62.0" onMouseClicked="#purchase" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/orange.png" />
                     </image>
                 </ImageView>
-                <Label alignment="CENTER" layoutX="44.0" layoutY="74.0" prefHeight="46.0" prefWidth="82.0" text="God Father Theme" textFill="#fffafa" wrapText="true" />
-                <Label alignment="CENTER" layoutX="355.0" layoutY="66.0" prefHeight="58.0" prefWidth="84.0" text="Cello and Piano" textFill="#f2efef" wrapText="true" />
-                <Label alignment="CENTER" layoutX="190.0" layoutY="83.0" prefHeight="24.0" prefWidth="87.0" text="Loft Music" textFill="#fcf8f8" />
-                <CheckBox fx:id="GodfatherThemeCB" disable="true" layoutX="71.0" layoutY="151.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="28.0" />
-                <CheckBox fx:id="LoftMusicCB" disable="true" layoutX="234.0" layoutY="152.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="28.0" />
-                <CheckBox fx:id="CelloAndPianoCB" disable="true" layoutX="387.0" layoutY="152.0" mnemonicParsing="false" />
-                <Button layoutX="207.0" layoutY="202.0" mnemonicParsing="false" onAction="#returnShopFromSounds" text="Return Shop" />
+                <Label alignment="CENTER" layoutX="48.0" layoutY="86.0" prefHeight="70.0" prefWidth="128.0" text="God Father Theme" textFill="#fffafa" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+                <Label alignment="CENTER" layoutX="495.0" layoutY="79.0" prefHeight="86.0" prefWidth="128.0" text="Cello and Piano" textFill="#f2efef" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+                <Label alignment="CENTER" layoutX="262.0" layoutY="83.0" prefHeight="68.0" prefWidth="134.0" text="Loft Music" textFill="#fcf8f8">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+                <CheckBox fx:id="GodfatherThemeCB" disable="true" layoutX="95.0" layoutY="229.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="28.0" />
+                <CheckBox fx:id="LoftMusicCB" disable="true" layoutX="314.0" layoutY="229.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="28.0" />
+                <CheckBox fx:id="CelloAndPianoCB" disable="true" layoutX="544.0" layoutY="229.0" mnemonicParsing="false" />
+                <Button layoutX="281.0" layoutY="288.0" mnemonicParsing="false" onAction="#returnShopFromSounds" prefHeight="50.0" prefWidth="133.0" text="Return Shop">
+               <font>
+                  <Font size="17.0" />
+               </font></Button>
+            <Label layoutX="77.0" layoutY="229.0" text="20" textFill="#f8f3f3" />
+            <Label layoutX="305.0" layoutY="229.0" text="5" textFill="WHITE" />
+            <Label layoutX="530.0" layoutY="229.0" text="10" textFill="#fcf8f8" />
             </children>
         </Pane>
         <Pane fx:id="buyPostItPane" layoutX="289.0" layoutY="100.0" prefHeight="262.0" prefWidth="502.0" visible="false">
             <children>
+            <Label layoutX="413.0" layoutY="138.0" text="3" textFill="WHITE" />
                 <ImageView fx:id="purplepostit" fitHeight="87.0" fitWidth="84.0" layoutX="150.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/purplepostit.png" />
@@ -411,6 +445,7 @@
                 <CheckBox fx:id="purplePostItCB" layoutX="185.0" layoutY="128.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="28.0" text="CheckBox" />
                 <CheckBox fx:id="bluePostItCB" disable="true" layoutX="299.0" layoutY="131.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="24.0" text="CheckBox" />
                 <Button fx:id="returnShopButton" layoutX="201.0" layoutY="213.0" mnemonicParsing="false" onAction="#returnShopFromPostIts" prefHeight="35.0" prefWidth="89.0" text="Return Shop" />
+            <Label layoutX="292.0" layoutY="137.0" prefHeight="25.0" prefWidth="12.0" text="1" textFill="#f8f5f5" />
             </children>
         </Pane>
         <Pane fx:id="settingsPane" layoutX="231.0" layoutY="47.0" prefHeight="535.0" prefWidth="610.0" visible="false">
@@ -565,16 +600,6 @@
                 </Pane>
             </children>
         </Pane>
-        <TextField fx:id="dayTextField" editable="false" focusTraversable="false" layoutX="837.0" layoutY="367.0" prefHeight="52.0" prefWidth="79.0" style="-fx-background-color: transparent;">
-            <font>
-                <Font name="Georgia Pro" size="24.0" />
-            </font>
-        </TextField>
-        <TextField fx:id="monthTextField" editable="false" focusTraversable="false" layoutX="829.0" layoutY="415.0" prefHeight="34.0" prefWidth="71.0" style="-fx-background-color: transparent;">
-            <font>
-                <Font name="Georgia Pro" size="10.0" />
-            </font>
-        </TextField>
         <Pane fx:id="addBookNamePane" layoutX="346.0" layoutY="32.0" prefHeight="540.0" prefWidth="432.0" visible="false">
             <children>
                 <ImageView fitHeight="635.0" fitWidth="618.0" layoutX="-83.0" layoutY="-52.0" pickOnBounds="true" preserveRatio="true">
