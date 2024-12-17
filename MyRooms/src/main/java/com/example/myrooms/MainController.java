@@ -389,6 +389,7 @@ public class MainController implements Initializable {
     public void playAudio(){
         AudioClip clip = new AudioClip(getClass().getResource("com/example/myrooms/Sounds/alarmsound.wav").toString());
         clip.play();
+
     }
     public void buyClock(String imageString){
         Image image = new Image(imageString);
@@ -484,6 +485,7 @@ public class MainController implements Initializable {
             myBoard.postItArrayList.add(b);
             CorkboardPostitsPane.getChildren().add(c);
             SecondBoardPane.getChildren().add(b);
+            printPostIts();
 
             b.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -519,11 +521,13 @@ public class MainController implements Initializable {
 
         int length = myBoard.getPostItArrayList().size();
 
-
+        int count = 1;
         for(int i =0; i< length; i++)
         {
             if(myBoard.getPostItArrayList().get(i) != null)
             {
+                totalPostitsCharts.setText(count + "");
+                count++;
                 myBoard.getPostItArrayList().get(i).getChildren().clear();
                 myBoard.getPostItArrayList().get(i).setPrefHeight(79);
                 myBoard.getPostItArrayList().get(i).setPrefWidth(87);
@@ -546,10 +550,6 @@ public class MainController implements Initializable {
                 else if(myBoard.getPostItArrayList().get(i).getColor()==4){
                     myBoard.getPostItArrayList().get(i).setStyle(" -fx-background-color: #0101e4");
                 }
-
-
-
-
 
                 TextField textOne = new TextField( myBoard.getPostItArrayList().get(i).getTitle());
                 textOne.setEditable(false);
@@ -834,14 +834,13 @@ public class MainController implements Initializable {
 
         String imagePath ="CsProject-BackGrounds/Book.png";
         if(!bookName.equals("")){
-            totalBooksCharts.setText((Integer.parseInt(totalBooksCharts.getText()) + 1)+ "");
+
             Book book = new Book(bookTextField.getText(),  imagePath);
             int count = bookcase.getCount();
             bookcase.books.add(book);
             bookcase.setCount(++count);
 
             putAndSortBooks();
-
 
             bookName = "";
             bookTextField.clear();
@@ -861,10 +860,14 @@ public class MainController implements Initializable {
         flowPaneBook.getChildren().clear();
         flowPaneBook2.getChildren().clear();
         flowPaneBook3.getChildren().clear();
+        int counts = 1;
 
         for(Book b : bookcase.books){
 
             if(b != null){
+
+                totalBooksCharts.setText(counts + "");
+                counts++;
                 ImageView bookImageView = new ImageView(new Image(b.path));
                 bookImageView.setFitWidth(25);
                 bookImageView.setFitHeight(110);
@@ -983,7 +986,7 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
         setAlarmImage(alarm.imagePath);
-        buyClock(clock1.imagePath);
+        setClockImage(clock1.imagePath);
         setCoin(totalCoin);
         setTotalTime(totalTimeSpent);
         putAndSortBooks();
@@ -1088,6 +1091,7 @@ public class MainController implements Initializable {
             totalTimeSpent++;
             user.totalCoin = totalCoin;
             user.totalHours = totalTimeSpent;
+            waterplant();
             UserManager.saveUser(user);
 
             System.out.println(user.password);
