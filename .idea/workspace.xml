@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b386a1ac-3056-4fc0-b161-95afda59d740" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/MyRoom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MyRoom.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyRooms/src/main/java/com/example/myrooms/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyRooms/src/main/java/com/example/myrooms/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyRooms/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyRooms/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyRooms/src/main/resources/Users" beforeDir="false" afterPath="$PROJECT_DIR$/MyRooms/src/main/resources/Users" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyRooms/src/main/resources/com/example/myrooms/mainRoom.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MyRooms/src/main/resources/com/example/myrooms/mainRoom.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/UserDatabases/AzraDatabase" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/UserDatabases/DemirDatabase" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/UserDatabases/KaanDatabase" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/UserDatabases/YaşarDatabase" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/UserDatabases/ZeynepDatabase" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/Users" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRoom/Users" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/Alarm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/Alarm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/Book.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/Book.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/BookCase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/BookCase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/Clock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/Clock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/MainController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/MainController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/MyRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/MyRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/mainRoom.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRoom/com/example/myrooms/mainRoom.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRoom/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRoom/module-info.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2qMTYprHua0nnkUKYAshWPa3jAZ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MyRoom.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/demirkandemir/Desktop/CS MyRoom/MyRoom",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/MyRooms/src/main/java/com/example/myrooms/Calendars" />
+      <recent name="$PROJECT_DIR$/MyRooms/src/main/java/com/example/myrooms" />
+      <recent name="$PROJECT_DIR$/MyRooms/src/main/resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.myrooms.MyRoom" />
+      <module name="MyRoom" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b386a1ac-3056-4fc0-b161-95afda59d740" name="Changes" comment="" />
+      <created>1734471495130</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1734471495130</updated>
+      <workItem from="1734471496726" duration="29000" />
+      <workItem from="1734471610626" duration="4070000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

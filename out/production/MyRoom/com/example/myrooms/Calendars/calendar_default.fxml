@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onMouseClicked="#exitPopUp" prefHeight="519.0" prefWidth="902.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane fx:id="dailyViewScrollPane" hbarPolicy="NEVER" layoutX="247.0" layoutY="56.0" prefHeight="539.0" prefWidth="674.0" />
+      <Separator layoutX="244.0" layoutY="2.0" orientation="VERTICAL" prefHeight="573.0" prefWidth="2.0" />
+      <AnchorPane layoutX="5.0" layoutY="321.0" prefHeight="226.0" prefWidth="225.0">
+         <children>
+            <ScrollPane fx:id="calendarScrollPane" layoutX="1.0" layoutY="29.0" prefHeight="196.0" prefWidth="179.0" />
+            <Label layoutX="-2.0" layoutY="5.0" text="Calendars">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="77.0" layoutY="1.0" mnemonicParsing="false" onAction="#openCalendarView" prefHeight="26.0" prefWidth="103.0" text="Add Calendar" />
+         </children>
+      </AnchorPane>
+      <DatePicker fx:id="currentDatePicker" editable="false" layoutX="8.0" layoutY="13.0" prefHeight="26.0" prefWidth="189.0" styleClass="custom_date-picker" />
+      <Pane fx:id="datePickerCalendar" layoutX="4.0" layoutY="70.0" prefHeight="244.0" prefWidth="222.0" />
+      <Button layoutX="280.0" layoutY="15.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: pink;" text="Today" />
+      <Button layoutX="376.0" layoutY="16.0" mnemonicParsing="false" onAction="#nextViewClicked" text="&gt;" />
+      <Button layoutX="354.0" layoutY="16.0" mnemonicParsing="false" onAction="#prevViewClicked" text="&lt;" />
+      <Accordion layoutX="687.0" layoutY="19.0" prefHeight="60.0" prefWidth="214.0" />
+      <AnchorPane fx:id="mainViewPanel" layoutX="254.0" layoutY="64.0" prefHeight="509.0" prefWidth="648.0" style="-fx-background-color: transparent;" visible="false" />
+      <AnchorPane fx:id="calendarView" layoutX="132.0" layoutY="236.0" prefHeight="200.0" prefWidth="235.0" style="-fx-background-color: lightblue;" visible="false">
+         <children>
+            <Label layoutX="6.0" layoutY="3.0" opacity="0.59" text="Calendar Name">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="calendarNameTF" layoutX="11.0" layoutY="25.0" />
+            <Label layoutX="5.0" layoutY="61.0" opacity="0.75" prefHeight="17.0" prefWidth="99.0" text="Description">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="189.0" layoutY="162.0" mnemonicParsing="false" onAction="#addingCalendarClicked" text="Add" />
+            <Button layoutX="128.0" layoutY="162.0" mnemonicParsing="false" onAction="#exitCalendarView" prefHeight="26.0" prefWidth="56.0" text="Cancel" />
+            <Button fx:id="calendarDeleteB" layoutX="64.0" layoutY="162.0" mnemonicParsing="false" onAction="#deleteCalendarClicked" text="Delete" visible="false" />
+            <TextField fx:id="calendarDescriptionTF" layoutX="10.0" layoutY="88.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="taskView" layoutX="412.0" layoutY="131.0" prefHeight="254.0" prefWidth="328.0" style="-fx-background-color: lightblue;" visible="false">
+         <children>
+            <Label layoutX="14.0" layoutY="6.0" text="Task Name">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="taskNameTF" layoutX="14.0" layoutY="29.0" />
+            <DatePicker fx:id="taskDatePicker" layoutX="100.0" layoutY="62.0" />
+            <Label layoutX="28.0" layoutY="64.0" text="Time">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="11.0" layoutY="95.0" prefHeight="46.0" prefWidth="98.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="49.78814697265625" minWidth="10.0" prefWidth="49.00213623046875" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="69.43634033203125" minWidth="10.0" prefWidth="49.49786376953125" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="taskStartHTF" prefHeight="26.0" prefWidth="33.0" GridPane.rowIndex="1" />
+                  <TextField fx:id="taskStartMTF" prefHeight="26.0" prefWidth="51.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label prefHeight="17.0" prefWidth="77.0" text="Hour" />
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="53.0" text="Minute" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+            <GridPane layoutX="120.0" layoutY="95.0" prefHeight="46.0" prefWidth="98.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="49.78814697265625" minWidth="10.0" prefWidth="47.7139892578125" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="69.43634033203125" minWidth="10.0" prefWidth="50.2860107421875" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <TextField fx:id="taskEndHTF" prefHeight="26.0" prefWidth="33.0" GridPane.rowIndex="1" />
+                  <TextField fx:id="taskEndMTF" prefHeight="26.0" prefWidth="51.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label prefHeight="17.0" prefWidth="46.0" text="Hour" />
+                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="53.0" text="Minute" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+            <CheckBox fx:id="taskAllDayCB" layoutX="228.0" layoutY="102.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="71.0" text="All Day" />
+            <CheckBox fx:id="taskDailyTaskCB" layoutX="227.0" layoutY="125.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="88.0" text="Daily Task" />
+            <CheckBox fx:id="taskDoneCB" layoutX="232.0" layoutY="34.0" mnemonicParsing="false" text="Done?" />
+            <Button layoutX="279.0" layoutY="207.0" mnemonicParsing="false" onAction="#addTaskClicked" text="Add" />
+            <Button layoutX="215.0" layoutY="207.0" mnemonicParsing="false" onAction="#taskViewClose" text="Cancel" />
+            <Label layoutX="16.0" layoutY="190.0" text="Notification" />
+            <ComboBox fx:id="taskNotificationComboBox" layoutX="10.0" layoutY="207.0" prefHeight="26.0" prefWidth="112.0" />
+            <Button fx:id="taskDeleteB" layoutX="147.0" layoutY="207.0" mnemonicParsing="false" text="Delete" />
+            <Label layoutX="16.0" layoutY="150.0" text="Calendar" />
+            <ComboBox fx:id="calendarComboBox" layoutX="11.0" layoutY="167.0" prefHeight="26.0" prefWidth="98.0" />
+            <Label layoutX="42.0" layoutY="87.0" text="Start" />
+            <Label layoutX="154.0" layoutY="87.0" text="End" />
+         </children>
+      </AnchorPane>
+      <ComboBox fx:id="viewChoiceComboBox" layoutX="731.0" layoutY="12.0" onAction="#changeViewCB" prefHeight="37.0" prefWidth="171.0" />
+   </children>
+</AnchorPane>

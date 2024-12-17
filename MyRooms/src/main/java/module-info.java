@@ -6,7 +6,11 @@ module com.example.myrooms {
     requires javafx.web;
     requires jdk.compiler;
     requires java.desktop;
+    requires com.google.gson;
+    requires java.sql;
 
-    opens com.example.myrooms to javafx.fxml;
     exports com.example.myrooms;
+
+    opens com.example.myrooms to
+            javafx.fxml;
 }

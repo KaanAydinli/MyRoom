@@ -190,6 +190,9 @@ public class MainController implements Initializable {
     Board myBoard;
     Plant plant;
 
+    Notebook notebook;
+    CalendarController calendarController;
+
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
 
     User user;
@@ -353,8 +356,27 @@ public class MainController implements Initializable {
     public void settingsScene() {
         ComputerApplications.setVisible(false);
         settingsPane.setVisible(!settingsPane.isVisible());
+    }
+    //TODO
+    public void InitializeCalendarNotebook()
+    {
+        calendarController = new CalendarController(allPane,user.ID);
+        notebook = new Notebook(allPane, user.ID, calendarController.getToday());
+    }
+
+    public void openNotebook(ActionEvent actionEvent)
+    {
+        System.out.println("dsagydhujısaopğ");
+        notebook.notebookOpen();
 
     }
+
+    public void openCalendar(ActionEvent event)
+    {
+        calendarController.openCalendar();
+        event.consume();
+    }
+
     public void closeEveryPane(){
         ClockParent.setVisible(false);
         ComputerPane.setVisible(false);
@@ -372,6 +394,8 @@ public class MainController implements Initializable {
         ShopPaneInPane.setVisible(false);
         buyPostItPane.setVisible(false);
         BuySoundPane.setVisible(false);
+        notebook.notebookClose();
+        calendarController.closeCalendar();
 
     }
     public void shopScene() {
@@ -582,8 +606,6 @@ public class MainController implements Initializable {
 
                 SecondBoardPane.getChildren().add(myBoard.getPostItArrayList().get(i));
                 CorkboardPostitsPane.getChildren().add(myBoard.getPostItArrayList().get(i).minimizePostIt());
-
-
             }
         }
 
@@ -599,7 +621,6 @@ public class MainController implements Initializable {
     {
         mainPostItPane.setVisible(false);
         ColorSelectFOrPostıtPane.setVisible(false);
-
     }
 
     public void goToLogin() throws IOException {
@@ -808,15 +829,15 @@ public class MainController implements Initializable {
 //             calendar.imagePath = "CsProject-BackGrounds/Calendar4.png";
 //             setClockImage(calendar.imagePath);
 //         }
-//
-        else if(e.getSource() == standartBoardRB && !standartBoardRB.isDisable()){
-            myBoard.imagePath = "CsProject-BackGrounds/HalfBoard.png";
-            setBoardImage(myBoard.imagePath);
-        }
-        else if(e.getSource() == board2RB && !board2RB.isDisable()){
-            myBoard.imagePath = "CsProject-BackGrounds/Board2.png";
-            setBoardImage(myBoard.imagePath);
-        }
+
+//        else if(e.getSource() == standartBoardRB && !standartBoardRB.isDisable()){
+//            myBoard.imagePath = "CsProject-BackGrounds/HalfBoard.png";
+//            setBoardImage(myBoard.imagePath);
+//        }
+//        else if(e.getSource() == board2RB && !board2RB.isDisable()){
+//            myBoard.imagePath = "CsProject-BackGrounds/Board2.png";
+//            setBoardImage(myBoard.imagePath);
+//        }
 //
 //        else if(e.getSource() == standartNoteBookRB && !standartNoteBookRB.isDisable()){
 //            notebook.imagePath = "CsProject-BackGrounds/Notebook.png";
@@ -1019,6 +1040,7 @@ public class MainController implements Initializable {
             alarmCreate.setText("Stop Alarm");
         }
 
+        InitializeCalendarNotebook();
         for(PostIt b : myBoard.getPostItArrayList()){
             b.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override

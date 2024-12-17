@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
+<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
     <children>
         <Pane fx:id="imagePane">
             <children>
@@ -32,6 +32,11 @@
                         <Rectangle2D />
                     </viewport>
                 </ImageView>
+            <ImageView fx:id="notebook" fitHeight="95.0" fitWidth="80.0" layoutX="275.0" layoutY="400.0" onMouseClicked="#openNotebook" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../CsProject-BackGrounds/Notebook.png" />
+               </image>
+            </ImageView>
                 <ImageView fx:id="PlantImage" fitHeight="106.0" fitWidth="94.0" layoutX="332.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/plantlevel1.png" />
@@ -115,16 +120,17 @@
             <children>
                 <Button layoutX="165.0" layoutY="71.0" mnemonicParsing="false" onAction="#corkBoardScene" opacity="0.0" prefHeight="226.0" prefWidth="186.0" text="Board" />
                 <Button layoutX="471.0" layoutY="23.0" mnemonicParsing="false" onAction="#clockScene" opacity="0.0" prefHeight="142.0" prefWidth="146.0" text="Clock" />
-                <Button layoutX="202.0" layoutY="350.0" mnemonicParsing="false" onAction="#alarmScene" opacity="0.0" prefHeight="99.0" prefWidth="94.0" text="Alarm" />
+                <Button layoutX="202.0" layoutY="350.0" mnemonicParsing="false" onAction="#alarmScene" opacity="0.0" prefHeight="99.0" prefWidth="79.0" text="Alarm" />
                 <Button layoutX="341.0" layoutY="316.0" mnemonicParsing="false" onAction="#plantScene" opacity="0.0" prefHeight="106.0" prefWidth="71.0" text="Plant" />
                 <Button layoutX="423.0" layoutY="221.0" mnemonicParsing="false" onAction="#computerScene" opacity="0.0" prefHeight="142.0" prefWidth="239.0" style="-fx-background-color: transparent;" text="Computer" />
-                <Button layoutX="808.0" layoutY="336.0" mnemonicParsing="false" opacity="0.0" prefHeight="121.0" prefWidth="101.0" text="Calendar" />
+                <Button fx:id="calendar" layoutX="808.0" layoutY="336.0" mnemonicParsing="false" onAction="#openCalendar" opacity="0.0" prefHeight="121.0" prefWidth="101.0" text="Calendar" />
                 <Button layoutX="730.0" layoutY="98.0" mnemonicParsing="false" onAction="#bookCaseScene" opacity="0.0" prefHeight="154.0" prefWidth="339.0" text="Bookcase" />
                 <ImageView fitHeight="72.0" fitWidth="30.0" layoutX="6.0" layoutY="73.0" onMouseClicked="#goToLogin" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/LoginDoorPlanted.png" />
                     </image>
                 </ImageView>
+            <Button layoutX="286.0" layoutY="406.0" mnemonicParsing="false" onAction="#openNotebook" opacity="0.0" prefHeight="66.0" prefWidth="64.0" text="Button" />
             </children>
         </Pane>
         <Pane fx:id="PlantPane" layoutX="186.0" layoutY="49.0" prefHeight="504.0" prefWidth="745.0" visible="false">
