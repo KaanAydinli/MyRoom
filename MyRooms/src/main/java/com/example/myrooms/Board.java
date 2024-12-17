@@ -13,11 +13,6 @@ public class Board implements Serializable {
         postItArrayList = new ArrayList<>();
     }
 
-    public PostIt getCurrentPostIt()
-    {
-        return this.currentPostIt;
-    }
-
     public ArrayList<PostIt> getPostItArrayList()
     {
         return this.postItArrayList;
@@ -28,7 +23,6 @@ public class Board implements Serializable {
         postItArrayList.remove(postIt);
 
     }
-
 }
 
 

@@ -17,14 +17,10 @@ public class PostIt extends StackPane implements Serializable {
     private int colorOfPostIt;
     private String textOfPostIt;
     private String titleOfPostIt;
-    private int indexOfPostIt;
-    private int idOfPostIt;
-
 
     public PostIt(String title, int colorOfPostIt)
     {
 
-        this.indexOfPostIt = 0;
         this.colorOfPostIt = colorOfPostIt;
         this.titleOfPostIt = title;
 
@@ -49,9 +45,8 @@ public class PostIt extends StackPane implements Serializable {
             this.setStyle(" -fx-background-color: #0101e4");
         }
 
-
         this.setPrefHeight(32);
-        this.setPrefWidth(35);
+        this.setPrefWidth(38);
 
         TextField textOne = new TextField(title);
         this.setAlignment(textOne, Pos.CENTER);
@@ -60,20 +55,17 @@ public class PostIt extends StackPane implements Serializable {
         textOne.setStyle("-fx-font-size: 10px; -fx-font-weight: bold; -fx-background-color: transparent; -fx-border-width: 1;");
         this.getChildren().add(textOne);
 
-
     }
 
     public PostIt minimizePostIt()
     {
 
         return new PostIt(this.getTitle(), this.getColor());
-
     }
 
     public PostIt(String title, String text, int colorOfPostIt)
     {
 
-        this.indexOfPostIt = 0;
         this.colorOfPostIt = colorOfPostIt;
         this.titleOfPostIt = title;
         this.textOfPostIt = text;
@@ -98,8 +90,6 @@ public class PostIt extends StackPane implements Serializable {
         {
             this.setStyle(" -fx-background-color: #0101e4");
         }
-
-
     }
 
     public int getColor()
@@ -107,12 +97,9 @@ public class PostIt extends StackPane implements Serializable {
         return this.colorOfPostIt;
     }
 
-
     public void setColor(int color)
     {
         this.colorOfPostIt = color;
-
-
 
     }
 
@@ -136,24 +123,6 @@ public class PostIt extends StackPane implements Serializable {
     {
         this.textOfPostIt = newText;
     }
-
-    public int getIndexOfPostIt()
-    {
-        return this.indexOfPostIt;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

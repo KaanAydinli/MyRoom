@@ -466,7 +466,6 @@ public class MainController implements Initializable {
                     mainPostItPane.setVisible(true);
                     postItTitle.setText(b.getTitle());
                     postItText.setText(b.getText());
-
                     printPostIts();
                 }
             });
@@ -698,6 +697,7 @@ public class MainController implements Initializable {
             clock2 = user.room.clock2;
             alarm = user.room.alarm;
             bookcase = user.room.bookcase;
+            myBoard = user.room.board;
             totalCoin = user.totalCoin;
             totalTimeSpent = user.totalHours;
 
@@ -711,6 +711,21 @@ public class MainController implements Initializable {
         putAndSortBooks();
         printPostIts();
         totalTimeCharts.setText(user.totalHours + "");
+
+        for(PostIt b : myBoard.getPostItArrayList()){
+            b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    myBoard.currentPostIt = b;
+                    mainPostItPane.setVisible(true);
+                    postItTitle.setText(b.getTitle());
+                    postItText.setText(b.getText());
+
+
+                    printPostIts();
+                }
+            });
+        }
 
         Image image = new Image("CsProject-BackGrounds/ComputerCursor.png");
         ToggleGroup group = new ToggleGroup();
