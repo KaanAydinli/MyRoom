@@ -900,7 +900,7 @@ public class MainController implements Initializable {
     public void growPlant(){
 
         plant.setLevelOfPlant(plant.getLevelOfPlant() + 1);
-        System.out.println(plant.getLevelOfPlant());
+        plantLevelCharts.setText(plant.getLevelOfPlant() + "");
         if(plant.getLevelOfPlant() == 1){
             plant.imagePath = "CsProject-BackGrounds/plantlevel2.png";
 
