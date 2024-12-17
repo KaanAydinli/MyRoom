@@ -170,12 +170,12 @@ public class MainController implements Initializable {
     @FXML
     ImageView bigClockImage, bigBoardImage, bigBookcase,bigAlarm;
 
-    int totalCoin = 10;
+    Integer totalCoin;
 
     int total = 0;
     String alarmTime = "";
     String name;
-    int totalTimeSpent;
+    Integer totalTimeSpent;
     String bookName = "";
 
     StackPane stackPane;
