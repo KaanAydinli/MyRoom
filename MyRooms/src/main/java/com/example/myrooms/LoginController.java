@@ -64,6 +64,9 @@ public class LoginController implements Initializable {
     User user;
     static Integer UserID = 1;
 
+    public boolean isAdmin = true;
+
+
     public void goToRoom() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mainRoom.fxml"));
@@ -74,6 +77,7 @@ public class LoginController implements Initializable {
         mainController.setName(name);
         mainController.stackPane = stackPane;
         loadRoom(name,mainController);
+        mainController.isAdmin = isAdmin;
 
         RotateTransition rotate = new RotateTransition();
         rotate.setAxis(Rotate.Y_AXIS);
@@ -126,9 +130,13 @@ public class LoginController implements Initializable {
         loginPane.setVisible(!loginPane.isVisible());
         if(loginPane.isVisible()){
             loginvisitButton.setText("Login");
+            mode = 0;
         }
-        else
+        else{
             loginvisitButton.setText("Visit");
+            mode = 2;
+        }
+
     }
     public static void saveDatabase() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(DataBase_FILE))) {
@@ -197,7 +205,7 @@ public class LoginController implements Initializable {
             }
         }
     }
-    public void isValid() {
+    public void isValid() throws IOException {
 
         if (mode == 0) {
             if(!username.getText().isEmpty() && !password.getText().isEmpty()) {
@@ -207,6 +215,7 @@ public class LoginController implements Initializable {
                    try {
                        name = username.getText();
 
+                       isAdmin = true;
                        goToRoom();
                    } catch (Exception e) {
                        e.printStackTrace();
@@ -225,6 +234,18 @@ public class LoginController implements Initializable {
                 username.clear();
                 password.clear();
                 fadeIn();
+            }
+        }
+        else if(mode == 2){
+
+            if(!visitUsername.getText().isEmpty()){
+
+                if(database.containsKey(visitUsername.getText())){
+                    isAdmin = false;
+                    name = visitUsername.getText();
+                    goToRoom();
+
+                }
             }
         }
     }

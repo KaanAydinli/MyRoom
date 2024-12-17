@@ -193,6 +193,7 @@ public class MainController implements Initializable {
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: transparent;";
 
     User user;
+    boolean isAdmin;
 
     public MainController() {
 
@@ -262,10 +263,11 @@ public class MainController implements Initializable {
     }
 
     public void computerScene() {
-        ClockParent.setVisible(false);
-        ComputerPane.setVisible(!ComputerPane.isVisible());
-        ComputerApplications.setVisible(!ComputerApplications.isVisible());
-
+        if(isAdmin){
+            ClockParent.setVisible(false);
+            ComputerPane.setVisible(!ComputerPane.isVisible());
+            ComputerApplications.setVisible(!ComputerApplications.isVisible());
+        }
     }
     public void chartScene() {
         totalTimeCharts.setText(String.valueOf(totalTimeSpent));
@@ -275,11 +277,17 @@ public class MainController implements Initializable {
 
     }
     public void clockScene() {
-        ComputerPane.setVisible(false);
-        ClockParent.setVisible(!ClockParent.isVisible());
+        if(isAdmin){
+            ComputerPane.setVisible(false);
+            ClockParent.setVisible(!ClockParent.isVisible());
+        }
+
     }
     public void alarmScene() {
-        AlarmPane.setVisible(!AlarmPane.isVisible());
+        if(isAdmin){
+            AlarmPane.setVisible(!AlarmPane.isVisible());
+        }
+
     }
     public void setAlarmText(String text){
         alarmText.setText(text);
@@ -312,6 +320,8 @@ public class MainController implements Initializable {
                     alarm.setStartingTime(clock1.getTotalTime());
 
                     System.out.println("Alarm set to: " + alarm.getAlarmTime());
+                    alarmCreate.setText("Stop Alarm");
+                    alarmTimeLabel.setText(alarmTimeLabel.getText() + alarmTime);
                 }
                 catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Wrong or missing input in alarm");
@@ -327,12 +337,13 @@ public class MainController implements Initializable {
                     int breakTime = Integer.parseInt(alarmPomodoroBreak.getText());
                     alarm.createAlarmPomodoro(session, breakTime);
                     System.out.println("Alarm set to: " + alarm.getAlarmTime());
+                    alarmCreate.setText("Stop Alarm");
+                    alarmTimeLabel.setText(alarmTimeLabel.getText() + alarmTime);
                 } catch (Exception e) {
                     System.out.println("Wrong or missing input in alarm");
                 }
             }
-            alarmCreate.setText("Stop Alarm");
-            alarmTimeLabel.setText(alarmTimeLabel.getText() + alarmTime);
+
         }
         else if(alarmCreate.getText().equals("Stop Alarm")){
             deActiveAlarm();
@@ -408,7 +419,10 @@ public class MainController implements Initializable {
     }
 
     public void corkBoardScene(){
-        BoardPane.setVisible(true);
+        if(isAdmin){
+            BoardPane.setVisible(true);
+        }
+
     }
     public void colorSelected()
     {
@@ -701,7 +715,11 @@ public class MainController implements Initializable {
         setCoin(totalCoin);
     }
     public void plantScene() {
-        PlantPane.setVisible(!PlantPane.isVisible());
+
+        if(isAdmin){
+            PlantPane.setVisible(!PlantPane.isVisible());
+        }
+
     }
     public  void  returnShopFromPostIts(){
         buyPostItPane.setVisible(!buyPostItPane.isVisible());
@@ -827,7 +845,9 @@ public class MainController implements Initializable {
     }
     public void bookCaseScene() {
 
-        bookPane.setVisible(!bookPane.isVisible());
+        if(isAdmin){
+            bookPane.setVisible(!bookPane.isVisible());
+        }
 
     }
     public void addImage(){
@@ -872,7 +892,6 @@ public class MainController implements Initializable {
                 bookImageView.setFitWidth(25);
                 bookImageView.setFitHeight(110);
                 addImageViewOfBooks();
-
 
                 b.setPrefSize(bookImageView.getFitWidth()+5, bookImageView.getFitHeight());
                 Label bookLabel = new Label(b.bookName);
@@ -993,6 +1012,13 @@ public class MainController implements Initializable {
         printPostIts();
         totalTimeCharts.setText(user.totalHours + "");
 
+        if(!alarm.isOn){
+            alarmCreate.setText("Start Alarm");
+        }
+        else{
+            alarmCreate.setText("Stop Alarm");
+        }
+
         for(PostIt b : myBoard.getPostItArrayList()){
             b.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -1079,6 +1105,7 @@ public class MainController implements Initializable {
 
                 int progress = alarm.compareTo(alarm.getStartingTime());
                 int comparison = clock1.compareTo(alarm.getTotalTime());
+
                 if(alarm.isOn){
                     float value = (float) (100 - (comparison * 100 / progress)) / 100f;
                     alarmProgress.setProgress(value);
@@ -1087,6 +1114,8 @@ public class MainController implements Initializable {
                     alarmProgress.setProgress(0);
                     alarmTimeLabel.setText("Alarm Time: ");
                 }
+
+
             }
             totalTimeSpent++;
             user.totalCoin = totalCoin;
@@ -1094,7 +1123,6 @@ public class MainController implements Initializable {
             waterplant();
             UserManager.saveUser(user);
 
-            System.out.println(user.password);
             System.out.println(clock1.getTime());
 
             if(ClockParent.isVisible()){

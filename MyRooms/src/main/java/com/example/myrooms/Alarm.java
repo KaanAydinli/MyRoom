@@ -26,6 +26,7 @@ public class Alarm implements Serializable {
         this.minute = minute;
         this.second = second;
         isOn = true;
+        setStartingTime(clock.getTotalTime());
     }
     public void createAlarmPomodoro(int session, int breakTime){
 
@@ -35,6 +36,7 @@ public class Alarm implements Serializable {
         this.breakTime = breakTime;
 
         minute = clock.getMinute() + sessionTime;
+        second = clock.getSecond();
 
         if(minute > 60){
             minute = minute - 60;
@@ -43,6 +45,7 @@ public class Alarm implements Serializable {
         else{
             hour = clock.getHour();
         }
+        setStartingTime(clock.getTotalTime());
     }
     public boolean checkAlarm(int hour,int minute,int second){
 

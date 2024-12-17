@@ -52,7 +52,7 @@
             </Pane>
             <Pane fx:id="VisitPane" layoutX="728.0" layoutY="80.0" prefHeight="219.0" prefWidth="221.0" visible="false">
                <children>
-                  <TextField fx:id="visitUsername" layoutX="36.0" layoutY="32.0" promptText="Username" />
+                  <TextField fx:id="visitUsername" layoutX="36.0" layoutY="32.0" onAction="#isValid" promptText="Username" />
                </children>
             </Pane>
             <ToggleButton fx:id="loginvisitButton" layoutX="795.0" layoutY="33.0" mnemonicParsing="false" onAction="#changePane" text="Login" textOverrun="WORD_ELLIPSIS" />
