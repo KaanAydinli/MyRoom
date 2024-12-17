@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
+<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
     <children>
         <Pane fx:id="imagePane">
             <children>
@@ -237,14 +237,14 @@
                 </Pane>
             </children>
         </Pane>
-        <Pane fx:id="ClockParent" layoutX="100.0" layoutY="34.0" prefHeight="516.0" prefWidth="900.0" visible="false">
+        <Pane fx:id="ClockParent" layoutX="266.0" layoutY="34.0" prefHeight="494.0" prefWidth="610.0" visible="false">
             <children>
-                <ImageView fx:id="bigClockImage" fitHeight="476.0" fitWidth="555.0" layoutX="191.0" pickOnBounds="true">
+                <ImageView fx:id="bigClockImage" fitHeight="476.0" fitWidth="565.0" layoutX="58.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../CsProject-BackGrounds/Clock.png" />
                     </image>
                 </ImageView>
-                <BorderPane fx:id="Clock2Pane" layoutX="228.0" prefHeight="500.0" prefWidth="481.0" />
+                <BorderPane fx:id="Clock2Pane" layoutX="2.0" prefHeight="500.0" prefWidth="586.0" />
             </children>
         </Pane>
         <ScrollPane fx:id="ShopPane" hbarPolicy="NEVER" layoutX="206.0" layoutY="44.0" prefHeight="364.0" prefWidth="695.0" visible="false">
