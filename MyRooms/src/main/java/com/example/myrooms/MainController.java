@@ -168,7 +168,7 @@ public class MainController implements Initializable {
     @FXML
     Button p,s,returnShopButton;
     @FXML
-    ImageView bigClockImage, bigBoardImage, bigBookcase,bigAlarm;
+    ImageView bigClockImage, bigBoardImage, bigBookcase,bigAlarm, NoteBookImage;
 
     Integer totalCoin;
 
@@ -189,6 +189,9 @@ public class MainController implements Initializable {
     BookCase bookcase;
     Board myBoard;
     Plant plant;
+    Notebooks notebooks;
+    Calendars calendars;
+    Shop shop;
 
     Notebook notebook;
     CalendarController calendarController;
@@ -213,6 +216,9 @@ public class MainController implements Initializable {
             totalTimeSpent = user.totalHours;
             myBoard = user.room.board;
             plant = user.room.plant;
+            notebooks = user.room.notebooks;
+            calendars = user.room.calendars;
+            shop = user.room.shop;
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -231,7 +237,163 @@ public class MainController implements Initializable {
         bookLabel.setText(bookTextField.getText());
         bookName = bookTextField.getText();
     }
+    public void loadShop(){
 
+        for(int i = 0; i < shop.items.size(); i++){
+
+            if(shop.items.get(i).name.equals("Calendar")){
+                if(shop.items.get(i).isUnlocked){
+                    standartCalenderRB.setDisable(false);
+                }
+                else
+                    standartCalenderRB.setDisable(true);
+
+            }
+            else if(shop.items.get(i).name.equals("Calendar2")){
+                if(shop.items.get(i).isUnlocked){
+                    calender2RB.setDisable(false);
+                }
+                else
+                    calender2RB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Calendar3")){
+                if(shop.items.get(i).isUnlocked){
+                    calendar3RB.setDisable(false);
+                }
+                else
+                    calendar3RB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Calendar4")){
+                if(shop.items.get(i).isUnlocked){
+                    calendar4RB.setDisable(false);
+                }
+                else
+                    calendar4RB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Clock1")){
+                if(shop.items.get(i).isUnlocked){
+                    standartClockRB.setDisable(false);
+                }
+                else
+                    standartClockRB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Clock2")){
+                if(shop.items.get(i).isUnlocked){
+                    clock2RB.setDisable(false);
+                }
+                else
+                    clock2RB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Clock3")){
+                if(shop.items.get(i).isUnlocked){
+                    clock3RB.setDisable(false);
+                }
+                else
+                    clock3RB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Board1")){
+                if(shop.items.get(i).isUnlocked){
+                    standartBoardRB.setDisable(false);
+                }
+                else
+                    standartBoardRB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Board2")){
+                if(shop.items.get(i).isUnlocked){
+                    board2RB.setDisable(false);
+                }
+                else
+                    board2RB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Notebook1")){
+                if(shop.items.get(i).isUnlocked){
+                    standartNoteBookRB.setDisable(false);
+                }
+                else
+                    standartNoteBookRB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Notebook2")){
+                if(shop.items.get(i).isUnlocked){
+                    notebook2RB.setDisable(false);
+                }
+                else
+                    notebook2RB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Notebook3")){
+                if(shop.items.get(i).isUnlocked){
+                    notebook3RB.setDisable(false);
+                }
+                else
+                    notebook3RB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Notebook4")){
+                if(shop.items.get(i).isUnlocked){
+                    notebook4RB.setDisable(false);
+                }
+                else
+                    notebook4RB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("GodFather")){
+                if(shop.items.get(i).isUnlocked){
+                    GodfatherThemeCB.setDisable(false);
+                }
+                else
+                    GodfatherThemeCB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Loft")){
+                if(shop.items.get(i).isUnlocked){
+                    LoftMusicCB.setDisable(false);
+                }
+                else
+                    LoftMusicCB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Cello")){
+                if(shop.items.get(i).isUnlocked){
+                    CelloAndPianoCB.setDisable(false);
+                }
+                else
+                    CelloAndPianoCB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Green")){
+                if(shop.items.get(i).isUnlocked){
+                    greenPostItCB.setDisable(false);
+                }
+                else
+                    greenPostItCB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Alarm1")){
+                if(shop.items.get(i).isUnlocked){
+                    standartAlarmRB.setDisable(false);
+                }
+                else
+                    standartAlarmRB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Alarm2")){
+                if(shop.items.get(i).isUnlocked){
+                    alarm2RB.setDisable(false);
+                }
+                else
+                    alarm2RB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Alarm3")){
+                if(shop.items.get(i).isUnlocked){
+                    alarm3RB.setDisable(false);
+                }
+                else
+                    alarm3RB.setDisable(true);
+            }
+            else if(shop.items.get(i).name.equals("Alarm4")){
+                if(shop.items.get(i).isUnlocked){
+                    alarm4RB.setDisable(false);
+                }
+                else
+                    alarm4RB.setDisable(true);
+            }
+
+
+
+        }
+    }
     public void setShopIcon(String name){
         shopIcon.setImage(new Image(name));
     }
@@ -240,9 +402,14 @@ public class MainController implements Initializable {
         TotalCoinLabel.setText(String.valueOf(totalCoin));
 
     }
-
+    public void setNotebook(String image){
+        NoteBookImage.setImage(new Image(image));
+    }
     public void setName(String names){
         name = names;
+    }
+    public void setCalendarImage(String image){
+        CalendarImage.setImage(new Image(image));
     }
     public void setAlarmImage(String image){
         AlarmImage.setImage(new Image(image));
@@ -425,11 +592,6 @@ public class MainController implements Initializable {
         AudioClip clip = new AudioClip(getClass().getResource("com/example/myrooms/Sounds/alarmsound.wav").toString());
         clip.play();
 
-    }
-    public void buyClock(String imageString){
-        Image image = new Image(imageString);
-
-        ClockImage.setImage(image);
     }
     public void checkAlarm(int hour,int minute, int seconds){
 
@@ -667,73 +829,123 @@ public class MainController implements Initializable {
     public void purchase(MouseEvent e){
         if(e.getSource() == notebook4 && notebook4RB.isDisable() && totalCoin >= 15){
             notebook4RB.setDisable(false);
+            shop.setUnlock("Notebook4",true);
             totalCoin -= 15;
         }
         else if(e.getSource() == notebook3 && notebook3RB.isDisable() && totalCoin >= 10){
             notebook3RB.setDisable(false);
+            shop.setUnlock("Notebook3",true);
             totalCoin -= 10;
         }
         else if(e.getSource() == notebook2 && notebook2RB.isDisable() && totalCoin >= 5 ){
             notebook2RB.setDisable(false);
+            shop.setUnlock("Notebook2",true);
             totalCoin -= 5;
         }
         else if(e.getSource() == clock3 && clock3RB.isDisable() && totalCoin >= 10 ){
             clock3RB.setDisable(false);
+            shop.setUnlock("Clock3",true);
             totalCoin -= 10;
         }
         else if(e.getSource() == clock2png && clock2RB.isDisable() && totalCoin >= 5 ){
             clock2RB.setDisable(false);
+            shop.setUnlock("Clock2",true);
             totalCoin -= 5;
         }
         else if(e.getSource() == alarm2png && alarm2RB.isDisable() && totalCoin >= 5 ){
             alarm2RB.setDisable(false);
+            shop.setUnlock("Alarm2",true);
             totalCoin -= 5;
         }
         else if(e.getSource() == alarm4 && alarm4RB.isDisable() && totalCoin >= 15){
             alarm4RB.setDisable(false);
+            shop.setUnlock("Alarm4",true);
             totalCoin -= 15;
         }
         else if(e.getSource() == alarm3 && alarm3RB.isDisable() && totalCoin >= 10 ){
             alarm3RB.setDisable(false);
+            shop.setUnlock("Alarm3",true);
             totalCoin -= 10;
         }
         else if(e.getSource() == board2 && board2RB.isDisable() && totalCoin >= 5 ){
             board2RB.setDisable(false);
+            shop.setUnlock("Board2",true);
             totalCoin -= 5;
         }
         else if(e.getSource() == calendar4 && calendar4RB.isDisable() && totalCoin >= 15 ){
             calendar4RB.setDisable(false);
+            shop.setUnlock("Calendar4",true);
             totalCoin -= 15;
         }
         else if(e.getSource() == calendar3 && calendar3RB.isDisable() && totalCoin >= 10 ){
             calendar3RB.setDisable(false);
+            shop.setUnlock("Calendar3",true);
             totalCoin -= 10;
         }
         else if(e.getSource() == calender2 && calender2RB.isDisable() && totalCoin >= 5 ){
             calender2RB.setDisable(false);
+            shop.setUnlock("Calendar2",true);
             totalCoin -= 5;
         }
         else if(e.getSource() == bluepostit && bluePostItCB.isDisable() && totalCoin >= 1 ){
             bluePostItCB.setDisable(false);
+            shop.setUnlock("Blue",true);
+            blueButton.setDisable(false);
             totalCoin -= 1;
         }
         else if(e.getSource() == greenpostit && greenPostItCB.isDisable() && totalCoin >= 3 ){
             greenPostItCB.setDisable(false);
+            shop.setUnlock("Green",true);
+            GreenButton.setDisable(false);
             totalCoin -= 3;
         }
         else if(e.getSource() == GFImage && GodfatherThemeCB.isDisable() && totalCoin >= 20 ){
             GodfatherThemeCB.setDisable(false);
+            shop.setUnlock("GodFather",true);
             totalCoin -= 20;
         }
         else if(e.getSource() == LoftImage && LoftMusicCB.isDisable() && totalCoin >= 5 ){
             LoftMusicCB.setDisable(false);
+            shop.setUnlock("Loft",true);
             totalCoin -= 5;
         }
         else if(e.getSource() == CelloImage && CelloAndPianoCB.isDisable() && totalCoin >= 10 ){
             CelloAndPianoCB.setDisable(false);
+            shop.setUnlock("Cello",true);
             totalCoin -= 10;
         }
         setCoin(totalCoin);
+    }
+    public void selectPostitColorsShop(ActionEvent e){
+
+        if(e.getSource() == greenPostItCB){
+            if(greenPostItCB.isSelected()){
+                GreenButton.setDisable(false);
+            }
+            else
+                GreenButton.setDisable(true);
+        }
+        else if(e.getSource() == bluePostItCB){
+            if(bluePostItCB.isSelected()){
+                blueButton.setDisable(false);
+            }
+            else
+                blueButton.setDisable(true);
+        }
+        else if(e.getSource() == yellowPostItCB){
+            if(yellowPostItCB.isSelected()){
+                yellowButton.setDisable(false);
+            }
+            else
+                yellowButton.setDisable(true);
+        }
+        else if(e.getSource() == purplePostItCB){
+            if(purplePostItCB.isSelected()){
+                purpleButton.setDisable(false);
+            }
+            else
+                purpleButton.setDisable(true);
+        }
     }
     public void plantScene() {
 
@@ -812,49 +1024,46 @@ public class MainController implements Initializable {
             clock1.imagePath = "CsProject-BackGrounds/Clock3.png";
             setClockImage(clock1.imagePath);
         }
-//
-//         else if(e.getSource() == standartCalenderRB && !standartCalenderRB.isDisable()){
-//             calendar.imagePath ="CsProject-BackGrounds/Calendar.png";
-//             setClockImage(calendar.imagePath);
-//         }
-//        else if(e.getSource() == calender2RB && !calender2RB.isDisable()){
-//             calendar.imagePath = "CsProject-BackGrounds/Calendar2.png";
-//            setClockImage(calendar.imagePath);
-//        }
-//         else if(e.getSource() == calendar3RB && !calendar3RB.isDisable()){
-//             calendar.imagePath = "CsProject-BackGrounds/Calendar3.png";
-//             setClockImage(calendar.imagePath);
-//         }
-//         else if(e.getSource() == calendar4RB && !calendar4RB.isDisable()){
-//             calendar.imagePath = "CsProject-BackGrounds/Calendar4.png";
-//             setClockImage(calendar.imagePath);
-//         }
-
-//        else if(e.getSource() == standartBoardRB && !standartBoardRB.isDisable()){
-//            myBoard.imagePath = "CsProject-BackGrounds/HalfBoard.png";
-//            setBoardImage(myBoard.imagePath);
-//        }
-//        else if(e.getSource() == board2RB && !board2RB.isDisable()){
-//            myBoard.imagePath = "CsProject-BackGrounds/Board2.png";
-//            setBoardImage(myBoard.imagePath);
-//        }
-//
-//        else if(e.getSource() == standartNoteBookRB && !standartNoteBookRB.isDisable()){
-//            notebook.imagePath = "CsProject-BackGrounds/Notebook.png";
-//            setClockImage(notebook.imagePath);
-//        }
-//         else if(e.getSource() == notebook2RB && !notebook2RB.isDisable()){
-//             notebook.imagePath = "CsProject-BackGrounds/NoteBook2.png";
-//             setClockImage(notebook.imagePath);
-//         }
-//         else if(e.getSource() == notebook3RB && !notebook3RB.isDisable()){
-//             notebook.imagePath = "CsProject-BackGrounds/NoteBook3.png";
-//             setClockImage(notebook.imagePath);
-//         }
-//         else if(e.getSource() == notebook4RB && !notebook4RB.isDisable()){
-//             notebook.imagePath = "CsProject-BackGrounds/NoteBook4.png";
-//             setClockImage(notebook.imagePath);
-//         }
+         else if(e.getSource() == standartCalenderRB && !standartCalenderRB.isDisable()){
+             calendars.imagePath ="CsProject-BackGrounds/Calendar.png";
+             setCalendarImage(calendars.imagePath);
+         }
+        else if(e.getSource() == calender2RB && !calender2RB.isDisable()){
+             calendars.imagePath = "CsProject-BackGrounds/Calendar2.png";
+            setCalendarImage(calendars.imagePath);
+        }
+         else if(e.getSource() == calendar3RB && !calendar3RB.isDisable()){
+             calendars.imagePath = "CsProject-BackGrounds/Calendar3.png";
+             setCalendarImage(calendars.imagePath);
+         }
+         else if(e.getSource() == calendar4RB && !calendar4RB.isDisable()){
+             calendars.imagePath = "CsProject-BackGrounds/Calendar4.png";
+             setCalendarImage(calendars.imagePath);
+         }
+        else if(e.getSource() == standartBoardRB && !standartBoardRB.isDisable()){
+            myBoard.imagePath = "CsProject-BackGrounds/HalfBoard.png";
+            setBoardImage(myBoard.imagePath);
+        }
+        else if(e.getSource() == board2RB && !board2RB.isDisable()){
+            myBoard.imagePath = "CsProject-BackGrounds/Board2.png";
+            setBoardImage(myBoard.imagePath);
+        }
+        else if(e.getSource() == standartNoteBookRB && !standartNoteBookRB.isDisable()){
+            notebooks.imagePath = "CsProject-BackGrounds/Notebook.png";
+            setNotebook(notebooks.imagePath);
+        }
+         else if(e.getSource() == notebook2RB && !notebook2RB.isDisable()){
+             notebooks.imagePath = "CsProject-BackGrounds/NoteBook2.png";
+             setNotebook(notebooks.imagePath);
+         }
+         else if(e.getSource() == notebook3RB && !notebook3RB.isDisable()){
+             notebooks.imagePath = "CsProject-BackGrounds/NoteBook3.png";
+             setNotebook(notebooks.imagePath);
+         }
+         else if(e.getSource() == notebook4RB && !notebook4RB.isDisable()){
+             notebooks.imagePath = "CsProject-BackGrounds/NoteBook4.png";
+             setNotebook(notebooks.imagePath);
+         }
     }
     public void buyPostItAction(){
         buyPostItPane.setVisible(!buyPostItPane.isVisible());
@@ -1021,6 +1230,9 @@ public class MainController implements Initializable {
             totalCoin = user.totalCoin;
             totalTimeSpent = user.totalHours;
             plant = user.room.plant;
+            notebooks = user.room.notebooks;
+            calendars = user.room.calendars;
+            shop = user.room.shop;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1028,9 +1240,13 @@ public class MainController implements Initializable {
         setAlarmImage(alarm.imagePath);
         setClockImage(clock1.imagePath);
         setCoin(totalCoin);
+        setCalendarImage(calendars.imagePath);
         setTotalTime(totalTimeSpent);
+        setBoardImage(myBoard.imagePath);
+        setNotebook(notebooks.imagePath);
         putAndSortBooks();
         printPostIts();
+        loadShop();
         totalTimeCharts.setText(user.totalHours + "");
 
         if(!alarm.isOn){

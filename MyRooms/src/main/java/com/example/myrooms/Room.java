@@ -10,13 +10,19 @@ public class Room implements Serializable {
     BookCase bookcase;
     Board board;
     Plant plant;
+    Notebooks notebooks;
+    Calendars calendars;
+    Shop shop;
 
-    public Room(Alarm alarm,Clock clock1, Clock clock2, BookCase bookcase, Board board,Plant plant) {
+    public Room(Alarm alarm,Clock clock1, Clock clock2, BookCase bookcase, Board board,Plant plant, Notebooks notebooks, Calendars calendars,Shop shop) {
         this.alarm = alarm;
         this.clock1 = clock1;
         this.clock2 = clock2;
         this.bookcase = bookcase;
         this.board = board;
         this.plant = plant;
+        this.notebooks = notebooks;
+        this.calendars = calendars;
+        this.shop = shop;
     }
 }

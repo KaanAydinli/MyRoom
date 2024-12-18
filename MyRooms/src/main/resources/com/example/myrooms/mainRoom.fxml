@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
+<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
     <children>
         <Pane fx:id="imagePane">
             <children>
@@ -32,7 +32,7 @@
                         <Rectangle2D />
                     </viewport>
                 </ImageView>
-            <ImageView fx:id="notebook" fitHeight="95.0" fitWidth="80.0" layoutX="275.0" layoutY="400.0" onMouseClicked="#openNotebook" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="NoteBookImage" fitHeight="95.0" fitWidth="80.0" layoutX="275.0" layoutY="400.0" onMouseClicked="#openNotebook" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../CsProject-BackGrounds/Notebook.png" />
                </image>
@@ -446,10 +446,10 @@
                         <Image url="@../../../CsProject-BackGrounds/greenpostit.png" />
                     </image>
                 </ImageView>
-                <CheckBox fx:id="yellowPostItCB" layoutX="56.0" layoutY="131.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="18.0" />
-                <CheckBox fx:id="greenPostItCB" disable="true" layoutX="423.0" layoutY="127.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="31.0" text="CheckBox" />
-                <CheckBox fx:id="purplePostItCB" layoutX="185.0" layoutY="128.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="28.0" text="CheckBox" />
-                <CheckBox fx:id="bluePostItCB" disable="true" layoutX="299.0" layoutY="131.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="24.0" text="CheckBox" />
+                <CheckBox fx:id="yellowPostItCB" layoutX="56.0" layoutY="131.0" mnemonicParsing="false" onAction="#selectPostitColorsShop" prefHeight="35.0" prefWidth="18.0" selected="true" />
+                <CheckBox fx:id="greenPostItCB" disable="true" layoutX="423.0" layoutY="127.0" mnemonicParsing="false" onAction="#selectPostitColorsShop" prefHeight="42.0" prefWidth="31.0" text="CheckBox" />
+                <CheckBox fx:id="purplePostItCB" layoutX="185.0" layoutY="128.0" mnemonicParsing="false" onAction="#selectPostitColorsShop" prefHeight="42.0" prefWidth="28.0" selected="true" text="CheckBox" />
+                <CheckBox fx:id="bluePostItCB" disable="true" layoutX="299.0" layoutY="131.0" mnemonicParsing="false" onAction="#selectPostitColorsShop" prefHeight="35.0" prefWidth="24.0" text="CheckBox" />
                 <Button fx:id="returnShopButton" layoutX="201.0" layoutY="213.0" mnemonicParsing="false" onAction="#returnShopFromPostIts" prefHeight="35.0" prefWidth="89.0" text="Return Shop" />
             <Label layoutX="292.0" layoutY="137.0" prefHeight="25.0" prefWidth="12.0" text="1" textFill="#f8f5f5" />
             </children>
