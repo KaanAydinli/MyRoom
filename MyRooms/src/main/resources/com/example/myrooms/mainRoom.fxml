@@ -473,7 +473,7 @@
                 </Label>
                 <Slider fx:id="settingsVolumeSlider" layoutX="294.0" layoutY="207.0" value="50.0" />
                 <Slider fx:id="settingsBrightnessSlider" layoutX="294.0" layoutY="264.0" max="0.4" min="-0.9" />
-                <ToggleButton fx:id="settingsNotificationsButton" layoutX="320.0" layoutY="137.0" mnemonicParsing="false" text="On" />
+                <ToggleButton fx:id="settingsNotificationsButton" layoutX="320.0" layoutY="137.0" mnemonicParsing="false" onAction="#setNotify" text="On" />
                 <TextField fx:id="changePasswordTextfield" layoutX="320.0" layoutY="85.0" onAction="#changePass" />
                 <Label layoutX="118.0" layoutY="81.0" text="Change Password" textFill="WHITE">
                     <font>

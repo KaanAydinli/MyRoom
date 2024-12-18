@@ -13,8 +13,9 @@ public class Room implements Serializable {
     Notebooks notebooks;
     Calendars calendars;
     Shop shop;
+    Settings settings;
 
-    public Room(Alarm alarm,Clock clock1, Clock clock2, BookCase bookcase, Board board,Plant plant, Notebooks notebooks, Calendars calendars,Shop shop) {
+    public Room(Alarm alarm,Clock clock1, Clock clock2, BookCase bookcase, Board board,Plant plant, Notebooks notebooks, Calendars calendars,Shop shop, Settings settings) {
         this.alarm = alarm;
         this.clock1 = clock1;
         this.clock2 = clock2;
@@ -24,5 +25,6 @@ public class Room implements Serializable {
         this.notebooks = notebooks;
         this.calendars = calendars;
         this.shop = shop;
+        this.settings = settings;
     }
 }

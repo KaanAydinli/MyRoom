@@ -23,6 +23,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -177,6 +179,10 @@ public class MainController implements Initializable {
     String name;
     Integer totalTimeSpent;
     String bookName = "";
+    double volume = 50;
+    AudioClip aclip;
+    Media media = new Media(getClass().getResource("/com/example/myrooms/Sounds/NatureSound.mp3").toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(media);
 
     StackPane stackPane;
 
@@ -192,6 +198,7 @@ public class MainController implements Initializable {
     Notebooks notebooks;
     Calendars calendars;
     Shop shop;
+    Settings settings;
 
     Notebook notebook;
     CalendarController calendarController;
@@ -200,6 +207,7 @@ public class MainController implements Initializable {
 
     User user;
     boolean isAdmin;
+
 
     public MainController() {
 
@@ -219,6 +227,7 @@ public class MainController implements Initializable {
             notebooks = user.room.notebooks;
             calendars = user.room.calendars;
             shop = user.room.shop;
+            settings = user.room.settings;
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -232,6 +241,18 @@ public class MainController implements Initializable {
             bookLabel.setText(bookTextField.getText());
         });
     }
+    public void setNotify(){
+
+        if(settingsNotificationsButton.getText().equals("On")){
+            settingsNotificationsButton.setText("Off");
+            alarm.notify = false;
+        }
+        else{
+            settingsNotificationsButton.setText("On");
+            alarm.notify = true;
+        }
+    }
+
     public void bookNameKey() {
 
         bookLabel.setText(bookTextField.getText());
@@ -578,19 +599,23 @@ public class MainController implements Initializable {
     }
     public void musicScene() {
 
-        AudioClip clip = new AudioClip(getClass().getResource("com/example/myrooms/Sounds/librarySounds.mp3").toString());
-        clip.play();
+        mediaPlayer.setVolume(volume / 100);
+        mediaPlayer.play();
     }
     public void showAlert(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alarm");
-        alert.setHeaderText(null);
-        alert.setContentText("Time is up");
-        alert.show();
+        if(alarm.notify){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Alarm");
+            alert.setHeaderText(null);
+            alert.setContentText("Time is up");
+            alert.show();
+        }
+
     }
     public void playAudio(){
-        AudioClip clip = new AudioClip(getClass().getResource("com/example/myrooms/Sounds/alarmsound.wav").toString());
+        AudioClip clip = new AudioClip(getClass().getResource("/com/example/myrooms/Sounds/alarmsound.wav").toString());
         clip.play();
+
 
     }
     public void checkAlarm(int hour,int minute, int seconds){
@@ -1233,6 +1258,7 @@ public class MainController implements Initializable {
             notebooks = user.room.notebooks;
             calendars = user.room.calendars;
             shop = user.room.shop;
+            settings = user.room.settings;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1247,6 +1273,18 @@ public class MainController implements Initializable {
         putAndSortBooks();
         printPostIts();
         loadShop();
+        settings.notify = alarm.notify;
+        
+        if(settings.notify){
+            settingsNotificationsButton.setText("Off");
+        }
+        else{
+            settingsNotificationsButton.setText("On");
+        }
+        settingsBrightnessSlider.setValue(settings.brightness);
+        settingsVolumeSlider.setValue(settings.volume);
+
+        aclip = new AudioClip(getClass().getResource("/com/example/myrooms/Sounds/librarySounds.mp3").toString());
         totalTimeCharts.setText(user.totalHours + "");
 
         if(!alarm.isOn){
@@ -1297,6 +1335,14 @@ public class MainController implements Initializable {
                 ColorAdjust setBrightness = new ColorAdjust();
                 setBrightness.setBrightness(settingsBrightnessSlider.getValue());
                 allPane.setEffect(setBrightness);
+            }
+        });
+
+        settingsVolumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                volume = settingsVolumeSlider.getValue();
+                mediaPlayer.setVolume(volume / 100);
             }
         });
 

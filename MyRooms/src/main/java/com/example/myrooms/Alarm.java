@@ -14,6 +14,7 @@ public class Alarm implements Serializable {
     int sessionTime;
     int breakTime;
     private int startingTime;
+    public boolean notify = true;
 
     public Alarm(Clock clock){
         mode = 0;
