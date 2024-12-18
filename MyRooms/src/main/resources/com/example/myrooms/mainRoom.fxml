@@ -18,9 +18,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
+<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
     <children>
         <Pane fx:id="imagePane">
             <children>
@@ -202,7 +203,7 @@
                 <FlowPane fx:id="bookFlowPanee3" layoutX="173.0" layoutY="395.0" prefHeight="101.0" prefWidth="304.0" />
             </children>
         </Pane>
-        <Pane fx:id="ComputerPane" layoutX="153.0" layoutY="7.0" prefHeight="579.0" prefWidth="802.0" visible="false">
+        <Pane fx:id="ComputerPane" layoutX="153.0" layoutY="7.0" prefHeight="579.0" prefWidth="802.0">
             <children>
                 <ImageView fx:id="ComputerImage" fitHeight="592.0" fitWidth="804.0" nodeOrientation="INHERIT" pickOnBounds="true">
                     <image>
@@ -482,6 +483,110 @@
                 </Label>
             </children>
         </Pane>
+      <Pane fx:id="musicAppPane" layoutX="208.0" layoutY="48.0" prefHeight="375.0" prefWidth="695.0" style="-fx-background-color: BEIGE;">
+          <children>
+              <Label layoutY="-2.0" opacity="0.88" prefHeight="71.0" prefWidth="135.0" style="-fx-background-color: BEIGE;" text="  YOUR SOUNDS">
+                  <font>
+                      <Font size="15.0" />
+                  </font>
+              </Label>
+              <Label layoutX="128.0" layoutY="-1.0" opacity="0.81" prefHeight="76.0" prefWidth="475.0" style="-fx-background-color: BEIGE;" text="           LOCKED SOUNDS" textAlignment="CENTER">
+                  <font>
+                      <Font size="30.0" />
+                  </font>
+              </Label>
+              <ScrollPane hbarPolicy="NEVER" layoutX="-2.0" layoutY="69.0" prefHeight="188.0" prefWidth="137.0">
+                  <content>
+                      <Pane prefHeight="331.0" prefWidth="144.0" style="-fx-background-color: BEIGE;">
+                          <children>
+                              <Button fx:id="firstSoundsButton" layoutY="-3.0" mnemonicParsing="false" onMouseClicked="#firstSoundButtonClicked" prefHeight="47.0" prefWidth="128.0" text="Library Sound" />
+                              <Button fx:id="secondSoundsButton" layoutY="44.0" mnemonicParsing="false" onMouseClicked="#secondSoundClicked" prefHeight="47.0" prefWidth="128.0" text="Nature Sound" />
+                              <Button fx:id="thirdSoundsButton" layoutY="91.0" mnemonicParsing="false" onMouseClicked="#thirdSoundClicked" prefHeight="47.0" prefWidth="128.0" text="Rain Sound" />
+                              <Button fx:id="fourthSoundsButton" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#fourthSoundClicked" prefHeight="47.0" prefWidth="128.0" text="Relaxing Sound" />
+                              <Button fx:id="fifthSoundsButton" layoutY="185.0" mnemonicParsing="false" onMouseClicked="#fifthSoundClicked" prefHeight="47.0" prefWidth="128.0" text="Godfather Theme" visible="false" />
+                              <Button fx:id="sixthSoundsButton" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#sixthSoundClicked" prefHeight="47.0" prefWidth="128.0" text="Cello and Piano" visible="false" />
+                              <Button fx:id="seventhSoundsButton" layoutY="279.0" mnemonicParsing="false" onMouseClicked="#seventhSoundClicked" prefHeight="47.0" prefWidth="128.0" text="Loft Music" visible="false" />
+                          </children>
+                      </Pane>
+                  </content>
+              </ScrollPane>
+              <Pane layoutX="171.0" layoutY="85.0" prefHeight="139.0" prefWidth="462.0">
+                  <children>
+                      <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="46.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../CsProject-BackGrounds/musicıcon.png" />
+                          </image>
+                      </ImageView>
+                      <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="194.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../CsProject-BackGrounds/musicıcon.png" />
+                          </image>
+                      </ImageView>
+                      <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="343.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../CsProject-BackGrounds/musicıcon.png" />
+                          </image>
+                      </ImageView>
+                      <TextArea fx:id="godFatherText" editable="false" layoutX="14.0" layoutY="69.0" prefHeight="63.0" prefWidth="128.0" text="Godfather Theme" wrapText="true">
+                          <font>
+                              <Font size="17.0" />
+                          </font>
+                      </TextArea>
+                      <TextArea fx:id="celloAndPianoText" editable="false" layoutX="167.0" layoutY="69.0" prefHeight="63.0" prefWidth="128.0" text="Cello and Piano" wrapText="true">
+                          <font>
+                              <Font size="17.0" />
+                          </font>
+                      </TextArea>
+                      <TextArea fx:id="loftMusicText" editable="false" layoutX="320.0" layoutY="69.0" prefHeight="63.0" prefWidth="128.0" text="Loft Music" wrapText="true">
+                          <font>
+                              <Font size="17.0" />
+                          </font>
+                      </TextArea>
+                  </children>
+              </Pane>
+              <Line endX="-3.0" endY="-22.0" layoutX="138.0" layoutY="21.0" startX="-3.0" startY="48.0" />
+              <Line endX="452.0" endY="-47.0" layoutX="239.0" layoutY="117.0" startX="-101.88894653320312" startY="-47.0" />
+              <Pane layoutX="143.0" layoutY="265.0" prefHeight="71.0" prefWidth="447.0">
+                  <children>
+                      <TextField editable="false" layoutX="3.0" layoutY="9.0" prefHeight="38.0" prefWidth="55.0" text="SONG:" />
+                      <TextField fx:id="SongNameArea" editable="false" layoutX="58.0" layoutY="9.0" prefHeight="38.0" prefWidth="378.0">
+                          <font>
+                              <Font size="19.0" />
+                          </font>
+                      </TextField>
+                  </children>
+              </Pane>
+              <ImageView fx:id="resumeImage" accessibleRole="BUTTON" fitHeight="47.0" fitWidth="47.0" layoutX="326.0" layoutY="323.0" onMouseClicked="#resumeButtonClicked" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                      <Image url="@../../../CsProject-BackGrounds/resumeButton.png" />
+                  </image>
+              </ImageView>
+              <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="245.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                      <Image url="@../../../CsProject-BackGrounds/previousButton.png" />
+                  </image>
+              </ImageView>
+              <ImageView fitHeight="47.0" fitWidth="47.0" layoutX="406.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                      <Image url="@../../../CsProject-BackGrounds/skipButton.png" />
+                  </image>
+              </ImageView>
+              <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="485.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                      <Image url="@../../../CsProject-BackGrounds/Lock.png" />
+                  </image>
+              </ImageView>
+              <Button fx:id="previousButton" layoutX="244.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#previousButtonClicked" opacity="0.0" prefHeight="55.0" prefWidth="55.0" text="Button" />
+              <Button fx:id="skipButton" layoutX="402.0" layoutY="320.0" mnemonicParsing="false" onMouseClicked="#skipButtonClicked" opacity="0.0" prefHeight="47.0" prefWidth="55.0" text="Button" />
+              <ImageView fx:id="pauseImage" accessibleRole="BUTTON" fitHeight="91.0" fitWidth="44.0" layoutX="329.0" layoutY="325.0" onMouseClicked="#pauseButtonClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+                  <image>
+                      <Image url="@../../../CsProject-BackGrounds/pauseButton.png" />
+                  </image>
+              </ImageView>
+              <Line endX="450.0" endY="-47.0" layoutX="241.0" layoutY="304.0" startX="-242.0" startY="-47.0" />
+          </children>
+      </Pane>
+        
         <Pane fx:id="ChartPane" layoutX="236.0" layoutY="12.0" prefHeight="401.0" prefWidth="652.0" visible="false">
             <children>
                 <Label layoutX="105.0" layoutY="94.0" text="Plant Level:" textFill="WHITE">

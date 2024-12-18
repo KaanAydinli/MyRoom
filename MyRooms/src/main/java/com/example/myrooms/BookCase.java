@@ -21,7 +21,7 @@ public class BookCase implements Serializable {
         for(int i = 0; i < books.size() - 1; i++){
             for(int j = 0; j < books.size() - 1 - i; j++){
 
-                if(books.get(j + 1) != null && books.get(j) != null && books.get(j).compareTo(books.get(j)) > 0){
+                if(books.get(j + 1) != null && books.get(j) != null && books.get(j).compareTo(books.get(j + 1)) > 0){
                     Book temp = books.get(j);
                     books.set(j, books.get(j + 1));
                     books.set(j + 1, temp);

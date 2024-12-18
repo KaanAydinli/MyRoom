@@ -154,6 +154,32 @@ public class MainController implements Initializable {
     @FXML
     TextArea postItText;
     @FXML
+    Pane musicAppPane;
+    @FXML
+    Button skipButton;
+    @FXML
+    Button previousButton;
+    @FXML
+    ImageView pauseImage;
+    @FXML
+    ImageView resumeImage;
+    @FXML
+    TextField SongNameArea;
+    @FXML
+    Button firstSoundsButton;
+    @FXML
+    Button secondSoundsButton;
+    @FXML
+    Button thirdSoundsButton;
+    @FXML
+    Button fourthSoundsButton;
+    @FXML
+    Button fifthSoundsButton;
+    @FXML
+    Button sixthSoundsButton;
+    @FXML
+    Button seventhSoundsButton;
+    @FXML
     ImageView BigPlantImage,WaterCanImage;
     @FXML
     Pane PlantPane;
@@ -171,6 +197,13 @@ public class MainController implements Initializable {
     Button p,s,returnShopButton;
     @FXML
     ImageView bigClockImage, bigBoardImage, bigBookcase,bigAlarm, NoteBookImage;
+    @FXML
+    TextArea godFatherText;
+    @FXML
+    TextArea celloAndPianoText;
+    @FXML
+    TextArea loftMusicText;
+
 
     Integer totalCoin;
 
@@ -199,6 +232,8 @@ public class MainController implements Initializable {
     Calendars calendars;
     Shop shop;
     Settings settings;
+    MusicPlayer myMusicPlayer;
+    AudioClip clip;
 
     Notebook notebook;
     CalendarController calendarController;
@@ -228,6 +263,7 @@ public class MainController implements Initializable {
             calendars = user.room.calendars;
             shop = user.room.shop;
             settings = user.room.settings;
+            myMusicPlayer = user.room.musicPlayer;
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -577,6 +613,7 @@ public class MainController implements Initializable {
         addBookNamePane.setVisible(false);
         mainPostItPane.setVisible(false);
         ColorSelectFOrPostıtPane.setVisible(false);
+        musicAppPane.setVisible(false);
         PlantPane.setVisible(false);
         ShopPane.setVisible(false);
         ShopPaneInPane.setVisible(false);
@@ -598,9 +635,140 @@ public class MainController implements Initializable {
         LoginController.saveDatabase();
     }
     public void musicScene() {
+        musicAppPane.setVisible(true);
 
-        mediaPlayer.setVolume(volume / 100);
-        mediaPlayer.play();
+    }
+    public void resumeButtonClicked()
+    {
+        resumeImage.setVisible(false);
+        pauseImage.setVisible(true);
+
+        if (myMusicPlayer.getCurrentMusic().getId() == 5)
+        {
+            clip = new AudioClip(getClass().getResource("/com/example/myrooms/Sounds/CelloAndPiano.mp3").toString());
+            clip.play();
+        }
+        else if (myMusicPlayer.getCurrentMusic().getId() == 4)
+        {
+            clip = new AudioClip(getClass().getResource("/com/example/myrooms/Sounds/GodfatherTheme.mp3").toString());
+            clip.play();
+        }
+        else if (myMusicPlayer.getCurrentMusic().getId() == 0)
+        {
+            clip = new AudioClip(getClass().getResource("/com/example/myrooms/Sounds/LibrarySound.mp3").toString());
+            clip.play();
+        }
+        else if (myMusicPlayer.getCurrentMusic().getId() == 6)
+        {
+            clip = new AudioClip(getClass().getResource("/com/example/myrooms/Sounds/LoftMusic.mp3").toString());
+            clip.play();
+        }
+        else if (myMusicPlayer.getCurrentMusic().getId() == 1)
+        {
+            clip = new AudioClip(getClass().getResource("/com/example/myrooms/Sounds/NatureSound.mp3").toString());
+            clip.play();
+        }
+        else if (myMusicPlayer.getCurrentMusic().getId() == 2)
+        {
+            clip = new AudioClip(getClass().getResource("/com/example/myrooms/Sounds/RainSound.mp3").toString());
+            clip.play();
+        }
+        else if (myMusicPlayer.getCurrentMusic().getId() == 3)
+        {
+            clip = new AudioClip(getClass().getResource("/com/example/myrooms/Sounds/RelaxingMusic.mp3").toString());
+            clip.play();
+        }
+        SongNameArea.setText(myMusicPlayer.getCurrentMusic().getName());
+
+    }
+
+    public void firstSoundButtonClicked()
+    {
+        myMusicPlayer.setCurrentMusic("Library Sound");
+        SongNameArea.setText("Library Sound");
+    }
+    public void secondSoundClicked()
+    {
+        myMusicPlayer.setCurrentMusic("Nature Sound");
+        SongNameArea.setText("Nature Sound");
+    }
+    public void thirdSoundClicked()
+    {
+        myMusicPlayer.setCurrentMusic("Rain Sound");
+        SongNameArea.setText("Rain Sound");
+    }
+    public void fourthSoundClicked()
+    {
+        myMusicPlayer.setCurrentMusic("Relaxing Sound");
+        SongNameArea.setText("Relaxing Sound");
+    }
+    public void fifthSoundClicked()
+    {
+        myMusicPlayer.setCurrentMusic("Godfather Theme");
+        SongNameArea.setText("Godfather Theme");
+    }
+    public void sixthSoundClicked()
+    {
+        myMusicPlayer.setCurrentMusic("Cello And Piano");
+        SongNameArea.setText("Cello And Piano");
+    }
+    public void seventhSoundClicked()
+    {
+        myMusicPlayer.setCurrentMusic("Loft Music");
+        SongNameArea.setText("Loft Music");
+
+    }
+
+    public void pauseButtonClicked()
+    {
+        if(clip==null)
+        {
+            pauseImage.setVisible(false);
+            resumeImage.setVisible(true);
+        }
+        else
+        {
+            clip.stop();
+            SongNameArea.setText(" ");
+            pauseImage.setVisible(false);
+            resumeImage.setVisible(true);
+
+        }
+
+    }
+    public void skipButtonClicked()
+    {
+        int number = myMusicPlayer.getListOfNotLockedMusics().size();
+        if(myMusicPlayer.getListOfNotLockedMusics().get(number-1).getName().equals(myMusicPlayer.getCurrentMusic().getName()))
+        {
+            myMusicPlayer.setCurrentMusic("Library Sound");
+        }
+        else
+        {
+            int index = myMusicPlayer.getCurrentMusic().getId() + 1;
+            Music temp = myMusicPlayer.getListOfNotLockedMusics().get(index);
+            myMusicPlayer.setCurrentMusic(temp);
+        }
+        SongNameArea.setText(myMusicPlayer.getCurrentMusic().getName());
+
+    }
+
+    public void previousButtonClicked()
+    {
+
+        int number = myMusicPlayer.getListOfNotLockedMusics().size();
+        if("Library Sound".equals(myMusicPlayer.getCurrentMusic().getName()))
+        {
+            myMusicPlayer.setCurrentMusic(myMusicPlayer.getListOfNotLockedMusics().get(number-1));
+        }
+        else
+        {
+            int index = myMusicPlayer.getCurrentMusic().getId() - 1;
+            Music temp = myMusicPlayer.getListOfNotLockedMusics().get(index);
+            myMusicPlayer.setCurrentMusic(temp);
+        }
+        SongNameArea.setText(myMusicPlayer.getCurrentMusic().getName());
+
     }
     public void showAlert(){
         if(alarm.notify){
@@ -613,8 +781,8 @@ public class MainController implements Initializable {
 
     }
     public void playAudio(){
-        AudioClip clip = new AudioClip(getClass().getResource("/com/example/myrooms/Sounds/alarmsound.wav").toString());
-        clip.play();
+        AudioClip aclip = new AudioClip(getClass().getResource("/com/example/myrooms/Sounds/alarmsound.wav").toString());
+        aclip.play();
 
 
     }
@@ -927,16 +1095,30 @@ public class MainController implements Initializable {
         else if(e.getSource() == GFImage && GodfatherThemeCB.isDisable() && totalCoin >= 20 ){
             GodfatherThemeCB.setDisable(false);
             shop.setUnlock("GodFather",true);
+            Music temp = myMusicPlayer.getListOfAllMusics().get(4);
+            myMusicPlayer.unlockMusic(temp);
+            fifthSoundsButton.setVisible(true);
+            godFatherText.setVisible(false);
+
+
             totalCoin -= 20;
         }
         else if(e.getSource() == LoftImage && LoftMusicCB.isDisable() && totalCoin >= 5 ){
             LoftMusicCB.setDisable(false);
             shop.setUnlock("Loft",true);
+            Music temp = myMusicPlayer.getListOfAllMusics().get(6);
+            myMusicPlayer.unlockMusic(temp);
+            seventhSoundsButton.setVisible(true);
+            loftMusicText.setVisible(false);
             totalCoin -= 5;
         }
         else if(e.getSource() == CelloImage && CelloAndPianoCB.isDisable() && totalCoin >= 10 ){
             CelloAndPianoCB.setDisable(false);
             shop.setUnlock("Cello",true);
+            Music temp = myMusicPlayer.getListOfAllMusics().get(5);
+            myMusicPlayer.unlockMusic(temp);
+            sixthSoundsButton.setVisible(true);
+            celloAndPianoText.setVisible(false);
             totalCoin -= 10;
         }
         setCoin(totalCoin);
@@ -1259,6 +1441,7 @@ public class MainController implements Initializable {
             calendars = user.room.calendars;
             shop = user.room.shop;
             settings = user.room.settings;
+            myMusicPlayer = user.room.musicPlayer;
 
         } catch (Exception e) {
             e.printStackTrace();
