@@ -5,6 +5,6 @@ import java.io.Serializable;
 public class Settings implements Serializable {
 
     boolean notify = true;
-    int volume = 50;
-    int brightness = 50;
+    double volume = 50;
+    double brightness = 50;
 }

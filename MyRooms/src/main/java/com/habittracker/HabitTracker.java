@@ -192,7 +192,7 @@ public class HabitTracker {
             pstmt.executeUpdate();
             //active dates AND DONE DATES are set up in the constructor
 
-            Habit habit = new Habit(id,habitTypeNo,name,description,type,progressType,frequence,today,0,connection);
+            Habit habit = new Habit(id,habitNo,name,description,type,progressType,frequence,today,0,connection);
             habits.add(habit);
         }
         catch (Exception e)

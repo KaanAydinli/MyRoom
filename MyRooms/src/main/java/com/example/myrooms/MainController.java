@@ -584,13 +584,13 @@ public class MainController implements Initializable {
     //TODO
     public void InitializeCalendarNotebook()
     {
-        calendarController = new CalendarController(allPane,user.ID);
-        notebook = new Notebook(allPane, user.ID, calendarController.getToday());
+        calendarController = new CalendarController(allPane,user);
+        notebook = new Notebook(allPane, user, calendarController.getCalendarFunctionality());
     }
 
     public void openNotebook(ActionEvent actionEvent)
     {
-        System.out.println("dsagydhujısaopğ");
+
         notebook.notebookOpen();
 
     }
@@ -1463,6 +1463,7 @@ public class MainController implements Initializable {
         printPostIts();
         loadShop();
         settings.notify = alarm.notify;
+        System.out.println(user.ID);
         
         if(settings.notify){
             settingsNotificationsButton.setText("Off");
@@ -1523,6 +1524,7 @@ public class MainController implements Initializable {
 
                 ColorAdjust setBrightness = new ColorAdjust();
                 setBrightness.setBrightness(settingsBrightnessSlider.getValue());
+                settings.brightness = settingsBrightnessSlider .getValue();
                 allPane.setEffect(setBrightness);
             }
         });
@@ -1532,6 +1534,7 @@ public class MainController implements Initializable {
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 volume = settingsVolumeSlider.getValue();
                 mediaPlayer.setVolume(volume / 100);
+                settings.volume = volume / 100;
             }
         });
 
@@ -1547,7 +1550,7 @@ public class MainController implements Initializable {
         lightingEffect.setLight(light);
         lightingEffect.setDiffuseConstant(10);
 
-        //allPane.setEffect(lightingEffect);
+        allPane.setEffect(lightingEffect);
 
         lightingTimeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(light.colorProperty(), Color.BEIGE)),

@@ -1,7 +1,9 @@
 package com.example.myrooms;
 
 import com.calendarfunctionality.*;
+import com.habittracker.Habit;
 import com.habittracker.HabitProgressType;
+import com.habittracker.HabitType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 
 public class CalendarController extends Pane
 {
+    User user;
     CalendarFunctionality calendarFunctionality;
 
     private Node innerPane;
@@ -28,42 +31,43 @@ public class CalendarController extends Pane
 
     @FXML
     private Node calendarView,
-                 taskView;
+            taskView;
 
     @FXML
     private TextField calendarNameTF,
-                      calendarDescriptionTF,
-                      taskNameTF,
-                      taskStartHTF,
-                      taskEndHTF,
-                      taskStartMTF,
-                      taskEndMTF;
+            calendarDescriptionTF,
+            taskNameTF,
+            taskStartHTF,
+            taskEndHTF,
+            taskStartMTF,
+            taskEndMTF;
 
     @FXML
     private CheckBox taskDoneCB,
-                    taskAllDayCB,
-                    taskDailyTaskCB;
+            taskAllDayCB;
     @FXML
     private DatePicker taskDatePicker,
-                       currentDatePicker;
+            currentDatePicker;
 
     @FXML
     private ComboBox<String> taskNotificationComboBox;
 
     @FXML
     private ComboBox<String> reoccurrenceComboBox,
-                             calendarComboBox,
-                            viewChoiceComboBox;
+            calendarComboBox,
+            viewChoiceComboBox;
 
     @FXML
-    private Button calendarDeleteB;
+    private Button calendarDeleteB,
+            taskDeleteB,
+            addTaskB;
 
     @FXML
     private ScrollPane calendarScrollPane,
-                        dailyViewScrollPane;
+            dailyViewScrollPane;
 
     private LocalDate currentDate,
-                        dailyViewDate;
+            dailyViewDate;
 
     private int mode; //0 --> weekly 1--> daily
 
@@ -74,15 +78,13 @@ public class CalendarController extends Pane
 
     private ArrayList<CalendarButton> calendarButtons = new ArrayList<>();
 
-    private int userID;
-
-    public CalendarController(Pane Window, int userID)
+    public CalendarController(Pane Window, User user)
     {
         this.setPrefSize(900,580);
         this.setLayoutX(100);
         this.setLayoutY(15);
-        this.userID = userID;
-        calendarFunctionality = new CalendarFunctionality(this.userID);
+        this.user = user;
+        calendarFunctionality = new CalendarFunctionality(user.ID);
         this.setVisible(false);
         Window.getChildren().add(this);
         loadFXML();
@@ -126,15 +128,12 @@ public class CalendarController extends Pane
     {
         this.setVisible(false);
     }
-
     public class DailyView extends Pane
     {
-
         Label dateLabel = new Label();
         VBox allDayTasks = new VBox();
         LocalDate date;
         Day day;
-
         public DailyView(Day day)
         {
             this.day = day;
@@ -142,6 +141,7 @@ public class CalendarController extends Pane
             setGeneralView();
             this.date = day.getDate();
         }
+
         public void changeDay(LocalDate date)
         {
             this.day = calendarFunctionality.getSpecificDay(date);
@@ -153,7 +153,7 @@ public class CalendarController extends Pane
         public void setGeneralView()
         {
             int y,
-                hour;
+                    hour;
             Label hourLabel;
             Separator separator;
             this.getChildren().clear();
@@ -192,12 +192,12 @@ public class CalendarController extends Pane
         public void addTasks()
         {
             int size,
-                y,
-                startH,
-                startM,
+                    y,
+                    startH,
+                    startM,
                     endH,
                     endM,
-                buttonSize;
+                    buttonSize;
             Task task;
             Button button;
             ArrayList<Task> tasks = day.getTasks();
@@ -264,8 +264,8 @@ public class CalendarController extends Pane
         public void setUpMonthlyView()
         {
             int row,
-                column,
-                size;
+                    column,
+                    size;
             DailyMonthFrame currentFrame;
             row = 0;
             column = 0;
@@ -357,19 +357,15 @@ public class CalendarController extends Pane
     public class CalendarButton extends GridPane
     {
         Calendar calendar;
-        CheckBox  checkBox;
         Button calendarButton;
 
         public CalendarButton(Calendar calendar)
         {
             this.calendar = calendar;
-            checkBox = new CheckBox();
             calendarButton = new Button(calendar.getName());
-            calendarButton.setMinWidth(150);
+            calendarButton.setMinWidth(170);
             calendarButton.setOnAction(this::calendarClicked);
-            checkBox.setStyle("-fx-font-size: 18px;");
             this.add(calendarButton,0,0);
-            this.add(checkBox,1,0);
 
         }
         public void calendarClicked(ActionEvent event)
@@ -382,6 +378,27 @@ public class CalendarController extends Pane
         }
 
     }
+
+    //TODO change
+    public void goToToday(ActionEvent event)
+    {
+        viewChoiceComboBox.setValue("Day");
+        this.mode = 1;
+        dailyViewDate = currentDate;
+        dailyView.changeDay(dailyViewDate);
+        setUpDailyView();
+    }
+
+    public void goToDay(LocalDate date)
+    {
+        viewChoiceComboBox.setValue("Day");
+        this.mode = 1;
+        dailyViewDate = date;
+        dailyView.changeDay(dailyViewDate);
+        setUpDailyView();
+
+    }
+
     public void taskClicked(ActionEvent event)
     {
         String notificationM;
@@ -392,6 +409,7 @@ public class CalendarController extends Pane
         source = (Button) event.getSource();
         task = (Task) source.getUserData();
 
+        taskNotificationComboBox.setVisible(false);
         taskViewOpen(event);
         taskNameTF.setText(task.getName());
         taskDatePicker.setValue(task.getDate());
@@ -401,6 +419,21 @@ public class CalendarController extends Pane
         taskEndMTF.setText(String.valueOf(task.getEndM()));
         calendar = calendarFunctionality.getTaskCalendar(task);
         calendarComboBox.setValue(calendar.toString());
+
+
+        calendarComboBox.setDisable(true);
+        taskNotificationComboBox.setDisable(true);
+        //task
+        taskDeleteB.setUserData(task);
+        taskDeleteB.setVisible(true);
+
+        taskDatePicker.setDisable(true);
+
+        addTaskB.setText("Change");
+        addTaskB.setOnAction(CalendarController.this::changeTask);
+        addTaskB.setUserData(task);
+
+
 
         notificationMin = task.getNotificationM();
         if(notificationMin == 42)
@@ -416,7 +449,71 @@ public class CalendarController extends Pane
 
         taskDoneCB.setSelected(task.getIsDone());
         taskAllDayCB.setSelected(task.isAllDay());
-        taskDailyTaskCB.setSelected(task.getDailyTask());
+    }
+    public void changeTask(ActionEvent event)
+    {
+        Button source = (Button) event.getSource();
+        Task task = (Task)  source.getUserData();
+
+        String name,
+                description,
+                calendarCB,
+                notificationStr;
+        int startH,
+                startM,
+                endH,
+                endM,
+                notificationM,
+                calendarNo;
+        boolean allDay,
+                isDone;
+        LocalDate date;
+
+        alert.setTitle("Error in Changing Task");
+        try{
+            name = taskNameTF.getText();
+            startH = Integer.parseInt(taskStartHTF.getText());
+            startM = Integer.parseInt(taskStartMTF.getText());
+            endH = Integer.parseInt(taskEndHTF.getText());
+            endM = Integer.parseInt(taskEndMTF.getText());
+            notificationStr = taskNotificationComboBox.getValue();
+            date = taskDatePicker.getValue();
+            allDay = taskAllDayCB.isSelected();
+            isDone = taskDoneCB.isSelected();
+            calendarCB = calendarComboBox.getValue();
+
+        } catch (Exception x) {
+
+            alert.setContentText("Error in changing task");
+            alert.showAndWait();
+            return;
+        }
+
+        //check whether start date end date;
+        if((name.isEmpty()) || (date == null) ||(calendarCB.isEmpty()))
+        {
+            alert.setContentText("Please enter everything");
+            alert.showAndWait();
+            return;
+        }
+
+        if(notificationStr.equals("None"))
+        {
+            //meaning of life
+            notificationM = 42;
+        }
+        else
+        {
+            notificationM = Integer.parseInt(notificationStr.substring(0,2));
+        }
+
+
+        calendarNo = Integer.parseInt(calendarCB.substring(0,1));
+        Calendar calendar = calendarFunctionality.getSpecificCalendar(calendarNo);
+        calendarFunctionality.changeTask(name,date,calendar,startH, startM,endH, endM,allDay,isDone, notificationM,task);
+        taskViewClose();
+        setUpView();
+
     }
     public void setUpView()
     {
@@ -451,8 +548,11 @@ public class CalendarController extends Pane
     public void taskViewAddOpen(MouseEvent event)
     {
         taskViewClose();
+        taskDeleteB.setVisible(false);
+
         taskView.toFront();
         taskView.setVisible(true);
+        taskViewOpen(null);
         event.consume();
     }
     public void changeViewCB()
@@ -521,6 +621,14 @@ public class CalendarController extends Pane
     }
     public void taskViewOpen(ActionEvent event)
     {
+        taskNotificationComboBox.setDisable(false);
+        taskNotificationComboBox.setVisible(false);
+        calendarComboBox.setDisable(false);
+        taskDeleteB.setVisible(false);
+        taskDatePicker.setDisable(false);
+        addTaskB.setText("Add");
+        addTaskB.setOnAction(this::addTaskClicked);
+        taskView.toFront();
         taskView.setVisible(true);
         System.out.println("taskViewOpen");
     }
@@ -531,13 +639,12 @@ public class CalendarController extends Pane
                 calendarCB,
                 notificationStr;
         int startH,
-            startM,
-            endH,
-            endM,
-            notificationM,
-            calendarNo;
-        boolean done,
-                allDay,
+                startM,
+                endH,
+                endM,
+                notificationM,
+                calendarNo;
+        boolean allDay,
                 dailyTask;
         LocalDate date;
 
@@ -549,11 +656,9 @@ public class CalendarController extends Pane
             startM = Integer.parseInt(taskStartMTF.getText());
             endH = Integer.parseInt(taskEndHTF.getText());
             endM = Integer.parseInt(taskEndMTF.getText());
-            notificationStr = taskNotificationComboBox.getValue();
+            notificationStr = "None";
             date = taskDatePicker.getValue();
-            done = taskDoneCB.isSelected();
             allDay = taskAllDayCB.isSelected();
-            dailyTask = taskDailyTaskCB.isSelected();
             calendarCB = calendarComboBox.getValue();
 
         } catch (Exception x) {
@@ -570,7 +675,7 @@ public class CalendarController extends Pane
             alert.showAndWait();
             return;
         }
-
+        notificationStr = "None";
         if(notificationStr.equals("None"))
         {
             //meaning of life
@@ -584,10 +689,9 @@ public class CalendarController extends Pane
 
         calendarNo = Integer.parseInt(calendarCB.substring(0,1));
         Calendar calendar = calendarFunctionality.getSpecificCalendar(calendarNo);
-        calendarFunctionality.addTask(name,date,calendar,startH, startM,endH, endM, dailyTask, allDay, notificationM);
+        calendarFunctionality.addTask(name,date,calendar,startH, startM,endH, endM,allDay, notificationM);
         taskViewClose();
         setUpView();
-
     }
     public void setCalendarComboBox()
     {
@@ -605,7 +709,6 @@ public class CalendarController extends Pane
         viewChoiceComboBox.getItems().add("Day");
         viewChoiceComboBox.setValue("Month");
     }
-
     public void setNotificationComboBox()
     {
         taskNotificationComboBox.getItems().clear();
@@ -621,15 +724,17 @@ public class CalendarController extends Pane
         taskNameTF.clear();
         taskDoneCB.setSelected(false);
         taskAllDayCB.setSelected(false);
-        taskDailyTaskCB.setSelected(false);
+
         taskDatePicker.setValue(null);
         taskStartHTF.clear();
         taskEndHTF.clear();
         taskStartMTF.clear();
         taskEndMTF.clear();
-        taskNotificationComboBox.setValue(null);
+        taskNotificationComboBox.setValue("None");
         calendarComboBox.setValue(null);
     }
+
+
     public void setUpCalendarButtons()
     {
         int size;
@@ -670,15 +775,49 @@ public class CalendarController extends Pane
         // Access the internal calendar view
         DatePickerSkin datePickerSkin = new DatePickerSkin(datePicker);
         Region popupContent = (Region) datePickerSkin.getPopupContent();
-
         // Display only the calendar view in a layout
         datePickerCalendar.getChildren().add(popupContent);
+
+        popupContent.lookupAll(".cell").forEach(node -> {
+            if (node instanceof DateCell) {
+                DateCell dateCell = (DateCell) node;
+
+                // Add an event listener to each cell
+                dateCell.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                    LocalDate clickedDate = dateCell.getItem();
+                    goToDay(clickedDate);
+                });
+            }
+        });
+
+
     }
+
+    public void deleteTask(ActionEvent event)
+    {
+        Task task;
+        Button source;
+        source = (Button) event.getSource();
+        task = (Task) source.getUserData();
+
+        confirmation.setHeaderText("Are you sure you want to delete this task?");
+        confirmation.setContentText("This action cannot be undone.");
+
+        confirmation.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                calendarFunctionality.deleteTask(task);
+            }
+        });
+        taskViewClose();
+        setUpView();
+    }
+
     public void openCalendarView(ActionEvent event)
     {
         calendarDeleteB.setVisible(false);
         calendarView.setVisible(true);
     }
+
     public void addingCalendarClicked(ActionEvent event)
     {
         String name,
@@ -704,6 +843,7 @@ public class CalendarController extends Pane
         setUpCalendarScrollPane();
         setCalendarComboBox();
         setUpView();
+        setCalendarComboBox();
 
     }
 
@@ -723,7 +863,9 @@ public class CalendarController extends Pane
             }
         });
         exitCalendarView();
+        setUpView();
         setUpCalendarScrollPane();
+        setCalendarComboBox();
     }
     public void exitCalendarView()
     {
@@ -744,6 +886,8 @@ public class CalendarController extends Pane
         exitCalendarView();
         taskViewClose();
     }
-
-
+    public CalendarFunctionality getCalendarFunctionality()
+    {
+        return calendarFunctionality;
+    }
 }

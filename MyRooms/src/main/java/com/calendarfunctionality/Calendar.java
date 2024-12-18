@@ -108,7 +108,42 @@ public class Calendar
         }
     }
 
+    public void deleteTask(Task task)
+    {
+        int size,
+                currentNo;
+        String output;
+        Task currentTask;
+        Type listType = new TypeToken<ArrayList<Integer>>() {}.getType();
+        ArrayList<Integer> taskNos;
+        if(taskListJSON.isEmpty())
+        {
+            return;
+        }
+        else
+        {
+            taskNos = gson.fromJson(taskListJSON, listType);
+        }
 
+        tasks.remove(task);
+        taskNos.remove((Integer) task.getTaskNo());
+        output = gson.toJson(taskNos);
+
+        taskListJSON = output;
+        String sql = "UPDATE CalendarDb SET taskList = ? WHERE userId = ? and calendarNo = ?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1, output);
+            pstmt.setDouble(2, userId);
+            pstmt.setInt(3, calendarNo);
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Error in deleting task from calendar");
+        }
+
+    }
 
     public int getCalendarNo()
     {

@@ -123,13 +123,12 @@ public class CalendarFunctionality
 
 
         ArrayList<Task> tasks = new ArrayList<>();
-        String sql = "SELECT userId, taskNo, name, taskStartH, taskStartM, taskEndH, taskEndM, dailyTask, allDay,isDone,notificationTime, Date FROM taskDB WHERE userId = ?";
+        String sql = "SELECT userId, taskNo, name, taskStartH, taskStartM, taskEndH, taskEndM,allDay,isDone,notificationTime, Date FROM taskDB WHERE userId = ?";
 
 
 
         try (PreparedStatement pstmt  = connection.prepareStatement(sql))
         {
-
             pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next())
@@ -140,24 +139,24 @@ public class CalendarFunctionality
                 taskStartM = rs.getInt("taskStartM");
                 taskEndH = rs.getInt("taskEndH");
                 taskEndM = rs.getInt("taskEndM");
-                dailyTask = rs.getBoolean("dailyTask");
                 allDay = rs.getBoolean("allDay");
                 isDone = rs.getBoolean("isDone");
                 notificationTime = rs.getInt("notificationTime");
                 date = LocalDate.parse(rs.getString("Date"));
-                Task task = new Task(userId, taskNo,name, date, taskStartH, taskStartM,taskEndH,taskEndM, dailyTask,isDone, allDay,notificationTime);
+                Task task = new Task(userId, taskNo,name, date, taskStartH, taskStartM,taskEndH,taskEndM,allDay,isDone,notificationTime);
                 tasks.add(task);
             }
+
         }catch (SQLException e)
         {
             System.out.println(e.getMessage());
         }
         return tasks;
     }
-    public void addTask(String name,LocalDate date,Calendar calendar, int startH, int startM, int endH, int endM, boolean isDailyTask,boolean isAllDay, int notificationM)
+    public void addTask(String name,LocalDate date,Calendar calendar, int startH, int startM, int endH, int endM,boolean isAllDay, int notificationM)
     {
         int taskNo;
-        String query = "INSERT INTO taskDB(userId,taskNo,name,taskStartH,taskStartM,taskEndH,taskEndM,dailyTask,allDay,isDone,notificationTime,Date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO taskDB(userId,taskNo,name,taskStartH,taskStartM,taskEndH,taskEndM,allDay,isDone,notificationTime,Date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement pstmt = connection.prepareStatement(query))
         {
             taskNo = getMaxTaskNo()+ 1;
@@ -169,14 +168,13 @@ public class CalendarFunctionality
             pstmt.setInt(5,startM);
             pstmt.setInt(6,endH);
             pstmt.setInt(7,endM);
-            pstmt.setInt(8,isDailyTask? 1 : 0);
-            pstmt.setInt(9,isAllDay? 1 : 0);
+            pstmt.setInt(8,isAllDay? 1 : 0);
+            pstmt.setInt(9,0);
             pstmt.setInt(10,notificationM);
-            pstmt.setInt(11,0);
-            pstmt.setString(12,date.toString());
+            pstmt.setString(11,date.toString());
             pstmt.executeUpdate();
 
-            Task task = new Task(userId, taskNo,name, date, startH, startM,endH,endM, isDailyTask, isAllDay,false,notificationM);
+            Task task = new Task(userId, taskNo,name, date, startH, startM,endH,endM,isAllDay,false,notificationM);
             addTaskToDay(task);
             calendar.addTask(task);
         }
@@ -194,6 +192,20 @@ public class CalendarFunctionality
         // Print the matching Days
         if (!matchingDays.isEmpty()) {
             matchingDays.forEach(day -> day.addTasks(task));
+        } else {
+            System.out.println("No matching days found.");
+        }
+
+    }
+
+    public void  removeTaskFromDay(Task task)
+    {
+        List<Day> matchingDays = allDays.stream()
+                .filter(day -> day.getDate().equals(task.getDate()))
+                .toList();
+        // Print the matching Days
+        if (!matchingDays.isEmpty()) {
+            matchingDays.forEach(day -> day.removeTask(task));
         } else {
             System.out.println("No matching days found.");
         }
@@ -288,7 +300,6 @@ public class CalendarFunctionality
 
         try (PreparedStatement pstmt = connection.prepareStatement(query))
         {
-            System.out.println(getMaxCalendarNo());
             calendarNo = getMaxCalendarNo()+ 1;
             // Set the values for the query parameters
             pstmt.setInt(1, this.userId);
@@ -339,6 +350,24 @@ public class CalendarFunctionality
             System.out.println(e.getMessage());
         }
     }
+
+    public void deleteTask(Task task)
+    {
+        String deleteSQL = "DELETE FROM TaskDb WHERE userId = ? AND taskNo = ?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
+
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, task.getTaskNo() );
+            pstmt.executeUpdate();
+            Calendar calendar = getTaskCalendar(task);
+            calendar.deleteTask(task);
+            removeTaskFromDay(task);
+        } catch (SQLException e) {
+            System.out.println("Problem in deleting habit progress type");
+        }
+    }
+
     public void deleteCalendar(Calendar calendar)
     {
         String deleteSQL = "DELETE FROM CalendarDb WHERE userId = ? AND calendarNo = ?";
@@ -348,6 +377,14 @@ public class CalendarFunctionality
             pstmt.setInt(1, userId);
             pstmt.setInt(2, calendar.getCalendarNo() );
             pstmt.executeUpdate();
+            ArrayList<Task> tasks = calendar.getTasks();
+            int size = tasks.size();
+            for(int i = 0; i < size; i++)
+            {
+                Task task = tasks.get(i);
+                this.deleteTask(task);
+                i++;
+            }
             calendars.remove(calendar);
 
         } catch (SQLException e) {
@@ -365,17 +402,35 @@ public class CalendarFunctionality
             return 0;
         }
         max = calendars.get(0).getCalendarNo();
-        for(int i = 0; i < size; i++)
-        {
-            if(max < calendars.get(i).getCalendarNo())
-            {
-                max = calendars.get(i).getCalendarNo();
-            }
-        }
         return max;
     }
 
+    public void changeTask(String name,LocalDate date , Calendar calendar, int startH, int startM, int endH, int endM,boolean allDay,boolean isDone, int notificationM,Task task)
+    {
+        int no;
+        no = task.getTaskNo();
 
+        String updateSQL = "UPDATE taskDB SET name = ?, taskStartH = ?, taskStartM = ?, taskEndH = ?, taskEndM = ?, allDay = ?, isDone = ?, notificationTime = ?, Date = ? WHERE userId = ? AND taskNo = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(updateSQL)) {
+            pstmt.setInt(10, userId);
+            pstmt.setInt(11, no);
+
+            pstmt.setString(1, name);
+            pstmt.setInt(2, startH);
+            pstmt.setInt(3, startM );
+            pstmt.setInt(4, endH);
+            pstmt.setInt(5,endM);
+            pstmt.setInt(6,allDay ? 1 : 0);
+            pstmt.setInt(7,isDone ? 1 : 0);
+            pstmt.setInt(8,notificationM);
+            pstmt.setString(9,date.toString());
+            pstmt.executeUpdate();
+            task.changeTask(name, date, startH, startM, endH, endM, allDay, isDone, notificationM);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error changing task" + e.getMessage());;
+        }
+    }
 
     public Calendar getSpecificCalendar(int calendarNo)
     {
@@ -391,10 +446,6 @@ public class CalendarFunctionality
             }
         }
         return null;
-    }
-    public void addTask()
-    {
-
     }
 
     public ArrayList<Calendar> getCalendars()

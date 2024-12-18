@@ -14,15 +14,14 @@ public class Task
                 endH,
                 endM,
                 notificationM;
-    boolean dailyTask,
-            allDay,
+    boolean allDay,
             isDone;
 
 
     String name;
     LocalDate date;
 
-    public Task(int id, int taskNo,String name, LocalDate date, int startH, int startM, int endH, int endM, boolean isDailyTask, boolean isAllDay,boolean isDone, int notificationM)
+    public Task(int id, int taskNo,String name, LocalDate date, int startH, int startM, int endH, int endM, boolean isAllDay,boolean isDone, int notificationM)
     {
         this.id = id;
         this.taskNo = taskNo;
@@ -32,14 +31,22 @@ public class Task
         this.startM = startM;
         this.endH = endH;
         this.endM = endM;
-        this.dailyTask = isDailyTask;
+
         this.allDay = isAllDay;
         this.notificationM = notificationM;
     }
 
-    public boolean getDailyTask()
+    public void changeTask(String name,LocalDate date ,int startH, int startM, int endH, int endM,boolean allDay,boolean isDone, int notificationM)
     {
-        return dailyTask;
+        this.name = name;
+        this.date = date;
+        this.startH = startH;
+        this.startM = startM;
+        this.endH = endH;
+        this.endM = endM;
+        this.allDay = allDay;
+        this.isDone = isDone;
+        this.notificationM = notificationM;
     }
 
     public boolean getIsDone()

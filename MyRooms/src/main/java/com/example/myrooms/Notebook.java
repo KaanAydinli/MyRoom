@@ -1,4 +1,5 @@
 package com.example.myrooms;
+import com.calendarfunctionality.Calendar;
 import com.calendarfunctionality.CalendarFunctionality;
 import com.calendarfunctionality.Day;
 import com.calendarfunctionality.Task;
@@ -28,31 +29,31 @@ public class Notebook extends Pane
 
     @FXML
     private Node progressTypeView,
-                 addFrequencyTypeView,
-                 habitTypeView,
-                 habitView,
-                 habitDetailedView,
-                  habitInfoView,
-                dailyPlannerPane,
-                activeHabitsPane;
+            addFrequencyTypeView,
+            habitTypeView,
+            habitView,
+            habitDetailedView,
+            habitInfoView,
+            dailyPlannerPane,
+            activeHabitsPane;
     @FXML
     private TextField progressTypeNameTF,
-                      progressTF,
-                      progressCoefTF,
-                      frequenceNameTF,
-                      habitTypeNameTF,
-                      habitTypeDescTF,
-                      habitNameTF,
-                      habitDescTF,
-                      habitNameTFDetailed,
-                      habitDescTFDetailed;
+            progressTF,
+            progressCoefTF,
+            frequenceNameTF,
+            habitTypeNameTF,
+            habitTypeDescTF,
+            habitNameTF,
+            habitDescTF,
+            habitNameTFDetailed,
+            habitDescTFDetailed;
 
 
     @FXML
     private CheckBox weekCB1,weekCB2,weekCB3,weekCB4,weekCB5,weekCB6,weekCB7,
-                     monthCB1,monthCB2,monthCB3,monthCB4,monthCB5,monthCB6,monthCB7,
-                     monthCB8,monthCB9,monthCB10,monthCB11,monthCB12,
-                     cbEveryDay, cbEveryMonth;
+            monthCB1,monthCB2,monthCB3,monthCB4,monthCB5,monthCB6,monthCB7,
+            monthCB8,monthCB9,monthCB10,monthCB11,monthCB12,
+            cbEveryDay, cbEveryMonth;
 
 
 
@@ -64,48 +65,75 @@ public class Notebook extends Pane
 
     @FXML
     private ScrollPane progressTypeScrollPane,
-                 frequenceTypeScrollPane,
-                 habitTypeScrollPane,
-                 habitsSmallScrollPane,
-                 habitInfoScrollPane,
-                 allHabitsScrollPane,
-                activeHabitsScrollPane,
-                dailyViewScrollPane,
-                dailyTaskScrollPane;
+            frequenceTypeScrollPane,
+            habitTypeScrollPane,
+            habitsSmallScrollPane,
+            habitInfoScrollPane,
+            allHabitsScrollPane,
+            activeHabitsScrollPane,
+            dailyViewScrollPane,
+            dailyTaskScrollPane;
 
 
     @FXML
     private TitledPane progressTypeTitledPane,
-                       frequenceTypeTitledPane;
+            frequenceTypeTitledPane;
 
     @FXML
     private ProgressIndicator habitDetailedProgressIndicator;
 
     @FXML
     private Button progressTypeDeleteB,
-                    progressTypeAddB,
-                    frequenceTypeDeleteB,
-                    frequenceTypeAddB,
-                    habitTypeAddB,
-                    habitTypeDeleteB,
-                    resetProgressButton,
-                    habitDeleteB,
-                    habitChangeB,
-                    habitDetailedInfoB,
-                    dailyHabitsReplaceB;
+            progressTypeAddB,
+            frequenceTypeDeleteB,
+            frequenceTypeAddB,
+            habitTypeAddB,
+            habitTypeDeleteB,
+            resetProgressButton,
+            habitDeleteB,
+            habitChangeB,
+            habitDetailedInfoB,
+            dailyHabitsReplaceB;
 
     @FXML
     private Label habitInfoLabel;
 
     @FXML
     private ChoiceBox<String> defaultProgressBox,
-                      defaultOccurrenceBox,
-                      hHabitTypeChooser,
-                      hProgressTypeChooser,
-                      hFrequenceChooser,
-                        hProgressTypeChooserDetailed,
-                     hHabitTypeChooserDetailed,
-                    hFrequenceChooserDetailed;
+            defaultOccurrenceBox,
+            hHabitTypeChooser,
+            hProgressTypeChooser,
+            hFrequenceChooser,
+            hProgressTypeChooserDetailed,
+            hHabitTypeChooserDetailed,
+            hFrequenceChooserDetailed;
+
+    //task stuff
+    @FXML
+    private ComboBox<String>    calendarComboBox,
+            taskNotificationComboBox;
+    @FXML
+    private CheckBox taskDoneCB,
+            taskAllDayCB;
+    @FXML
+    private DatePicker taskDatePicker,
+            currentDatePicker;
+
+    @FXML
+    private Node taskView;
+
+    @FXML
+    private TextField
+            taskNameTF,
+            taskStartHTF,
+            taskEndHTF,
+            taskStartMTF,
+            taskEndMTF;
+    @FXML
+    private Button
+            taskDeleteB,
+            addTaskB;
+
 
     ArrayList<HabitButton> habitButtons = new ArrayList<>();
     ArrayList<HabitButton> habitButtonsSecond = new ArrayList<>();
@@ -116,50 +144,46 @@ public class Notebook extends Pane
 
 
     private Node innerPane; //
-
+    User user;
     HabitTracker habitTracker;
 
     Day today;
+    CalendarFunctionality calendarFunctionality;
 
     ArrayList<Task> todayTasks;
 
     DailyPlanner dailyPlanner;
 
-    int userID;
-
-    public Notebook(Pane Window, int userID, Day today)
+    public Notebook(Pane Window, User user, CalendarFunctionality calendarFunctionality)
     {
         this.setPrefSize(900,580);
         this.setStyle("-fx-background-color: beige;");
 
         this.setLayoutX(100);
         this.setLayoutY(15);
-        this.userID = userID;
+        this.user = user;
 
-        habitTracker = new HabitTracker(userID);
+        habitTracker = new HabitTracker(user.ID);
         InitializeHabitButtons(habitButtons);
         InitializeHabitButtons(habitButtonsSecond);
         Window.getChildren().add(this);
         this.setVisible(false);
         loadFXML("notebook_dailyTask");
         this.setVisible(false);
-        this.today = today;
+        this.today = calendarFunctionality.getSpecificDay(LocalDate.now());
         dailyPlanner = new DailyPlanner();
+        this.calendarFunctionality = calendarFunctionality;
     }
-
-
     public void notebookOpen()
-     {
+    {
         this.setVisible(true);
         goToDailyTaskView(new ActionEvent());
         this.toFront();
     }
-
     public void notebookClose()
     {
         this.setVisible(false);
     }
-
     //loading the wanted
     private void loadFXML(String name)
     {
@@ -175,7 +199,6 @@ public class Notebook extends Pane
             throw new RuntimeException("Failed to load FXML", e);
         }
     }
-
     public void goToHabitTrackerView(ActionEvent e)
     {
         this.getChildren().remove(innerPane);
@@ -201,23 +224,263 @@ public class Notebook extends Pane
         habitsSmallScrollPane.setFitToWidth(true);
 
     }
-
-
     public void goToDailyTaskView(ActionEvent e)
     {
         this.getChildren().remove(innerPane);
         loadFXML("notebook_dailyTask");
         dailyPlanner.setDailyViewView();
+        dailyPlanner.setGeneralView();
         addTasksToPane();
     }
-
-
     public void goToDailyHabitsView(ActionEvent e)
     {
         this.getChildren().remove(innerPane);
         goToDailyTaskView(e);
+    }
+    //Task Actions
+    public void taskClicked(ActionEvent event)
+    {
+        String notificationM;
+        int notificationMin;
+        Button source;
+        Task task;
+        Calendar calendar;
+        source = (Button) event.getSource();
+        task = (Task) source.getUserData();
+
+        taskViewOpen(event);
+        taskNameTF.setText(task.getName());
+        taskDatePicker.setValue(task.getDate());
+        taskStartHTF.setText(String.valueOf(task.getStartH()));
+        taskStartMTF.setText(String.valueOf(task.getStartM()));
+        taskEndHTF.setText(String.valueOf(task.getEndH()));
+        taskEndMTF.setText(String.valueOf(task.getEndM()));
+        calendar = calendarFunctionality.getTaskCalendar(task);
+        calendarComboBox.setValue(calendar.toString());
+
+        calendarComboBox.setDisable(true);
+        taskNotificationComboBox.setDisable(true);
+        //task
+        taskDeleteB.setUserData(task);
+        taskDeleteB.setVisible(true);
+
+        taskDatePicker.setValue(this.today.getDate());
+        taskDatePicker.setDisable(true);
+
+        addTaskB.setText("Change");
+        addTaskB.setOnAction(Notebook.this::changeTask);
+        addTaskB.setUserData(task);
+
+        notificationMin = task.getNotificationM();
+        if(notificationMin == 42)
+        {
+            notificationM = "None";
+        }
+        else
+        {
+            notificationM = String.format("%d minutes bfr",task.getNotificationM());
+        }
+
+        taskNotificationComboBox.setValue(notificationM);
+
+        taskDoneCB.setSelected(task.getIsDone());
+        taskAllDayCB.setSelected(task.isAllDay());
+    }
+    public void changeTask(ActionEvent event)
+    {
+        Button source = (Button) event.getSource();
+        Task task = (Task)  source.getUserData();
+
+        String name,
+                description,
+                calendarCB,
+                notificationStr;
+        int startH,
+                startM,
+                endH,
+                endM,
+                notificationM,
+                calendarNo;
+        boolean allDay,
+                isDone;
+        LocalDate date;
+
+        alert.setTitle("Error in Changing Task");
+        try{
+            name = taskNameTF.getText();
+            startH = Integer.parseInt(taskStartHTF.getText());
+            startM = Integer.parseInt(taskStartMTF.getText());
+            endH = Integer.parseInt(taskEndHTF.getText());
+            endM = Integer.parseInt(taskEndMTF.getText());
+            notificationStr = taskNotificationComboBox.getValue();
+            date = taskDatePicker.getValue();
+            allDay = taskAllDayCB.isSelected();
+            isDone = taskDoneCB.isSelected();
+            calendarCB = calendarComboBox.getValue();
+
+        } catch (Exception x) {
+
+            alert.setContentText("Error in changing task");
+            alert.showAndWait();
+            return;
+        }
+
+        //check whether start date end date;
+        if((name.isEmpty()) || (date == null) ||(calendarCB.isEmpty()))
+        {
+            alert.setContentText("Please enter everything");
+            alert.showAndWait();
+            return;
+        }
+
+        if(notificationStr.equals("None"))
+        {
+            //meaning of life
+            notificationM = 42;
+        }
+        else
+        {
+            notificationM = Integer.parseInt(notificationStr.substring(0,2));
+        }
 
 
+        calendarNo = Integer.parseInt(calendarCB.substring(0,1));
+        Calendar calendar = calendarFunctionality.getSpecificCalendar(calendarNo);
+
+        calendarFunctionality.changeTask(name,date,calendar,startH, startM,endH, endM,allDay,isDone, notificationM,task);
+        taskViewClose();
+        addTasksToPane();
+        dailyPlanner.setGeneralView();
+        dailyPlanner.setDailyViewView();
+    }
+    public void taskViewOpen(ActionEvent event)
+    {
+        taskNotificationComboBox.setDisable(false);
+        calendarComboBox.setDisable(false);
+        taskDeleteB.setVisible(false);
+        taskDatePicker.setDisable(false);
+        addTaskB.setText("Add");
+        addTaskB.setOnAction(this::addTaskClicked);
+        taskView.toFront();
+        taskView.setVisible(true);
+        System.out.println("taskViewOpen");
+    }
+    public void taskViewClose()
+    {
+        taskView.setVisible(false);
+        taskNameTF.clear();
+        taskDoneCB.setSelected(false);
+        taskAllDayCB.setSelected(false);
+
+        taskDatePicker.setValue(null);
+        taskStartHTF.clear();
+        taskEndHTF.clear();
+        taskStartMTF.clear();
+        taskEndMTF.clear();
+        taskNotificationComboBox.setValue(null);
+        calendarComboBox.setValue(null);
+    }
+    public void addTaskClicked(ActionEvent event)
+    {
+        String name,
+                description,
+                calendarCB,
+                notificationStr;
+        int startH,
+                startM,
+                endH,
+                endM,
+                notificationM,
+                calendarNo;
+        boolean allDay,
+                dailyTask;
+        LocalDate date;
+
+
+        alert.setTitle("Error in adding task");
+        try{
+            name = taskNameTF.getText();
+            startH = Integer.parseInt(taskStartHTF.getText());
+            startM = Integer.parseInt(taskStartMTF.getText());
+            endH = Integer.parseInt(taskEndHTF.getText());
+            endM = Integer.parseInt(taskEndMTF.getText());
+            notificationStr = taskNotificationComboBox.getValue();
+            date = taskDatePicker.getValue();
+            allDay = taskAllDayCB.isSelected();
+            calendarCB = calendarComboBox.getValue();
+
+        } catch (Exception x) {
+
+            alert.setContentText("Error in adding task");
+            alert.showAndWait();
+            return;
+        }
+
+        //check whether start date end date;
+        if((name.isEmpty()) || (date == null) ||(calendarCB.isEmpty()))
+        {
+            alert.setContentText("Please enter everything");
+            alert.showAndWait();
+            return;
+        }
+
+        if(notificationStr.equals("None"))
+        {
+            //meaning of life
+            notificationM = 42;
+        }
+        else
+        {
+            notificationM = Integer.parseInt(notificationStr.substring(0,2));
+        }
+
+
+        calendarNo = Integer.parseInt(calendarCB.substring(0,1));
+        Calendar calendar = calendarFunctionality.getSpecificCalendar(calendarNo);
+        calendarFunctionality.addTask(name,date,calendar,startH, startM,endH, endM,allDay, notificationM);
+        taskViewClose();
+        addTasksToPane();
+        dailyPlanner.setGeneralView();
+    }
+    public void deleteTask(ActionEvent event)
+    {
+        Task task;
+        Button source;
+        source = (Button) event.getSource();
+        task = (Task) source.getUserData();
+
+        confirmation.setHeaderText("Are you sure you want to delete this task?");
+        confirmation.setContentText("This action cannot be undone.");
+
+        confirmation.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                calendarFunctionality.deleteTask(task);
+            }
+        });
+        taskViewClose();
+        addTasksToPane();
+        dailyPlanner.setGeneralView();
+        dailyPlanner.setDailyViewView();
+
+
+    }
+    public void setNotificationComboBox()
+    {
+        taskNotificationComboBox.getItems().clear();
+        taskNotificationComboBox.getItems().add("None");
+        taskNotificationComboBox.getItems().add("10 minute bfr");
+        taskNotificationComboBox.getItems().add("30 minute bfr");
+        taskNotificationComboBox.getItems().add("60 minute bfr");
+        taskNotificationComboBox.setValue("None");
+    }
+    public void setCalendarComboBox()
+    {
+        calendarComboBox.getItems().clear();
+        ArrayList<Calendar> list = calendarFunctionality.getCalendars();
+        for(Calendar element: list)
+        {
+            calendarComboBox.getItems().add(element.toString());
+        }
     }
 
     public void dailyPlannerShow(ActionEvent e)
@@ -290,8 +553,8 @@ public class Notebook extends Pane
     public void addTasksToPane()
     {
         int size,
-            row,
-            column;
+                row,
+                column;
         Task task;
         ArrayList<Task> tasks = today.getTasks();
         GridPane gridPane = new GridPane();
@@ -315,6 +578,7 @@ public class Notebook extends Pane
             button.setMaxWidth(Double.MAX_VALUE);
             //TODO add show function
             button.setUserData(task);
+            button.setOnAction(this::taskClicked);
             gridPane.add(button, column, row);
             button.setMinWidth(125);
             button.setMaxWidth(125);
@@ -411,6 +675,7 @@ public class Notebook extends Pane
                     y = calculatePosition(startH,startM);
                     buttonSize = calculatePosition(endH,endM) - y;
 
+
                     this.getChildren().add(button);
                     button.setLayoutY(y);
                     button.setLayoutX(20);
@@ -420,7 +685,6 @@ public class Notebook extends Pane
                     button.setPrefHeight(buttonSize);
                 }
                 button.setUserData(task);
-
                 button.setOnAction(Notebook.this::taskClicked);
             }
         }
@@ -440,16 +704,12 @@ public class Notebook extends Pane
         }
     }
 
-    public void taskClicked(ActionEvent e)
-    {
-        System.out.println("Task clicked in notebook.");
-    }
 
-    //TODO
     public void exitDailyTaskHabitPopUps()
     {
         closeHabitDetailedView(null);
         habitInfoView.setVisible(false);
+        taskViewClose();
 
     }
 
@@ -520,7 +780,13 @@ public class Notebook extends Pane
         {
             habit.makeProgress();
             setProgressPercentage();
+            if(allHabitsScrollPane == null || habitsSmallScrollPane == null)
+            {
+                return;
+            }
+            setSmallHabitPane();
             setUpAllHabitScrollFrame();
+
         }
 
         public void habitClicked(ActionEvent actionEvent)
@@ -558,7 +824,7 @@ public class Notebook extends Pane
         Label dateLabel;
         CheckBox habitCheckBox;
         int index,
-            doneDateVal;
+                doneDateVal;
 
 
         public HabitLookFrame(Habit habit,int index,int doneDateVal,LocalDate date)
@@ -674,6 +940,10 @@ public class Notebook extends Pane
         today = LocalDate.now();
         habit.undoDate(today);
         habitDetailedProgressIndicator.setProgress(0.0);
+        if(habitsSmallScrollPane == null || allHabitsScrollPane == null)
+        {
+            return;
+        }
         setSmallHabitPane();
         setUpAllHabitScrollFrame();
 
@@ -724,8 +994,6 @@ public class Notebook extends Pane
         }
         allHabitsScrollPane.setContent(gridPane);
         allHabitsScrollPane.setFitToWidth(true);
-
-
     }
 
     //Methods of Habit Tracker
@@ -1234,7 +1502,7 @@ public class Notebook extends Pane
                 description;
         Button source;
         String frequence,
-               progress;
+                progress;
         HabitType habitType;
 
         int frequenceNo,
@@ -1324,8 +1592,8 @@ public class Notebook extends Pane
                 progressType,
                 frequencyType;
         int habitTypeNo,
-            habitProgressNo,
-            frequencyNo;
+                habitProgressNo,
+                frequencyNo;
 
         alert.setTitle("Error in adding habit type");
 
@@ -1394,8 +1662,6 @@ public class Notebook extends Pane
         setSmallHabitPane();
         setUpAllHabitScrollFrame();
 
-
-
     }
 
     public void changeHabit(ActionEvent e)
@@ -1432,11 +1698,6 @@ public class Notebook extends Pane
 
     }
 
-    //change the whole view for habits //reset the habit view
-    public void resetHabitView()
-    {
-
-    }
 
 
     public void setSmallHabitPane()
@@ -1444,7 +1705,6 @@ public class Notebook extends Pane
         int size;
         HabitButton element;
 
-        //TODO LOOK AT THIS
         InitializeHabitButtons(habitButtons);
 
         size = habitButtons.size();

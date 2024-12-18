@@ -62,7 +62,7 @@ public class LoginController implements Initializable {
     private int mode = 0; // 0 Login -- 1 Register -- 2 Visit
     static public String name;
     User user;
-    static Integer UserID = 1;
+    static int UserID = 1;
 
     public boolean isAdmin = true;
 
@@ -187,10 +187,10 @@ public class LoginController implements Initializable {
                     Watercan watercan = new Watercan(0);
                     Room userRoom = new Room(new Alarm(clock1),clock1,new Clock(),new BookCase(),new Board(),new Plant(0,watercan),new Notebooks(),new Calendars(),new Shop(),new Settings(),new MusicPlayer());
 
-                    user = new User(registerUsername.getText(),registerPassword.getText(),20,0,userRoom,UserID);
+                    user = new User(registerUsername.getText(),registerPassword.getText(),20,0,userRoom,MyRoom.UserID);
                     UserManager.USER_FILE = name + ".ser";
                     UserManager.saveUser(user);
-                    UserID++;
+                    MyRoom.UserID++;
 
                     goToRoom();
                 }

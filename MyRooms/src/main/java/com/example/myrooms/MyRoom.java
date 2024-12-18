@@ -12,6 +12,7 @@ import java.io.*;
 
 public class MyRoom extends Application {
 
+    static int UserID = 1;
 
     @Override
     public void start(Stage stage) throws IOException {

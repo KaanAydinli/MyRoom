@@ -18,6 +18,10 @@ public class Day
         System.out.println("Adding task: " + task);
         tasks.add(task);
     }
+    public void removeTask(Task task)
+    {
+        tasks.remove(task);
+    }
 
     public ArrayList<Task> getTasks()
     {
@@ -33,4 +37,5 @@ public class Day
     {
         return date;
     }
+
 }
