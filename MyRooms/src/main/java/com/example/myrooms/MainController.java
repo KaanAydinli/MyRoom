@@ -745,9 +745,12 @@ public class MainController implements Initializable {
         }
         else
         {
-            int index = myMusicPlayer.getCurrentMusic().getId() + 1;
-            Music temp = myMusicPlayer.getListOfNotLockedMusics().get(index);
-            myMusicPlayer.setCurrentMusic(temp);
+            int index = myMusicPlayer.getIndexInNotLockedSong();
+            myMusicPlayer.setCurrentMusic(myMusicPlayer.getListOfNotLockedMusics().get(index+1));
+
+//            int index = myMusicPlayer.getCurrentMusic().getId() + 1;
+//            Music temp = myMusicPlayer.getListOfNotLockedMusics().get(index);
+//            myMusicPlayer.setCurrentMusic(temp);
         }
         SongNameArea.setText(myMusicPlayer.getCurrentMusic().getName());
 
@@ -763,9 +766,11 @@ public class MainController implements Initializable {
         }
         else
         {
-            int index = myMusicPlayer.getCurrentMusic().getId() - 1;
-            Music temp = myMusicPlayer.getListOfNotLockedMusics().get(index);
-            myMusicPlayer.setCurrentMusic(temp);
+              int index = myMusicPlayer.getIndexInNotLockedSong();
+              myMusicPlayer.setCurrentMusic(myMusicPlayer.getListOfNotLockedMusics().get(index-1));
+//            int index = myMusicPlayer.getCurrentMusic().getId() - 1;
+//            Music temp = myMusicPlayer.getListOfNotLockedMusics().get(index);
+//            myMusicPlayer.setCurrentMusic(temp);
         }
         SongNameArea.setText(myMusicPlayer.getCurrentMusic().getName());
 
@@ -1099,8 +1104,7 @@ public class MainController implements Initializable {
             myMusicPlayer.unlockMusic(temp);
             fifthSoundsButton.setVisible(true);
             godFatherText.setVisible(false);
-
-
+            myMusicPlayer.unlockMusic(temp);
             totalCoin -= 20;
         }
         else if(e.getSource() == LoftImage && LoftMusicCB.isDisable() && totalCoin >= 5 ){
@@ -1110,6 +1114,7 @@ public class MainController implements Initializable {
             myMusicPlayer.unlockMusic(temp);
             seventhSoundsButton.setVisible(true);
             loftMusicText.setVisible(false);
+            myMusicPlayer.unlockMusic(temp);
             totalCoin -= 5;
         }
         else if(e.getSource() == CelloImage && CelloAndPianoCB.isDisable() && totalCoin >= 10 ){
@@ -1119,6 +1124,7 @@ public class MainController implements Initializable {
             myMusicPlayer.unlockMusic(temp);
             sixthSoundsButton.setVisible(true);
             celloAndPianoText.setVisible(false);
+            myMusicPlayer.unlockMusic(temp);
             totalCoin -= 10;
         }
         setCoin(totalCoin);

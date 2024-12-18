@@ -90,5 +90,13 @@ public class MusicPlayer implements Serializable {
             listOfLockedMusics.remove(music);
         }
     }
+    public int getIndexInNotLockedSong()
+    {
+        if(currentMusic!=null)
+        {
+            return listOfNotLockedMusics.indexOf(currentMusic);
+        }
+        return 0;
+    }
 }
 

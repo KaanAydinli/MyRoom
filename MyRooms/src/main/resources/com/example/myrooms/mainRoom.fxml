@@ -203,7 +203,7 @@
                 <FlowPane fx:id="bookFlowPanee3" layoutX="173.0" layoutY="395.0" prefHeight="101.0" prefWidth="304.0" />
             </children>
         </Pane>
-        <Pane fx:id="ComputerPane" layoutX="153.0" layoutY="7.0" prefHeight="579.0" prefWidth="802.0">
+        <Pane fx:id="ComputerPane" layoutX="153.0" layoutY="7.0" prefHeight="579.0" prefWidth="802.0" visible="false">
             <children>
                 <ImageView fx:id="ComputerImage" fitHeight="592.0" fitWidth="804.0" nodeOrientation="INHERIT" pickOnBounds="true">
                     <image>
@@ -385,7 +385,7 @@
                         <Image url="@../../../CsProject-BackGrounds/orange.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="216.0" prefHeight="57.0" prefWidth="227.0" text="BUY SOUNDS" textFill="#f2efef">
+                <Label layoutX="216.0" prefHeight="57.0" prefWidth="268.0" text="BUY SOUNDS" textFill="#f2efef">
                <font>
                   <Font size="38.0" />
                </font></Label>
@@ -403,7 +403,7 @@
                <font>
                   <Font size="20.0" />
                </font></Label>
-                <Label alignment="CENTER" layoutX="495.0" layoutY="79.0" prefHeight="86.0" prefWidth="128.0" text="Cello and Piano" textFill="#f2efef" wrapText="true">
+                <Label alignment="CENTER" layoutX="490.0" layoutY="79.0" prefHeight="68.0" prefWidth="133.0" text="Cello and Piano" textFill="#f2efef" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font></Label>
@@ -483,7 +483,7 @@
                 </Label>
             </children>
         </Pane>
-      <Pane fx:id="musicAppPane" layoutX="208.0" layoutY="48.0" prefHeight="375.0" prefWidth="695.0" style="-fx-background-color: BEIGE;">
+      <Pane fx:id="musicAppPane" layoutX="208.0" layoutY="48.0" prefHeight="375.0" prefWidth="695.0" style="-fx-background-color: BEIGE;" visible="false">
           <children>
               <Label layoutY="-2.0" opacity="0.88" prefHeight="71.0" prefWidth="135.0" style="-fx-background-color: BEIGE;" text="  YOUR SOUNDS">
                   <font>
