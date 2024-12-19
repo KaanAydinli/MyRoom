@@ -21,7 +21,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
+<Pane fx:id="allPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrooms.MainController">
     <children>
         <Pane fx:id="imagePane">
             <children>
@@ -473,7 +473,7 @@
                     </font>
                 </Label>
                 <Slider fx:id="settingsVolumeSlider" layoutX="294.0" layoutY="207.0" value="50.0" />
-                <Slider fx:id="settingsBrightnessSlider" layoutX="294.0" layoutY="264.0" max="0.4" min="-0.9" />
+                <Slider fx:id="settingsBrightnessSlider" layoutX="294.0" layoutY="264.0" max="0.4" min="-0.9" value="0.1" />
                 <ToggleButton fx:id="settingsNotificationsButton" layoutX="320.0" layoutY="137.0" mnemonicParsing="false" onAction="#setNotify" text="On" />
                 <TextField fx:id="changePasswordTextfield" layoutX="320.0" layoutY="85.0" onAction="#changePass" />
                 <Label layoutX="118.0" layoutY="81.0" text="Change Password" textFill="WHITE">
@@ -481,6 +481,12 @@
                         <Font size="22.0" />
                     </font>
                 </Label>
+            <Label layoutX="147.0" layoutY="332.0" text="Day/Night" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <ToggleButton fx:id="dayNightToggle" layoutX="320.0" layoutY="336.0" mnemonicParsing="false" onAction="#changeDayNight" text="On" />
             </children>
         </Pane>
       <Pane fx:id="musicAppPane" layoutX="208.0" layoutY="48.0" prefHeight="375.0" prefWidth="695.0" style="-fx-background-color: BEIGE;" visible="false">

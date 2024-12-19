@@ -1601,6 +1601,8 @@ public class Notebook extends Pane
         Frequence frequence;
         HabitProgressType habitProgressType;
 
+
+
         name = habitNameTF.getText();
         description = habitDescTF.getText();
         habitType = hHabitTypeChooser.getSelectionModel().getSelectedItem();
@@ -1639,6 +1641,8 @@ public class Notebook extends Pane
         closeHabitView();
         setSmallHabitPane();
         setUpAllHabitScrollFrame();
+        int temp = user.room.charts.totalHabit + 1;
+        user.room.charts.totalHabit = temp;
         //addHabitTypeButtons();
 
     }
@@ -1658,6 +1662,8 @@ public class Notebook extends Pane
                 habitTracker.deleteHabit(habit);
             }
         });
+
+
         closeHabitDetailedView(event);
         setSmallHabitPane();
         setUpAllHabitScrollFrame();

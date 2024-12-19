@@ -185,9 +185,9 @@ public class LoginController implements Initializable {
 
                     Clock clock1 = new Clock();
                     Watercan watercan = new Watercan(0);
-                    Room userRoom = new Room(new Alarm(clock1),clock1,new Clock(),new BookCase(),new Board(),new Plant(0,watercan),new Notebooks(),new Calendars(),new Shop(),new Settings(),new MusicPlayer());
+                    Room userRoom = new Room(new Alarm(clock1),clock1,new Clock(),new BookCase(),new Board(),new Plant(0,watercan),new Notebooks(),new Calendars(),new Shop(),new Settings(),new MusicPlayer(), new Charts());
 
-                    user = new User(registerUsername.getText(),registerPassword.getText(),20,0,userRoom,MyRoom.UserID);
+                    user = new User(registerUsername.getText(),registerPassword.getText(),100,0,userRoom,MyRoom.UserID);
                     UserManager.USER_FILE = name + ".ser";
                     UserManager.saveUser(user);
                     MyRoom.UserID++;

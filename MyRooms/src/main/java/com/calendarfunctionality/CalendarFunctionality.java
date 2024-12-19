@@ -383,7 +383,7 @@ public class CalendarFunctionality
             {
                 Task task = tasks.get(i);
                 this.deleteTask(task);
-                i++;
+                size-=1;
             }
             calendars.remove(calendar);
 

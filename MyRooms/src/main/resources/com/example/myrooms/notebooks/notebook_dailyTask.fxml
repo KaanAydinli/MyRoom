@@ -37,7 +37,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <ScrollPane fx:id="dailyViewScrollPane" layoutY="61.0" prefHeight="479.0" prefWidth="455.0" />
+            <ScrollPane fx:id="dailyViewScrollPane" layoutY="56.0" prefHeight="473.0" prefWidth="455.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="activeHabitsPane" layoutX="450.0" prefHeight="575.0" prefWidth="451.0" style="-fx-background-color: beige;" visible="false">
@@ -110,8 +110,8 @@
             <ProgressIndicator fx:id="habitDetailedProgressIndicator" layoutX="200.0" layoutY="18.0" progress="0.0" />
          </children>
       </AnchorPane>
-      <ScrollPane fx:id="dailyTaskScrollPane" hbarPolicy="NEVER" layoutY="57.0" prefHeight="479.0" prefWidth="442.0" />
-      <AnchorPane fx:id="taskView" layoutX="422.0" layoutY="141.0" prefHeight="254.0" prefWidth="328.0" style="-fx-background-color: lightblue;">
+      <ScrollPane fx:id="dailyTaskScrollPane" hbarPolicy="NEVER" layoutY="56.0" prefHeight="473.0" prefWidth="442.0" />
+      <AnchorPane fx:id="taskView" layoutX="287.0" layoutY="103.0" prefHeight="254.0" prefWidth="328.0" style="-fx-background-color: lightblue;" visible="false">
          <children>
             <Label layoutX="14.0" layoutY="6.0" text="Task Name">
                <font>
@@ -158,13 +158,12 @@
                </children>
             </GridPane>
             <CheckBox fx:id="taskAllDayCB" layoutX="228.0" layoutY="102.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="71.0" text="All Day" />
-            <CheckBox fx:id="taskDailyTaskCB" layoutX="227.0" layoutY="125.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="88.0" text="Daily Task" />
             <CheckBox fx:id="taskDoneCB" layoutX="232.0" layoutY="34.0" mnemonicParsing="false" text="Done?" />
-            <Button layoutX="279.0" layoutY="207.0" mnemonicParsing="false" text="Add" />
-            <Button layoutX="215.0" layoutY="207.0" mnemonicParsing="false" text="Cancel" />
-            <Label layoutX="16.0" layoutY="190.0" text="Notification" />
-            <ComboBox fx:id="taskNotificationComboBox" layoutX="10.0" layoutY="207.0" prefHeight="26.0" prefWidth="112.0" />
-            <Button fx:id="taskDeleteB" layoutX="147.0" layoutY="207.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="addTaskB" layoutX="279.0" layoutY="207.0" mnemonicParsing="false" onAction="#addTaskClicked" text="Add" />
+            <Button layoutX="215.0" layoutY="207.0" mnemonicParsing="false" onAction="#taskViewClose" text="Cancel" />
+            <Label layoutX="16.0" layoutY="190.0" text="Notification" visible="false" />
+            <ComboBox fx:id="taskNotificationComboBox" layoutX="10.0" layoutY="207.0" prefHeight="26.0" prefWidth="112.0" visible="false" />
+            <Button fx:id="taskDeleteB" layoutX="147.0" layoutY="207.0" mnemonicParsing="false" onAction="#deleteTask" text="Delete" />
             <Label layoutX="16.0" layoutY="150.0" text="Calendar" />
             <ComboBox fx:id="calendarComboBox" layoutX="11.0" layoutY="167.0" prefHeight="26.0" prefWidth="98.0" />
             <Label layoutX="42.0" layoutY="87.0" text="Start" />

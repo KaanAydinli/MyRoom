@@ -203,9 +203,17 @@ public class MainController implements Initializable {
     TextArea celloAndPianoText;
     @FXML
     TextArea loftMusicText;
+    @FXML
+    ToggleButton dayNightToggle;
 
 
     Integer totalCoin;
+
+    Light.Point light = new Light.Point();
+
+
+    Lighting lightingEffect = new Lighting();
+
 
     int total = 0;
     String alarmTime = "";
@@ -234,6 +242,7 @@ public class MainController implements Initializable {
     Settings settings;
     MusicPlayer myMusicPlayer;
     AudioClip clip;
+    Charts charts;
 
     Notebook notebook;
     CalendarController calendarController;
@@ -264,6 +273,7 @@ public class MainController implements Initializable {
             shop = user.room.shop;
             settings = user.room.settings;
             myMusicPlayer = user.room.musicPlayer;
+            charts = user.room.charts;
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -566,6 +576,7 @@ public class MainController implements Initializable {
                     System.out.println("Alarm set to: " + alarm.getAlarmTime());
                     alarmCreate.setText("Stop Alarm");
                     alarmTimeLabel.setText(alarmTimeLabel.getText() + alarmTime);
+                    setCoin(totalCoin + 3);
                 } catch (Exception e) {
                     System.out.println("Wrong or missing input in alarm");
                 }
@@ -877,6 +888,10 @@ public class MainController implements Initializable {
             //textTwo.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-background-color: transparent; -fx-border-width: 1;");
             //textTwo.setEditable(false);
 
+            int temp = charts.totalPostits + 1;
+            charts.totalPostits = temp;
+            setPostitCharts(charts.totalPostits);
+
             b.getChildren().add(textOne);
             //b.getChildren().add(textTwo);
             PostIt c = b.minimizePostIt();
@@ -895,6 +910,7 @@ public class MainController implements Initializable {
                     printPostIts();
                 }
             });
+            setCoin(totalCoin + 3);
 
 
         }
@@ -919,13 +935,11 @@ public class MainController implements Initializable {
 
         int length = myBoard.getPostItArrayList().size();
 
-        int count = 1;
         for(int i =0; i< length; i++)
         {
             if(myBoard.getPostItArrayList().get(i) != null)
             {
-                totalPostitsCharts.setText(count + "");
-                count++;
+
                 myBoard.getPostItArrayList().get(i).getChildren().clear();
                 myBoard.getPostItArrayList().get(i).setPrefHeight(79);
                 myBoard.getPostItArrayList().get(i).setPrefWidth(87);
@@ -1302,6 +1316,8 @@ public class MainController implements Initializable {
             int count = bookcase.getCount();
             bookcase.books.add(book);
             bookcase.setCount(++count);
+            int temp = charts.totalBook + 1;
+            charts.totalBook = temp;
 
             putAndSortBooks();
 
@@ -1323,14 +1339,13 @@ public class MainController implements Initializable {
         flowPaneBook.getChildren().clear();
         flowPaneBook2.getChildren().clear();
         flowPaneBook3.getChildren().clear();
-        int counts = 1;
+
 
         for(Book b : bookcase.books){
 
             if(b != null){
 
-                totalBooksCharts.setText(counts + "");
-                counts++;
+
                 ImageView bookImageView = new ImageView(new Image(b.path));
                 bookImageView.setFitWidth(25);
                 bookImageView.setFitHeight(110);
@@ -1394,7 +1409,7 @@ public class MainController implements Initializable {
             plant.watercan.imagePath = "CsProject-BackGrounds/watercanhalf.png";
             setWaterCanImage(plant.watercan.imagePath);
         }
-        else if (plant.watercan.getWaterLevel() == 3) {
+        else if (plant.watercan.getWaterLevel() >= 3) {
             plant.watercan.imagePath = "CsProject-BackGrounds/watercanfull.png";
             setWaterCanImage(plant.watercan.imagePath);
         }
@@ -1408,12 +1423,26 @@ public class MainController implements Initializable {
 
         }
     }
+    public void changeDayNight(){
+        if(dayNightToggle.getText().equals("On")){
+            allPane.setEffect(null);
+            dayNightToggle.setText("Off");
+        }
+        else if(dayNightToggle.getText().equals("Off")){
+            allPane.setEffect(lightingEffect);
+            dayNightToggle.setText("On");
+        }
+
+    }
     public  void addImageViewOfBooks(){
+
         Image image = new Image("CsProject-BackGrounds/Book.png");
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(60);
         imageView.setFitWidth(25);
         imageView.setPreserveRatio(true);
+        plant.watercan.setWaterLevel(plant.watercan.getWaterLevel()+1);
+        setCoin(totalCoin + 3);
         if(flowPaneBook.getChildren().size()<9){
             flowPaneBook.getChildren().add(imageView);
 
@@ -1424,6 +1453,15 @@ public class MainController implements Initializable {
         else if(flowPaneBook3.getChildren().size()<10){
             flowPaneBook3.getChildren().add(imageView);
         }
+    }
+    public void setPostitCharts(int num){
+        totalPostitsCharts.setText(num + "");
+    }
+    public void setTotalBooks(int num){
+        totalBooksCharts.setText(num + "");
+    }
+    public void setTotalHabits(int num){
+        totalHabitsCharts.setText(num + "");
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -1448,12 +1486,14 @@ public class MainController implements Initializable {
             shop = user.room.shop;
             settings = user.room.settings;
             myMusicPlayer = user.room.musicPlayer;
+            charts = user.room.charts;
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         setAlarmImage(alarm.imagePath);
         setClockImage(clock1.imagePath);
+        setPlantImage(plant.imagePath);
         setCoin(totalCoin);
         setCalendarImage(calendars.imagePath);
         setTotalTime(totalTimeSpent);
@@ -1462,6 +1502,12 @@ public class MainController implements Initializable {
         putAndSortBooks();
         printPostIts();
         loadShop();
+
+        setTotalBooks(charts.totalBook);
+        setPostitCharts(charts.totalPostits);
+        setTotalHabits(charts.totalHabit);
+        plantLevelCharts.setText(plant.getLevelOfPlant() + "");
+
         settings.notify = alarm.notify;
         System.out.println(user.ID);
         
@@ -1483,6 +1529,14 @@ public class MainController implements Initializable {
         else{
             alarmCreate.setText("Stop Alarm");
         }
+
+        light.setX(50);
+        light.setY(300);
+        light.setZ(200);
+        light.setColor(Color.BEIGE);
+
+        lightingEffect.setLight(light);
+        lightingEffect.setDiffuseConstant(10);
 
         InitializeCalendarNotebook();
         for(PostIt b : myBoard.getPostItArrayList()){
@@ -1506,6 +1560,9 @@ public class MainController implements Initializable {
         blueButton.setToggleGroup(group);
         GreenButton.setToggleGroup(group);
         purpleButton.setToggleGroup(group);
+
+        mediaPlayer.play();
+        mediaPlayer.setVolume(settings.volume / 100);
 
         ComputerPane.setCursor(new ImageCursor(image,
                 image.getWidth() ,
@@ -1540,23 +1597,15 @@ public class MainController implements Initializable {
 
         TotalCoinLabel.setText(String.valueOf(totalCoin));
 
-        Light.Point light = new Light.Point();
-        light.setX(50);
-        light.setY(300);
-        light.setZ(200);
-        light.setColor(Color.BEIGE);
 
-        Lighting lightingEffect = new Lighting();
-        lightingEffect.setLight(light);
-        lightingEffect.setDiffuseConstant(10);
 
         allPane.setEffect(lightingEffect);
 
         lightingTimeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(light.colorProperty(), Color.BEIGE)),
-                new KeyFrame(Duration.seconds(10), new KeyValue(light.colorProperty(), Color.rgb(225, 215, 180))), // Afternoon light
-                new KeyFrame(Duration.seconds(30), new KeyValue(light.colorProperty(), Color.rgb(50, 50, 150))),  // Night light
-                new KeyFrame(Duration.seconds(50), new KeyValue(light.colorProperty(), Color.rgb(225, 215, 180)))
+                new KeyFrame(Duration.seconds(30), new KeyValue(light.colorProperty(), Color.rgb(225, 215, 180))), // Afternoon light
+                new KeyFrame(Duration.seconds(60), new KeyValue(light.colorProperty(), Color.rgb(50, 50, 150))),  // Night light
+                new KeyFrame(Duration.seconds(90), new KeyValue(light.colorProperty(), Color.rgb(225, 215, 180)))
         );
 
         lightingTimeline.setCycleCount(Timeline.INDEFINITE);
@@ -1576,6 +1625,8 @@ public class MainController implements Initializable {
             clock1.setCurrent();
 
             checkAlarm(clock1.getHour(),clock1.getMinute(),clock1.getSecond());
+
+            setTotalHabits(charts.totalHabit);
 
             if(alarm.getTotalTime() != 0){
 

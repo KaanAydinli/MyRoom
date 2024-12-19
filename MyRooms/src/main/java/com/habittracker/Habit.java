@@ -372,6 +372,7 @@ public class Habit {
         if(currentProgress >= wantedProgress)
         {
             setSpecificDoneDate(currentDate,1);
+
             updateDoneDatesDB();
         }
     }
