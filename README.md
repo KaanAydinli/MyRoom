@@ -15,9 +15,9 @@ Users can easily set alarms. It will create an alarm, and when the time comes, t
 ### 📋Board
 Users can add their important notes here using Post-its. Users can add, edit, or remove the notes. 
 ### 🗓️Calendar
-Users could use the calendar as a reminder. In addition, they can add reminders to notify themselves, or they can just use it as a normal calendar to see the current date.
+Users can use calendar to add tasks and see these tasks intervals they can also specify these tasks to some new calendars that they created
 ### 🪴Plant
-Users will have plants at the beginning. They need to water the plant regularly to keep it alive. So, they need to use the app regularly and efficiently. 
+Users will have plants at the beginning. They need to water the plant regularly make it grow. So, they need to use the app regularly and efficiently. 
 ### 📒Notebook
 Users will add the habits that they want to adopt. They can also track these habits. Tasks from the calendar for the current day will be added to the notebook. In addition, users may add, remove, or change those tasks.
 ### 🖥️Computer
